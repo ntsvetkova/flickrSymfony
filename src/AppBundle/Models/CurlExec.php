@@ -17,7 +17,7 @@ class CurlExec
     /**
      * @var
      */
-    private static $instance;
+//    private static $instance;
     /**
      * @var resource
      */
@@ -26,20 +26,20 @@ class CurlExec
     /**
      * Constructor
      */
-    private function __construct() {
+    public function __construct() {
         $this->handle = curl_init();
     }
 
     /**
      * @return mixed
      */
-    public static function getInstance() {
-        if (empty(self::$instance)) {
-            $classname = __CLASS__;
-            self::$instance = new $classname;
-        }
-        return self::$instance;
-    }
+//    public static function getInstance() {
+//        if (empty(self::$instance)) {
+//            $classname = __CLASS__;
+//            self::$instance = new $classname;
+//        }
+//        return self::$instance;
+//    }
 
     /**
      * @return resource
@@ -60,7 +60,7 @@ class CurlExec
     /**
      * Restricted to clone
      */
-    private function __clone() {}
+//    private function __clone() {}
 
     /**
      * Destructor

@@ -14,3 +14,5 @@ services:
         class: AppBundle\Models\RequestParameters
         arguments: ["%request_parameters.endPoint%", "%request_parameters.apiKey%", "%request_parameters.format%"]
 
+    curl:
+        class: AppBundle\Models\CurlExec

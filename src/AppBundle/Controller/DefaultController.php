@@ -29,9 +29,10 @@ class DefaultController extends Controller
         $request = Request::create($requestParameters->getEndPoint() .
             $this->get('router')->generate('homepage', $requestParameters->getRecent()));
 
-//        var_dump($request);
+        var_dump($request);
 
-        $test = $this->get('request_parameters');
+        $test = $this->get('curl');
+        $test->curlExec($request->getRequestUri());
         var_dump($test);
 
         return new Response($request);
