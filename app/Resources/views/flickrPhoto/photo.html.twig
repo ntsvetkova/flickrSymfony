@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block table %}
+    <div class='cell'>
+        <a class='large' href={{ srclarge }}>
+            <div class='img' style='background-image:url({{ srcthumbnail }})'></div>
+            <div class='title'>{{ title }}</div>
+        </a>
+        <a id='arrow' target='_blank' href='http://www.flickr.com/photos/{{ owner }}/{{ id }}'> » </a>
+        <div class='clearfix'></div>
+    </div>
+{% endblock %}
