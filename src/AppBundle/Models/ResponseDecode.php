@@ -58,7 +58,7 @@ class ResponseDecode
      * @param $response
      */
     public function setResponse($response) {
-        $this->response = $response;
+        $this->response = json_decode($response);
     }
 
     /**
@@ -76,9 +76,8 @@ class ResponseDecode
      * @return array
      */
     public function decodeRecent() {
-        $obj = json_decode($this->response);
-        for ($i = 0; $i < count($obj->photos->photo); $i++) {
-            $this->photo = new FlickrPhoto($obj->photos->photo[$i]->id, $obj->photos->photo[$i]->owner, $obj->photos->photo[$i]->title);
+        for ($i = 0; $i < count($this->response->photos->photo); $i++) {
+            $this->photo = new FlickrPhoto($this->response->photos->photo[$i]->id, $this->response->photos->photo[$i]->owner, $this->response->photos->photo[$i]->title);
             array_push($this->arrayPhotos, $this->photo);
         }
         return $this->arrayPhotos;
@@ -88,11 +87,10 @@ class ResponseDecode
      * @return FlickrPhoto
      */
     public function decodeSizes() {
-        $obj = json_decode($this->response);
-        $this->photo->setSrcLarge($obj->sizes->size[count($obj->sizes->size) - 1]->source);
-        for ($i = 0; $i < count($obj->sizes->size); $i++) {
-            if ($obj->sizes->size[$i]->label == "Thumbnail") {
-                $this->photo->setSrcThumbnail($obj->sizes->size[$i]->source);
+        $this->photo->setSrcLarge($this->response->sizes->size[count($this->response->sizes->size) - 1]->source);
+        for ($i = 0; $i < count($this->response->sizes->size); $i++) {
+            if ($this->response->sizes->size[$i]->label == "Thumbnail") {
+                $this->photo->setSrcThumbnail($this->response->sizes->size[$i]->source);
             }
         }
         return $this->photo;

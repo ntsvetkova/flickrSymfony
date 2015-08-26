@@ -71,6 +71,7 @@ class DefaultController extends Controller
                 break;
         }
         $sendRequest = $this->get('curl');
+//        $data = $sendRequest->curlExec();
         $data = $sendRequest->curlExec($request->getHttpHost() . $request->getRequestUri());
 
         $responseDecode = ResponseDecode::getInstance();

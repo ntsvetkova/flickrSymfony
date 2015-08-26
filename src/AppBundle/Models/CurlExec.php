@@ -25,9 +25,10 @@ class CurlExec
 //    protected $requestStack;
 
     /**
-     * @param RequestStack $requestStack
+     *
      */
     public function __construct() {
+//    public function __construct(RequestStack $requestStack) {
 //        $this->requestStack = $requestStack;
         $this->handle = curl_init();
     }
@@ -40,7 +41,6 @@ class CurlExec
     }
 
     /**
-     * @param $url
      * @return string
      */
     public function curlExec($url) {
@@ -48,6 +48,7 @@ class CurlExec
 
         $options = [
             CURLOPT_URL => 'https://' . $url,
+//            CURLOPT_URL => 'https://' . $request->getHttpHost() . $request->getRequestUri(),
             CURLOPT_RETURNTRANSFER => 1
         ];
         curl_setopt_array($this->handle, $options);
