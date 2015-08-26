@@ -1,16 +1,17 @@
 <?php
 
 namespace AppBundle\Controller;
-use AppBundle\Models\FlickrPhoto;
+//use AppBundle\Models\FlickrPhoto;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__ . '/../Models/FlickrPhoto.php';
+//require_once __DIR__ . '/../Models/FlickrPhoto.php';
 
 /**
  * Class DefaultController
@@ -18,7 +19,7 @@ require_once __DIR__ . '/../Models/FlickrPhoto.php';
  */
 class DefaultController extends Controller
 {
-    private  $photo;
+//    private  $photo;
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -28,20 +29,23 @@ class DefaultController extends Controller
 
         $request = Request::create($requestParameters->getEndPoint(), 'GET',
             $requestParameters->getRecent());
-//        var_dump($request);
+//        $requestStack = new RequestStack();
+//        $requestStack->push($request);
+        var_dump($request);
 
         $sendRequest = $this->get('curl');
-        $data = $sendRequest->curlExec($request->getHttpHost() . $request->getRequestUri());
+        $data = $sendRequest->curlExec();
 
 
-//            $this->render ('flickrPhoto/photo.html.twig', array('srclarge' => $this->photo->getSrcLarge(),
+
+
+
+        return new Response($request);
+        //    $this->render ('flickrPhoto/photo.html.twig', array('srclarge' => $this->photo->getSrcLarge(),
 //            'srcthumbnail' => $this->photo->getSrcThumbnail(),
 //            'title' => $this->photo->getTitle(),
 //            'id' => $this->photo->getId(),
 //            'owner' => $this->photo->getOwner(),
-
-
-        return new Response($request);
 //        $srclarge = '';
 //        $srcthumbnail = '';
 //        $title = 'Title';
