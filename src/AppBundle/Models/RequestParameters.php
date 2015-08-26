@@ -69,7 +69,7 @@ class RequestParameters
             'method' => 'flickr.photos.getSizes',
             'format' => $this->format,
             'api_key' => $this->apiKey,
-            'id' => $id
+            'photo_id' => $id
         );
         return $query;
     }
