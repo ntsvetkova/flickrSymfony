@@ -17,5 +17,8 @@ services:
     curl:
         class: AppBundle\Models\CurlExec
 #        arguments: ["@request_stack"]
+#    response_decode:
+#        class: AppBundle\Models\ResponseDecode
+#        arguments: []
 
 
