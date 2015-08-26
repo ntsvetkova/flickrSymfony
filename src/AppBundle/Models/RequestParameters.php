@@ -19,34 +19,25 @@ class RequestParameters
     /**
      * @var string
      */
-    private $endPoint = "https://api.flickr.com/services/rest";
+    private $endPoint;
     /**
      * @var string
      */
-    private $apiKey = "3bd97586d21ffcffe1931f53c2883652";
+    private $apiKey;
     /**
      * @var string
      */
-    private $format = "json";
-    /**
-     * @var
-     */
-    private static $instance;
+    private $format;
 
     /**
-     * Constructor
+     * @param $endPoint
+     * @param $apiKey
+     * @param $format
      */
-    public function __construct() {}
-
-    /**
-     * @return mixed
-     */
-    public static function getInstance() {
-        if (empty(self::$instance)) {
-            $classname = __CLASS__;
-            self::$instance = new $classname;
-        }
-        return self::$instance;
+    public function __construct($endPoint, $apiKey, $format) {
+        $this->endPoint = $endPoint;
+        $this->apiKey = $apiKey;
+        $this->format = $format;
     }
 
     /**
@@ -57,12 +48,7 @@ class RequestParameters
     }
 
     /**
-     * Restricted to clone
-     */
-    private function __clone() {}
-
-    /**
-     * @return mixed
+     * @return array
      */
     public function getRecent() {
         $query = array(
@@ -76,7 +62,7 @@ class RequestParameters
 
     /**
      * @param $id
-     * @return mixed
+     * @return array
      */
     public function getSizes($id) {
         $query = array(
