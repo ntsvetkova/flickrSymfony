@@ -16,3 +16,4 @@ services:
 
     curl:
         class: AppBundle\Models\CurlExec
+        arguments: ["@request_stack"]
