@@ -17,8 +17,11 @@ services:
     curl:
         class: AppBundle\Models\CurlExec
         arguments: ["@request_stack"]
-#    response_decode:
-#        class: AppBundle\Models\ResponseDecode
-#        arguments: []
+
+    app.locale_listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
 
 
