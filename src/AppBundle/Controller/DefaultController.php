@@ -24,15 +24,23 @@ class DefaultController extends Controller
      */
     private $photo;
 
+//    public function indexAction(Request $request)
+//    {
+//        return $this->redirectToRoute('flickrPhotos', array(), 301);
+//    }
+
     /**
      * @return Response
      */
-    public function indexAction()
-    {
-        $responseDecode = $this->setData('getRecent', $this->photo);
+    public function getRecentAction(Request $request) {
+        $requestInfo = $this->setRequest('getRecent', $this->photo);
+        $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),
+            $requestInfo->attributes->all(), $requestInfo->cookies->all(), $requestInfo->files->all(),
+            $requestInfo->server->all(), $requestInfo->getContent());
+        $responseDecode = $this->setData($this->photo);
         $arrayPhotos = $responseDecode->decodeRecent();
         foreach ($arrayPhotos as $photo) {
-            $this->forward('AppBundle:Default:final', array(
+            $this->forward('AppBundle:Default:getSizes', array(
                 'photo' => $photo
             ));
         }
@@ -45,39 +53,50 @@ class DefaultController extends Controller
      * @param FlickrPhoto $photo
      * @return Response
      */
-    public function finalAction(FlickrPhoto $photo) {
-        $responseDecode = $this->setData('getSizes', $photo);
+    public function getSizesAction(FlickrPhoto $photo, Request $request) {
+        $requestInfo = $this->setRequest('getSizes', $photo);
+        $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),
+            $requestInfo->attributes->all(), $requestInfo->cookies->all(), $requestInfo->files->all(),
+            $requestInfo->server->all(), $requestInfo->getContent());
+        $responseDecode = $this->setData($photo);
         $this->photo = $responseDecode->decodeSizes();
         return new Response();
     }
 
     /**
-     * @param $apiMethod
      * @param FlickrPhoto|null $photo
      * @return mixed
      */
-    public function setData($apiMethod, FlickrPhoto $photo = null) {
+    public function setData(FlickrPhoto $photo = null) {
+        $sendRequest = $this->get('curl');
+        $data = $sendRequest->curlExec();
+        $responseDecode = ResponseDecode::getInstance();
+        $responseDecode->setPhoto($photo);
+        $responseDecode->setResponse($data);
+        return $responseDecode;
+    }
+
+    /**
+     * @param $apiMethod
+     * @param FlickrPhoto|null $photo
+     * @return Request
+     *
+     */
+    public function setRequest($apiMethod, FlickrPhoto $photo = null) {
         $requestParameters = $this->get('request_parameters');
         switch ($apiMethod) {
             case 'getRecent':
-                $request = Request::create($requestParameters->getEndPoint(), 'GET',
+                $requestInfo = Request::create($requestParameters->getEndPoint(), 'GET',
                     $requestParameters->getRecent());
                 break;
             case 'getSizes':
-                $request = Request::create($requestParameters->getEndPoint(), 'GET',
+                $requestInfo = Request::create($requestParameters->getEndPoint(), 'GET',
                     $requestParameters->getSizes($photo->getId()));
                 break;
             default:
                 break;
         }
-        $sendRequest = $this->get('curl');
-//        $data = $sendRequest->curlExec();
-        $data = $sendRequest->curlExec($request->getHttpHost() . $request->getRequestUri());
-
-        $responseDecode = ResponseDecode::getInstance();
-        $responseDecode->setPhoto($photo);
-        $responseDecode->setResponse($data);
-        return $responseDecode;
+        return $requestInfo;
     }
 
 }
