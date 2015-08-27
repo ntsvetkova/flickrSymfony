@@ -24,6 +24,14 @@ class DefaultController extends Controller
      */
     private $photo;
 
+<<<<<<< HEAD
+=======
+//    public function indexAction(Request $request) {
+//        $this->redirectToRoute('flickrPhotos', array(), 301);
+//        return new Response($request);
+//    }
+
+>>>>>>> 12e9b5cdc6195e95852a4c4b38e75644ef9e158e
     /**
      * @param Request $request
      * @return Response

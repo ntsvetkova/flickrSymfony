@@ -13,8 +13,16 @@ homepage:
         route: flickrPhotos
         permanent: true
 flickrPhotos:
+<<<<<<< HEAD
     path: /photos
     defaults: { _controller: AppBundle:Default:getRecent }
     methods: [GET]
 #    requirements:
 #        _locale: en
+=======
+    path: /{_locale}/photos
+        defaults: { _controller: AppBundle:Default:getRecent }
+        methods: [GET]
+        requirements:
+            _locale: en
+>>>>>>> 12e9b5cdc6195e95852a4c4b38e75644ef9e158e

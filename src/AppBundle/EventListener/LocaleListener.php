@@ -3,7 +3,11 @@
  * Created by PhpStorm.
  * User: vkalachikhin
  * Date: 27.08.15
+<<<<<<< HEAD
  * Time: 15:47
+=======
+ * Time: 16:51
+>>>>>>> 12e9b5cdc6195e95852a4c4b38e75644ef9e158e
  */
 
 namespace AppBundle\EventListener;
