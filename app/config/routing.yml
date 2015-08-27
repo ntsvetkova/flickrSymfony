@@ -2,7 +2,17 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+#homepage:
+#    path: /
+#    defaults: { _controller: AppBundle:Default:index }
+#    methods: [GET]
 homepage:
     path: /
-    defaults: { _controller: AppBundle:Default:index }
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: flickrPhotos
+        permanent: true
+flickrPhotos:
+    path: /photos
+    defaults: { _controller: AppBundle:Default:getRecent }
     methods: [GET]
