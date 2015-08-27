@@ -24,12 +24,13 @@ class DefaultController extends Controller
      */
     private $photo;
 
-//    public function indexAction(Request $request)
-//    {
-//        return $this->redirectToRoute('flickrPhotos', array(), 301);
+//    public function indexAction(Request $request) {
+//        $this->redirectToRoute('flickrPhotos', array(), 301);
+//        return new Response($request);
 //    }
 
     /**
+     * @param Request $request
      * @return Response
      */
     public function getRecentAction(Request $request) {
@@ -51,6 +52,7 @@ class DefaultController extends Controller
 
     /**
      * @param FlickrPhoto $photo
+     * @param Request $request
      * @return Response
      */
     public function getSizesAction(FlickrPhoto $photo, Request $request) {
