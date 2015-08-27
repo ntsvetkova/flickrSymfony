@@ -22,14 +22,13 @@ class CurlExec
     /**
      * @var RequestStack
      */
-//    protected $requestStack;
+    protected $requestStack;
 
     /**
-     *
+     * @param RequestStack $requestStack
      */
-    public function __construct() {
-//    public function __construct(RequestStack $requestStack) {
-//        $this->requestStack = $requestStack;
+    public function __construct(RequestStack $requestStack) {
+        $this->requestStack = $requestStack;
         $this->handle = curl_init();
     }
 
@@ -43,12 +42,10 @@ class CurlExec
     /**
      * @return string
      */
-    public function curlExec($url) {
-//        $request = $this->requestStack->getCurrentRequest();
-
+    public function curlExec() {
+        $request = $this->requestStack->getCurrentRequest();
         $options = [
-            CURLOPT_URL => 'https://' . $url,
-//            CURLOPT_URL => 'https://' . $request->getHttpHost() . $request->getRequestUri(),
+            CURLOPT_URL => 'https://' . $request->getHttpHost() . $request->getRequestUri(),
             CURLOPT_RETURNTRANSFER => 1
         ];
         curl_setopt_array($this->handle, $options);
