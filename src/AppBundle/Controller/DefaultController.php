@@ -24,12 +24,8 @@ class DefaultController extends Controller
      */
     private $photo;
 
-//    public function indexAction(Request $request)
-//    {
-//        return $this->redirectToRoute('flickrPhotos', array(), 301);
-//    }
-
     /**
+     * @param Request $request
      * @return Response
      */
     public function getRecentAction(Request $request) {
@@ -37,6 +33,7 @@ class DefaultController extends Controller
         $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),
             $requestInfo->attributes->all(), $requestInfo->cookies->all(), $requestInfo->files->all(),
             $requestInfo->server->all(), $requestInfo->getContent());
+        $locale = $request->getLocale();
         $responseDecode = $this->setData($this->photo);
         $arrayPhotos = $responseDecode->decodeRecent();
         foreach ($arrayPhotos as $photo) {
@@ -51,6 +48,7 @@ class DefaultController extends Controller
 
     /**
      * @param FlickrPhoto $photo
+     * @param Request $request
      * @return Response
      */
     public function getSizesAction(FlickrPhoto $photo, Request $request) {
