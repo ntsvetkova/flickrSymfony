@@ -8,7 +8,7 @@
     <div class='cell'>
         <a class='large' href={{ photo.srclarge }}>
             <div class='img' style='background-image:url({{ photo.srcthumbnail }})'></div>
-            <div class='title'>{{ photo.title|counter(loop.index) }}</div>
+            <div class='title'>{{ short(photo.title|default('No title'))|counter(loop.index) }}</div>
         </a>
         <a id='arrow' target='_blank' href='http://www.flickr.com/photos/{{ photo.owner }}/{{ photo.id }}'> » </a>
         <div class='clearfix'></div>

@@ -24,3 +24,6 @@ photos:
         _controller: FrameworkBundle:Redirect:redirect
         route: flickrPhotos
         permanent: true
+test:
+    path: /test
+    defaults: { _controller: AppBundle:Default:test }

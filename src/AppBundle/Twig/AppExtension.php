@@ -9,10 +9,10 @@
 namespace AppBundle\Twig;
 
 /**
- * Class CounterExtension
+ * Class AppExtension
  * @package AppBundle\Twig
  */
-class CounterExtension extends \Twig_Extension
+class AppExtension extends \Twig_Extension
 {
     /**
      * @return array
@@ -32,8 +32,28 @@ class CounterExtension extends \Twig_Extension
     public function counterFilter($string, $count)
     {
         $counter = $count . '. ' . $string;
-
         return $counter;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFunctions() {
+        return array(
+            new \Twig_SimpleFunction('short', array($this, 'shortFunction'))
+        );
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    public function shortFunction($string) {
+        $length = strlen($string);
+        if ($length > 100) {
+            $string = substr($string, 1, 100) . '...';
+        }
+        return $string;
     }
 
     /**

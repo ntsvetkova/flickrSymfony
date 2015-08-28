@@ -117,4 +117,8 @@ class DefaultController extends Controller
         return $requestInfo;
     }
 
+    public function testAction(Request $request) {
+        return new Response($request);
+    }
+
 }

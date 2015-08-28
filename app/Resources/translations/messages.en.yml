@@ -10,3 +10,4 @@ error:
     syntax: Syntax error
     utf8: UTF8 error
   curl: Error while executing cUrl request
+stop: The app can not work

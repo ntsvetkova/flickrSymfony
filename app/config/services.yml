@@ -25,8 +25,8 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    app.twig_extension_counter:
-      class: AppBundle\Twig\CounterExtension
+    app.twig_extension:
+      class: AppBundle\Twig\AppExtension
       public: false
       tags:
           - { name: twig.extension }
