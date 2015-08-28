@@ -7,7 +7,7 @@
                 <target>фотографии</target>
             </trans-unit>
             <trans-unit id="2">
-                <source>This app can not work with this API method</source>
+                <source>no.method</source>
                 <target>Данное приложение не может работать с данным методом API</target>
             </trans-unit>
         </body>

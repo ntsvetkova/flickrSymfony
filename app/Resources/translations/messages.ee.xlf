@@ -7,7 +7,7 @@
                 <target>flickr pildid</target>
             </trans-unit>
             <trans-unit id="2">
-                <source>This app can not work with this API method</source>
+                <source>no.method</source>
                 <target>See rakendus ei oska töötada see API meetodiga</target>
             </trans-unit>
             <trans-unit id="3">

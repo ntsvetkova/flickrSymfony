@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 require_once __DIR__ . '/../Models/FlickrPhoto.php';
 require_once __DIR__ . '/../Models/ResponseDecode.php';
 require_once __DIR__ . '/../Exceptions/AppException.php';
-require_once __DIR__ . '/../Exceptions/errors.php';
 
 /**
  * Class DefaultController
@@ -97,7 +96,6 @@ class DefaultController extends Controller
      *
      */
     public function setRequest($apiMethod, FlickrPhoto $photo = null) {
-        $errors = unserialize(ERROR_MESSAGE);
         $requestParameters = $this->get('request_parameters');
         try {
             switch ($apiMethod) {
@@ -110,12 +108,11 @@ class DefaultController extends Controller
                         $requestParameters->getSizes($photo->getId()));
                     break;
                 default:
-                    throw new AppException($errors['NO_METHOD']);
+                    throw new AppException('no.method');
             }
         }
         catch (AppException $e) {
-            $requestInfo = $e;
-//            $requestInfo = $this->get('translator')->trans($e);
+            $requestInfo = $this->get('translator')->trans($e);
         }
         return $requestInfo;
     }

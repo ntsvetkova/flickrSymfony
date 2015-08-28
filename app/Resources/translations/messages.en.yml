@@ -1,0 +1,11 @@
+no:
+  method: This app can not work with this API method
+  file: Error loading file
+  template: Error loading template
+json:
+  error:
+    depth: Max depth
+    state_mismatch: Error state mismatch
+    ctrl_char: Control char error
+    syntax: Syntax error
+    utf8: UTF8 error
