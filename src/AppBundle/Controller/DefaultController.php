@@ -100,11 +100,11 @@ class DefaultController extends Controller
         try {
             switch ($apiMethod) {
                 case 'getRecent':
-                    $requestInfo = Request::create($requestParameters->getEndPoint(), 'GET',
+                    $requestInfo = Request::create($this->container->getParameter('end_point'), 'GET',
                         $requestParameters->getRecent());
                     break;
                 case 'getSizes':
-                    $requestInfo = Request::create($requestParameters->getEndPoint(), 'GET',
+                    $requestInfo = Request::create($this->container->getParameter('end_point'), 'GET',
                         $requestParameters->getSizes($photo->getId()));
                     break;
                 default:

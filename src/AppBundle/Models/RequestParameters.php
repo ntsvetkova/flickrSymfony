@@ -30,12 +30,12 @@ class RequestParameters
     private $format;
 
     /**
-     * @param $endPoint
      * @param $apiKey
      * @param $format
      */
-    public function __construct($endPoint, $apiKey, $format) {
-        $this->endPoint = $endPoint;
+    public function __construct($apiKey, $format) {
+//    public function __construct($endPoint, $apiKey, $format) {
+//        $this->endPoint = $endPoint;
         $this->apiKey = $apiKey;
         $this->format = $format;
     }
