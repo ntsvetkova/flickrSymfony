@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>flickr photos</source>
+                <target>flickr pildid</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>This app can not work with this API method</source>
+                <target>See rakendus ei oska töötada see API meetodiga</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>{0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos</source>
+                <target>{0}Siin ei ole pildid|{1}Siin on üks pilt|]1,Inf[Siin on %count% pilti</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
