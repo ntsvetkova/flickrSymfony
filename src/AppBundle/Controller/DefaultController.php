@@ -49,7 +49,8 @@ class DefaultController extends Controller
                 ));
             }
             return $this->render('flickrPhoto/photo.html.twig', array(
-                'arrayPhotos' => $arrayPhotos
+                'arrayPhotos' => $arrayPhotos,
+                'count' => count($arrayPhotos)
             ));
         }
         else {
@@ -98,7 +99,6 @@ class DefaultController extends Controller
     public function setRequest($apiMethod, FlickrPhoto $photo = null) {
         $errors = unserialize(ERROR_MESSAGE);
         $requestParameters = $this->get('request_parameters');
-        $requestInfo = null;
         try {
             switch ($apiMethod) {
                 case 'getRecent':
