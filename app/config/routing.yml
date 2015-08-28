@@ -14,7 +14,9 @@ homepage:
         permanent: true
 flickrPhotos:
     path: /{_locale}/photos
-    defaults: { _controller: AppBundle:Default:getRecent }
+    defaults:
+      _controller: AppBundle:Default:getRecent
+      _locale: en
     methods: [GET]
 photos:
     path: /photos
