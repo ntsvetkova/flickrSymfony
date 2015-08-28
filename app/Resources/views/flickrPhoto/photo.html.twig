@@ -4,6 +4,7 @@
     {% transchoice count %}
         {0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos
     {% endtranschoice %}
+    {{ '5500'|price }}
     {% for photo in arrayPhotos %}
     <div class='cell'>
         <a class='large' href={{ photo.srclarge }}>
