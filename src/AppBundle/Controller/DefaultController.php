@@ -41,7 +41,6 @@ class DefaultController extends Controller
             $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),
                 $requestInfo->attributes->all(), $requestInfo->cookies->all(), $requestInfo->files->all(),
                 $requestInfo->server->all(), $requestInfo->getContent());
-            $locale = $request->getLocale();
             $responseDecode = $this->setData($this->photo);
             $arrayPhotos = $responseDecode->decodeRecent();
             foreach ($arrayPhotos as $photo) {
@@ -115,7 +114,8 @@ class DefaultController extends Controller
             }
         }
         catch (AppException $e) {
-            $requestInfo = $this->get('translator')->trans($e);
+            $requestInfo = $e;
+//            $requestInfo = $this->get('translator')->trans($e);
         }
         return $requestInfo;
     }
