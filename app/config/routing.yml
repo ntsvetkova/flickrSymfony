@@ -17,5 +17,3 @@ flickrPhotos:
     path: /{_locale}/photos
     defaults: { _controller: AppBundle:Default:getRecent }
     methods: [GET]
-#    requirements:
-#        _locale: en
