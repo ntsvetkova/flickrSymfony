@@ -25,10 +25,9 @@ class InputValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        if (!preg_match("/(\d\s\d)\s+((\d\s){2}[NSWE]{1}\s+[LRM]+\s*)+$/", $value, $matches)) {
+        if (!preg_match("/(\d\s\d)\s+(((\d\s){2}[NSWE]{1})\s+([LRM]+)\s*)+$/", $value)) {
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
         }
-
     }
 }
