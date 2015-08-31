@@ -84,4 +84,4 @@ swiftmailer:
 
 #App Configuration
 app:
-    end_point:  https://api.flickr.com/services/rest
+    end_point: "%end_point%"

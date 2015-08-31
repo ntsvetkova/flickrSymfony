@@ -118,14 +118,18 @@ class DefaultController extends Controller
         return $requestInfo;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function marsAction(Request $request) {
         $setData = new SetData();
         $form = $this->createForm(new MarsType(), $setData);
         $form->handleRequest($request);
-        $setData->execute();
-//        if ($form->isValid()) {
-//
-//        }
+        if ($form->isValid()) {
+            $setData->setAll();
+            $setData->execute();
+        }
         return $this->render('mars/mars.html.twig', array(
             'form' => $form->createView()
         ));
