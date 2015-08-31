@@ -8,11 +8,15 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.enterData) }}
-        {{ form_row(form.showFinalPosition) }}
-    {#{{ form_widget(form) }}#}
+        <input type="submit" value="Show final position" />
+        {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
 
 {% block result %}
-    <iframe name="output"></iframe>
+    <div class='result'>
+        {% for result in results %}
+            {{ result }} <br>
+        {% endfor %}
+    </div>
 {% endblock %}
