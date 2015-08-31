@@ -44,14 +44,15 @@ class Action
     /**
      * @param Rover $rover
      * @param Plateau $plateau
+     * @return int|string
      */
     public function change(Rover $rover, Plateau $plateau)
     {
         $plateauCoordinates = $plateau->getCoordinates();
-        $errorCode = 0;
+        $result = '';
         foreach ($this->actions as $changing) {
-            $errorCode = $this->checkRoverCoordinates($rover->getX(), $rover->getY(), $plateauCoordinates);
-            if ($errorCode == 1) {
+            $result = $this->checkRoverCoordinates($rover->getX(), $rover->getY(), $plateauCoordinates);
+            if ($result != '') {
                 break;
             }
             if ($changing == 'L' || $changing == 'R') {
@@ -64,9 +65,10 @@ class Action
                 }
             }
         }
-        if ($errorCode == 0) {
-            echo nl2br($rover->getX() . ' ' . $rover->getY() . ' ' . $rover->getHeading() . "\n");
+        if ($result == '') {
+            $result = $rover->getX() . ' ' . $rover->getY() . ' ' . $rover->getHeading();
         }
+        return $result;
     }
 
     /**
@@ -101,7 +103,7 @@ class Action
      * @return int
      */
     public function checkRoverCoordinates($x, $y, $plateauCoordinates) {
-        $errorCode = 0;
+        $error = '';
         try {
             if ($x < $plateauCoordinates['leftCornerX'] || $x > $plateauCoordinates['rightCornerX']
                 || $y < $plateauCoordinates['leftCornerY'] || $y > $plateauCoordinates['rightCornerY']) {
@@ -109,9 +111,8 @@ class Action
             }
         }
         catch (AppException $e) {
-            echo nl2br($e . "\n");
-            $errorCode = 1;
+            $error = $e;
         }
-        return $errorCode;
+        return $error;
     }
 }
