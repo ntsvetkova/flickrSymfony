@@ -81,3 +81,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#App Configuration
+app:
+    end_point:  https://api.flickr.com/services/rest

@@ -26,10 +26,5 @@ $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
-if ($kernel->getContainer()->hasParameter('end_point')){
-    $response->send();
-    $kernel->terminate($request, $response);
-}
-else {
-    exit('Stop');
-}
+$response->send();
+$kernel->terminate($request, $response);

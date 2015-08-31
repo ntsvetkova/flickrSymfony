@@ -2,7 +2,6 @@
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
-#    request_parameters.endPoint: "https://api.flickr.com/services/rest"
     request_parameters.apiKey: "3bd97586d21ffcffe1931f53c2883652"
     request_parameters.format: "json"
 
@@ -13,7 +12,6 @@ services:
     request_parameters:
         class: AppBundle\Models\RequestParameters
         arguments: ["%request_parameters.apiKey%", "%request_parameters.format%"]
-#        arguments: ["%end_point%", "%request_parameters.apiKey%", "%request_parameters.format%"]
 
     curl:
         class: AppBundle\Models\CurlExec
@@ -26,8 +24,7 @@ services:
             - { name: kernel.event_subscriber }
 
     app.twig_extension:
-      class: AppBundle\Twig\AppExtension
-      public: false
-      tags:
-          - { name: twig.extension }
-
+        class: AppBundle\Twig\AppTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }

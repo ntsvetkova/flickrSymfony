@@ -19,10 +19,6 @@ class RequestParameters
     /**
      * @var string
      */
-    private $endPoint;
-    /**
-     * @var string
-     */
     private $apiKey;
     /**
      * @var string
@@ -34,17 +30,8 @@ class RequestParameters
      * @param $format
      */
     public function __construct($apiKey, $format) {
-//    public function __construct($endPoint, $apiKey, $format) {
-//        $this->endPoint = $endPoint;
         $this->apiKey = $apiKey;
         $this->format = $format;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndPoint() {
-        return $this->endPoint;
     }
 
     /**
