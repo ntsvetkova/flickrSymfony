@@ -12,7 +12,7 @@ namespace AppBundle\Twig;
  * Class AppExtension
  * @package AppBundle\Twig
  */
-class AppExtension extends \Twig_Extension
+class AppTwigExtension extends \Twig_Extension
 {
     /**
      * @return array
