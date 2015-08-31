@@ -6,11 +6,11 @@
  * Time: 12:59
  */
 
-namespace AppBundle\Models;
+namespace AppBundle\Models\FlickrPhoto;
 use AppBundle\Controller\DefaultController;
-use AppBundle\Models\FlickrPhoto;
+use AppBundle\Models\FlickrPhoto\FlickrPhoto;
 
-require_once __DIR__ . '/../Models/FlickrPhoto.php';
+require_once __DIR__ . '/../FlickrPhoto/FlickrPhoto.php';
 
 /**
  * Class ResponseDecode

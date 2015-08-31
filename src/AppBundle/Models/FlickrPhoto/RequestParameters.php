@@ -6,7 +6,7 @@
  * Time: 16:55
  */
 
-namespace AppBundle\Models;
+namespace AppBundle\Models\FlickrPhoto;
 use AppBundle\Controller\DefaultController;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -6,7 +6,7 @@
  * Time: 19:25
  */
 
-namespace AppBundle\Models;
+namespace AppBundle\Models\FlickrPhoto;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**

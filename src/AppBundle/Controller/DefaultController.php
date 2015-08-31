@@ -2,16 +2,18 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Exceptions\AppException;
-use AppBundle\Models\FlickrPhoto;
-use AppBundle\Models\ResponseDecode;
+use AppBundle\Models\FlickrPhoto\FlickrPhoto;
+use AppBundle\Models\FlickrPhoto\ResponseDecode;
 
+use AppBundle\Models\Mars\MarsType;
+use AppBundle\Models\Mars\SetData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__ . '/../Models/FlickrPhoto.php';
-require_once __DIR__ . '/../Models/ResponseDecode.php';
+require_once __DIR__ . '/../Models/FlickrPhoto/FlickrPhoto.php';
+require_once __DIR__ . '/../Models/FlickrPhoto/ResponseDecode.php';
 require_once __DIR__ . '/../Exceptions/AppException.php';
 
 /**
@@ -25,10 +27,9 @@ class DefaultController extends Controller
      */
     private $photo;
 
-//    public function indexAction(Request $request) {
-//        $this->redirectToRoute('flickrPhotos', array(), 301);
-//        return new Response($request);
-//    }
+    public function indexAction(Request $request) {
+        return $this->render('menu.html.twig', array());
+    }
 
     /**
      * @param Request $request
@@ -117,8 +118,17 @@ class DefaultController extends Controller
         return $requestInfo;
     }
 
-    public function testAction(Request $request) {
-        return new Response($request);
+    public function marsAction(Request $request) {
+        $setData = new SetData();
+        $form = $this->createForm(new MarsType(), $setData);
+        $form->handleRequest($request);
+        $setData->execute();
+//        if ($form->isValid()) {
+//
+//        }
+        return $this->render('mars/mars.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
 }

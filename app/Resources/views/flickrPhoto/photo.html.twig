@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}flickr photos v.{{ version }}{% endblock %}
+
+{% block header %}{{ 'flickr photos'|trans }}{% endblock %}
+
 {% block table %}
     {% transchoice count %}
         {0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos

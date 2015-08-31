@@ -6,7 +6,7 @@
  * Time: 10:43
  */
 
-namespace AppBundle\Models;
+namespace AppBundle\Models\FlickrPhoto;
 
 /**
  * Class FlickrPhoto
