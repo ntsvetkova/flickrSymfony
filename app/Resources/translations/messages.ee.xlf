@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>{0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos</source>
-                <target>{0}Siin ei ole pildid|{1}Siin on üks pilt|]1,Inf[Siin on %count% pilti</target>
+                <target>{0}Siin ei ole pilti|{1}Siin on üks pilt|]1,Inf[Siin on %count% pilti</target>
             </trans-unit>
         </body>
     </file>
