@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Models\Mars;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class SetData
@@ -64,6 +65,7 @@ class SetData
 
         $this->plateau = Plateau::getInstance();
         $this->plateau->setCoordinates($this->plateauRightCornerX, $this->plateauRightCornerY);
+
         foreach ($this->enterData as $key => $value) {
             if ($key % 2 == 0) {
                 array_push($this->arrInstructions, trim($value));
@@ -72,9 +74,7 @@ class SetData
                 array_push($this->arrPositions, trim($value));
             }
         }
-        for ($i = 0; $i < count($this->arrInstructions); $i++) {
-            $this->arrRover[$this->arrPositions[$i]] = $this->arrInstructions[$i];
-        }
+        $this->arrRover = array_combine($this->arrPositions, $this->arrInstructions);
     }
 
     /**
@@ -95,5 +95,11 @@ class SetData
             $action->change($rover, $this->plateau);
         }
     }
+
+//    public function configureOptions(OptionsResolver $resolver) {
+//        $resolver->setDefaults(array(
+//
+//        ));
+//    }
 
 }

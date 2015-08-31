@@ -6,7 +6,7 @@
  * Time: 14:02
  */
 
-namespace AppBundle\Models\Mars;
+namespace AppBundle\Model\Mars;
 
 
 use Symfony\Component\Form\AbstractType;
