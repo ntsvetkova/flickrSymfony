@@ -6,7 +6,7 @@
  * Time: 14:02
  */
 
-namespace AppBundle\Model\Mars;
+namespace AppBundle\Models\Mars;
 
 
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +19,7 @@ class MarsType extends AbstractType
             ->add('enterData', 'textarea', array(
                 'attr' => array('rows' => 10)
             ))
-            ->add('showFinalPosition','submit')
+//            ->add('showFinalPosition','submit')
         ;
     }
 
@@ -30,6 +30,6 @@ class MarsType extends AbstractType
      */
     public function getName()
     {
-        return 'mars';
+        return 'app_mars';
     }
 }
