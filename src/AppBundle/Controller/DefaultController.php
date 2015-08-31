@@ -12,10 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__ . '/../Models/FlickrPhoto/FlickrPhoto.php';
-require_once __DIR__ . '/../Models/FlickrPhoto/ResponseDecode.php';
-require_once __DIR__ . '/../Exceptions/AppException.php';
-
 /**
  * Class DefaultController
  * @package AppBundle\Controller
@@ -124,15 +120,16 @@ class DefaultController extends Controller
      */
     public function marsAction(Request $request) {
         $setData = new SetData();
+        $results = [];
         $form = $this->createForm(new MarsType(), $setData);
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $setData->setAll();
-            $setData->execute();
+            $results = $setData->execute();
         }
         return $this->render('mars/mars.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'results' => $results
         ));
     }
-
 }
