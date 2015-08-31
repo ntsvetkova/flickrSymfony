@@ -8,9 +8,6 @@
 
 namespace AppBundle\Models\FlickrPhoto;
 use AppBundle\Controller\DefaultController;
-use AppBundle\Models\FlickrPhoto\FlickrPhoto;
-
-require_once __DIR__ . '/../FlickrPhoto/FlickrPhoto.php';
 
 /**
  * Class ResponseDecode
