@@ -60,9 +60,9 @@ class AppTwigExtension extends \Twig_Extension
      * @return string
      */
     public function shortFunction($string) {
-        $length = strlen($string);
+        $length = mb_strlen($string);
         if ($length > 100) {
-            $string = substr($string, 1, 100) . '...';
+            $string = mb_substr($string, 0, 100) . '...';
         }
         return $string;
     }
