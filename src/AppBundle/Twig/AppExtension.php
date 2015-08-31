@@ -40,8 +40,19 @@ class AppExtension extends \Twig_Extension
      */
     public function getFunctions() {
         return array(
-            new \Twig_SimpleFunction('short', array($this, 'shortFunction'))
+            new \Twig_SimpleFunction('short', array($this, 'shortFunction')),
+            new \Twig_SimpleFunction('reverse', array($this, 'reverseFunction')),
+            new \Twig_SimpleFunction('show', array($this, 'showFunction'))
         );
+    }
+
+    /**
+     * @param $array
+     * @return array
+     */
+    public function reverseFunction($array) {
+        $reversed = array_reverse($array, true);
+        return $reversed;
     }
 
     /**
@@ -54,6 +65,21 @@ class AppExtension extends \Twig_Extension
             $string = substr($string, 1, 100) . '...';
         }
         return $string;
+    }
+
+    /**
+     * @param $array
+     * @param $count
+     * @return mixed
+     */
+    public function showFunction($array, $count) {
+        $showArray = $array;
+        if ($count < count($array)) {
+            for ($i = count($array) - 1; $i >= $count; $i--) {
+                unset($showArray[$i]);
+            }
+        }
+        return $showArray;
     }
 
     /**

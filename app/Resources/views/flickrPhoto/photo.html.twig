@@ -4,7 +4,7 @@
     {% transchoice count %}
         {0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos
     {% endtranschoice %}
-    {% for photo in arrayPhotos %}
+    {% for photo in show(reverse(arrayPhotos), 5) %}
     <div class='cell'>
         <a class='large' href={{ photo.srclarge }}>
             <div class='img' style='background-image:url({{ photo.srcthumbnail }})'></div>
