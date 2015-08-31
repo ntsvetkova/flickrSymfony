@@ -1,0 +1,4 @@
+AppBundle\Models\Mars\SetData:
+    properties:
+        enterData:
+            - AppBundle\Validator\Constraints\Input: ~
