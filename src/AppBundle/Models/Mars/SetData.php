@@ -7,7 +7,6 @@
  */
 
 namespace AppBundle\Models\Mars;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class SetData
@@ -43,6 +42,10 @@ class SetData
      * @var Plateau
      */
     private $plateau;
+    /**
+     * @var array
+     */
+    private $arrayNewPositions = [];
 
     /**
      * @param $enterData
@@ -92,14 +95,9 @@ class SetData
             $positionDetails = explode(' ', $position);
             $rover = new Rover((int)$positionDetails[0], (int)$positionDetails[1], $positionDetails[2]);
             $action = new Action($instruction);
-            $action->change($rover, $this->plateau);
+            array_push($this->arrayNewPositions, $action->change($rover, $this->plateau));
         }
+        return $this->arrayNewPositions;
     }
-
-//    public function configureOptions(OptionsResolver $resolver) {
-//        $resolver->setDefaults(array(
-//
-//        ));
-//    }
 
 }
