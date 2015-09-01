@@ -1,0 +1,136 @@
+body {
+    margin: 0 auto;
+    width: 60%;
+    background-color: white;
+    font-family: Arial;
+    color: #1f1f21;
+}
+
+a {
+    text-decoration: none;
+    color: #1f1f21;
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.wrapper #table {
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper .cell {
+    width: 100%;
+    border: 4px solid #ffffff;
+    background-color: #d8d8ca;
+    height: 100px;
+    color: #1f1f21;
+}
+
+.wrapper .cell:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+.wrapper .cell:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.wrapper .cell .img {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.wrapper .cell .title {
+    color: #1f1f21;
+    font-size: 14px;
+    margin: 10px;
+    text-align: center;
+}
+
+.wrapper .cell .large {
+    height: 100%;
+    display: block;
+    width: 80%;
+    font-size: 14px;
+    text-align: left;
+    float: left;
+}
+
+.wrapper .cell #arrow {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    float: right;
+    height: 100%;
+}
+
+.wrapper .cell .menu {
+    height: 70px;
+    display: block;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    width: 100%;
+    padding-top: 30px;
+}
+
+#photo_large {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #1f1f21;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#photo_large:hover {
+    cursor: pointer;
+}
+
+
+.wrapper form textarea {
+    width: 100%;
+}
+
+.wrapper form input {
+    width: 200px;
+    height: 30px;
+    margin: 20px;
+}
+
+.wrapper .result {
+    width: 100%;
+    height: 200px;
+    margin: 0;
+    border: 1px darkgrey solid;
+}
+
+.clearfix {
+    clear: both;
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper .cell {
+        height: 200px;
+    }
+}
