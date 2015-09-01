@@ -1,11 +1,16 @@
 imports:
     - { resource: config.yml }
 
-#framework:
+framework:
+  profiler: { only_exceptions: false }
 #    validation:
 #        cache: validator.mapping.cache.apc
 #    serializer:
 #        cache: serializer.mapping.cache.apc
+#
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
 
 #doctrine:
 #    orm:
@@ -25,3 +30,6 @@ monolog:
             level: debug
         console:
             type:  console
+
+assetic:
+    use_controller: true
