@@ -74,6 +74,25 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return Response
+     */
+    public function marsAction(Request $request) {
+        $setData = new SetData();
+        $results = [];
+        $form = $this->createForm(new MarsType(), $setData);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $setData->setAll();
+            $results = $setData->execute();
+        }
+        return $this->render('mars/mars.html.twig', array(
+            'form' => $form->createView(),
+            'results' => $results
+        ));
+    }
+
+    /**
      * @param FlickrPhoto|null $photo
      * @return mixed
      */
@@ -112,24 +131,5 @@ class DefaultController extends Controller
             $requestInfo = $this->get('translator')->trans($e);
         }
         return $requestInfo;
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function marsAction(Request $request) {
-        $setData = new SetData();
-        $results = [];
-        $form = $this->createForm(new MarsType(), $setData);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $setData->setAll();
-            $results = $setData->execute();
-        }
-        return $this->render('mars/mars.html.twig', array(
-            'form' => $form->createView(),
-            'results' => $results
-        ));
     }
 }
