@@ -28,3 +28,6 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+    mars_type:
+        class: AppBundle\Models\Mars\MarsType
+        arguments: ["@translator"]

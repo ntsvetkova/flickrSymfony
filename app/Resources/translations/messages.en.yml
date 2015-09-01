@@ -3,6 +3,7 @@ no:
   method: This app can not work with this API method
   file: Error loading file
   template: Error loading template
+  input: The value should be given
 error:
   json:
     depth: Max depth

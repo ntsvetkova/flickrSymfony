@@ -38,6 +38,10 @@
                 <source>mars</source>
                 <target>marss</target>
             </trans-unit>
+            <trans-unit id="10">
+                <source>no.input</source>
+                <target>Väärtus peab olema ülalesitatud</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -80,7 +80,7 @@ class DefaultController extends Controller
     public function marsAction(Request $request) {
         $setData = new SetData();
         $results = [];
-        $form = $this->createForm(new MarsType(), $setData);
+        $form = $this->createForm($this->get('mars_type'), $setData);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $setData->setAll();
