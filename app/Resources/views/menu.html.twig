@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}homepage{% endblock %}
+{% block title %}{{ 'home'|trans }}{% endblock %}
 
-{% block header %}homepage{% endblock %}
+{% block header %}{{ 'home'|trans }}{% endblock %}
 
 {% block table %}
     <div class='cell'>
-        <a class='menu' href="{{ path('photos') }}">flickr photos</a>
+        <a class='menu' href="{{ path('flickrPhotos') }}">{{ 'flickr.photos'|trans }}</a>
     </div>
     <div class='cell'>
-        <a class='menu' href="{{ path('mars') }}">mars</a>
+        <a class='menu' href="{{ path('exploringMars') }}">{{ 'mars'|trans }}</a>
     </div>
 {% endblock %}

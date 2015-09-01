@@ -1,3 +1,4 @@
+home: homepage
 no:
   method: This app can not work with this API method
   file: Error loading file
@@ -11,5 +12,14 @@ error:
     utf8: UTF8 error
   curl: Error while executing cUrl request
 stop: The app can not work
+flickr:
+  photos: flickr photos
+explore:
+  mars: exploring mars
 enter:
   data: Enter data
+show:
+  final: Show final position
+rover:
+  out: The rover is out of the plateau
+mars: mars

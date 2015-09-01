@@ -107,7 +107,7 @@ class Action
         try {
             if ($x < $plateauCoordinates['leftCornerX'] || $x > $plateauCoordinates['rightCornerX']
                 || $y < $plateauCoordinates['leftCornerY'] || $y > $plateauCoordinates['rightCornerY']) {
-                throw new AppException('The rover is out of the plateau');
+                throw new AppException('rover.out');
             }
         }
         catch (AppException $e) {

@@ -3,13 +3,22 @@ app:
     type:     annotation
 
 homepage:
+    path: /{_locale}
+    defaults:
+        _controller: AppBundle:Default:index
+        _locale: en
+start:
     path: /
-    defaults: { _controller: AppBundle:Default:index }
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: homepage
+        permanent: true
+
 flickrPhotos:
     path: /{_locale}/photos
     defaults:
-      _controller: AppBundle:Default:getRecent
-      _locale: en
+        _controller: AppBundle:Default:getRecent
+        _locale: en
     methods: [GET]
 photos:
     path: /photos
@@ -17,6 +26,15 @@ photos:
         _controller: FrameworkBundle:Redirect:redirect
         route: flickrPhotos
         permanent: true
+
+exploringMars:
+    path: /{_locale}/mars
+    defaults:
+        _controller: AppBundle:Default:mars
+        _locale: en
 mars:
     path: /mars
-    defaults: { _controller: AppBundle:Default:mars }
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: exploringMars
+        permanent: true

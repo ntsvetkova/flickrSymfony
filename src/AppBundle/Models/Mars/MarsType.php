@@ -17,10 +17,9 @@ class MarsType extends AbstractType
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
         $builderInterface
             ->add('enterData', 'textarea', array(
+                'label' => 'enter.data',
                 'attr' => array('rows' => 10)
-            ))
-//            ->add('showFinalPosition','submit')
-        ;
+            ));
     }
 
     /**

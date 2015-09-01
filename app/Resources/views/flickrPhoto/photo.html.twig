@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}flickr photos v.{{ version }}{% endblock %}
+{% block title %}{{ 'flickr.photos'|trans }} v.{{ version }}{% endblock %}
 
-{% block header %}{{ 'flickr photos'|trans }}{% endblock %}
+{% block header %}{{ 'flickr.photos'|trans }}{% endblock %}
 
 {% block table %}
     {% transchoice count %}

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}exploring mars{% endblock %}
+{% block title %}{{ 'explore.mars'|trans }}{% endblock %}
 
-{% block header %}exploring mars{% endblock %}
+{% block header %}{{ 'explore.mars'|trans }}{% endblock %}
 
 {% block form %}
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.enterData) }}
-        <input type="submit" value="Show final position" />
+        <input type="submit" value="{{ 'show.final'|trans }}" />
         {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
@@ -16,7 +16,7 @@
 {% block result %}
     <div class='result'>
         {% for result in results %}
-            {{ result }} <br>
+            {{ result|trans }} <br>
         {% endfor %}
     </div>
 {% endblock %}

@@ -3,7 +3,7 @@
     <file source-language="en" target-language="ee" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>flickr photos</source>
+                <source>flickr.photos</source>
                 <target>flickr pildid</target>
             </trans-unit>
             <trans-unit id="2">
@@ -13,6 +13,30 @@
             <trans-unit id="3">
                 <source>{0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos</source>
                 <target>{0}Siin ei ole pilti|{1}Siin on üks pilt|]1,Inf[Siin on %count% pilti</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>home</source>
+                <target>kodulehekülg</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>explore.mars</source>
+                <target>marssi uurimine</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>enter.data</source>
+                <target>Sisestage andmed</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>show.final</source>
+                <target>Näitama lõpuasendit</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>rover.out</source>
+                <target>Marssiaurik on platoo väljas</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>mars</source>
+                <target>marss</target>
             </trans-unit>
         </body>
     </file>
