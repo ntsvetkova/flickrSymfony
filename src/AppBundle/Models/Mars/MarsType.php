@@ -23,12 +23,17 @@ class MarsType extends AbstractType
      * @var Translator|DataCollectorTranslator
      */
     protected $translator;
+    /**
+     * @var array
+     */
+    protected $attributes;
 
     /**
      * @param DataCollectorTranslator $translator
      */
-    public function __construct(DataCollectorTranslator $translator) {
+    public function __construct(DataCollectorTranslator $translator, $attributes) {
         $this->translator = $translator;
+        $this->attributes = $attributes;
     }
 
     /**
@@ -40,7 +45,7 @@ class MarsType extends AbstractType
         $builderInterface
             ->add('enterData', 'textarea', array(
                 'label' => 'enter.data',
-                'attr' => array('rows' => 10,
+                'attr' => array('rows' => $this->attributes['rows'],
                     'oninvalid' => "setCustomValidity('$emptyField')")
             ));
     }

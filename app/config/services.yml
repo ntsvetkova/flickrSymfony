@@ -30,4 +30,4 @@ services:
             - { name: twig.extension }
     mars_type:
         class: AppBundle\Models\Mars\MarsType
-        arguments: ["@translator"]
+        arguments: ["@translator", "%form.textarea.attributes%"]

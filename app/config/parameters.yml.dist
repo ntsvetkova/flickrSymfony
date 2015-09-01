@@ -17,3 +17,9 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    #app parameters
+    app.version: 1.3
+    end_point: https://api.flickr.com/services/rest
+    form.textarea.attributes:
+        rows: 1
