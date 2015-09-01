@@ -9,5 +9,4 @@
 /composer.phar
 /vendor/
 /web/bundles/
-!web/bundles/framework/css/main.css
 /.idea/
