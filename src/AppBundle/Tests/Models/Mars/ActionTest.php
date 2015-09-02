@@ -35,6 +35,13 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      * @var Plateau
      */
     private $plateau;
+    /**
+     * @var array
+     */
+    private $arrayResults = [
+        '1 2 N' => '1 3 N',
+        '3 3 E' => '5 1 E',
+    ];
 
     /**
      * Values necessary for all tests
@@ -75,9 +82,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      * @covers Action::change
      */
     public function testChange(Rover $rover, Plateau $plateau, $instruction) {
+        $start = $rover->getX() . ' ' . $rover->getY() . ' ' .$rover->getHeading();
         $change = $this->action->change($rover, $plateau, $instruction);
         $this->assertInternalType('string', $change);
-        $this->assertEquals('1 3 N', $change, 'Error performing instructions');
+        $this->assertEquals($change, $this->arrayResults[$start], 'Error performing instructions');
     }
 
     /**
@@ -134,7 +142,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->plateau->setCoordinates(5,5);
         return array(
             array(new Rover(1, 2, 'N'), $this->plateau, 'LMLMLMLMM'),
-//            array(new Rover(3, 3, 'E'), $this->plateau, 'MMRMMRMRRM'),
+            array(new Rover(3, 3, 'E'), $this->plateau, 'MMRMMRMRRM'),
         );
     }
 
