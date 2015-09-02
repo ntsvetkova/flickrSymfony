@@ -23,7 +23,7 @@ class Plateau
         'rightCornerX' => 0,
         'rightCornerY' => 0
     ];
-        /**
+    /**
      * @var
      */
     private static $instance;
