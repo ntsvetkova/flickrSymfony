@@ -19,10 +19,6 @@ class Action
     /**
      * @var array
      */
-    private $actions = [];
-    /**
-     * @var array
-     */
     private $changeHeadings = [
         'NL' => 'W',
         'NR' => 'E',
@@ -33,24 +29,51 @@ class Action
         'EL' => 'N',
         'ER' => 'S'
     ];
+    /**
+     * @var
+     */
+    private static $instance;
 
     /**
-     * @param $actions string
+     * Constructor
      */
-    public function __construct($actions) {
-        $this->actions = str_split($actions);
+    private function __construct() {}
+
+    /**
+     * Cloning restriction
+     */
+    private function __clone() {}
+
+    /**
+     * @return mixed
+     */
+    public static function getInstance() {
+        if (empty(self::$instance)) {
+            $classname = __CLASS__;
+            self::$instance = new $classname;
+        }
+        return self::$instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function getChangeHeadings() {
+        return $this->changeHeadings;
     }
 
     /**
      * @param Rover $rover
      * @param Plateau $plateau
+     * @param string $actions
      * @return int|string
      */
-    public function change(Rover $rover, Plateau $plateau)
+    public function change(Rover $rover, Plateau $plateau, $actions)
     {
         $plateauCoordinates = $plateau->getCoordinates();
+        $actions = str_split($actions);
         $result = '';
-        foreach ($this->actions as $changing) {
+        foreach ($actions as $changing) {
             $result = $this->checkRoverCoordinates($rover->getX(), $rover->getY(), $plateauCoordinates);
             if ($result != '') {
                 break;
@@ -59,9 +82,9 @@ class Action
                 $rover->setHeading($this->rotate($rover->getHeading(), $changing));
             } else {
                 if ($rover->getHeading() == 'W' || $rover->getHeading() == 'E') {
-                    $rover->setX($this->move($rover->getX(), $rover->getHeading(), $plateauCoordinates));
+                    $rover->setX($this->move($rover->getX(), $rover->getHeading()));
                 } else {
-                    $rover->setY($this->move($rover->getY(), $rover->getHeading(), $plateauCoordinates));
+                    $rover->setY($this->move($rover->getY(), $rover->getHeading()));
                 }
             }
         }
@@ -72,8 +95,8 @@ class Action
     }
 
     /**
-     * @param $oldHeading
-     * @param $rotating
+     * @param string $oldHeading
+     * @param string $rotating
      */
     public function rotate($oldHeading, $rotating)
     {
@@ -81,12 +104,11 @@ class Action
     }
 
     /**
-     * @param $oldCoordinate
-     * @param $heading
-     * @param $plateauCoordinates
-     * @return mixed
+     * @param int $oldCoordinate
+     * @param string $heading
+     * @return int
      */
-    public function move($oldCoordinate, $heading, $plateauCoordinates)
+    public function move($oldCoordinate, $heading)
     {
         if ($heading == 'E' || $heading == 'N') {
             $newCoordinate = ++$oldCoordinate;
@@ -97,10 +119,10 @@ class Action
     }
 
     /**
-     * @param $x
-     * @param $y
-     * @param $plateauCoordinates
-     * @return int
+     * @param int $x
+     * @param int $y
+     * @param array $plateauCoordinates
+     * @return string
      */
     public function checkRoverCoordinates($x, $y, $plateauCoordinates) {
         $error = '';

@@ -94,8 +94,8 @@ class SetData
         foreach ($this->arrRover as $position => $instruction) {
             $positionDetails = explode(' ', $position);
             $rover = new Rover((int)$positionDetails[0], (int)$positionDetails[1], $positionDetails[2]);
-            $action = new Action($instruction);
-            array_push($this->arrayNewPositions, $action->change($rover, $this->plateau));
+            $action = Action::getInstance();
+            array_push($this->arrayNewPositions, $action->change($rover, $this->plateau, $instruction));
         }
         return $this->arrayNewPositions;
     }
