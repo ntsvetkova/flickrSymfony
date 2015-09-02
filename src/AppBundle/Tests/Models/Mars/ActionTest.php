@@ -49,12 +49,12 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      * @param int $x
      * @param int $y
      * @param array $plateauCoordinates
+     * @param string $expected
      *
      * @dataProvider checkRoverCoordinatesProvider
      * @covers Action::checkRoverCoordinates
      */
-    public function testCheckRoverCoordinates($x, $y, array $plateauCoordinates, $expected)
-    {
+    public function testCheckRoverCoordinates($x, $y, array $plateauCoordinates, $expected) {
         $check = $this->action->checkRoverCoordinates($x, $y, $plateauCoordinates);
         $this->assertEquals($expected, $check);
     }
@@ -125,6 +125,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         return [
             [new Rover(1, 2, 'N'), $this->plateau, 'LMLMLMLMM', '1 3 N'],
             [new Rover(3, 3, 'E'), $this->plateau, 'MMRMMRMRRM', '5 1 E'],
+            [new Rover(3, 3, 'E'), $this->plateau, 'MMRMMRMRRM', '5 4 E'],
         ];
     }
 
@@ -145,4 +146,54 @@ class ActionTest extends \PHPUnit_Framework_TestCase
             [1, 'N', 2]
         ];
     }
+
+    /**
+     * Mock test
+     */
+    public function testMock() {
+        $plateau = $this->getMockBuilder('Plateau')
+            ->setMethods(['getCoordinates', 'setCoordinates'])
+            ->getMock();
+        $plateau->expects($this->atLeastOnce())
+            ->method('getCoordinates')
+            ->will($this->onConsecutiveCalls(
+                [
+                    'leftCornerX' => 1,
+                    'leftCornerY' => 2,
+                    'rightCornerX' => 6,
+                    'rightCornerY' => 9
+                ],
+                [
+                    'leftCornerX' => 0,
+                    'leftCornerY' => 0,
+                    'rightCornerX' => 5,
+                    'rightCornerY' => 5
+                ]
+            ));
+        $plateau->expects($this->atLeastOnce())
+            ->method('setCoordinates')
+            ->with($this->equalTo(0), $this->equalTo(0), $this->greaterThan(0), $this->greaterThan(0))
+            ->will($this->returnArgument(3));
+        $plateau->setCoordinates(0,0,3,8);
+
+        $roverMock = $this->getMockBuilder('Rover')
+            ->setMethods(['getX','getY'])
+            ->getMock();
+
+        $roverMock->expects($this->any())
+            ->method('getX')
+            ->will($this->returnValue(1));
+
+        $roverMock->expects($this->any())
+            ->method('getY')
+            ->will($this->returnValue('6'));
+        $this->assertEquals(6, $roverMock->getY());
+
+        $check = $this->action->checkRoverCoordinates($roverMock->getX(), $roverMock->getY(), $plateau->getCoordinates());
+        $this->assertEquals('', $check);
+
+        $check = $this->action->checkRoverCoordinates($roverMock->getX(), $roverMock->getY(), $plateau->getCoordinates());
+        $this->assertEquals('rover.out', $check);
+    }
+
 }
