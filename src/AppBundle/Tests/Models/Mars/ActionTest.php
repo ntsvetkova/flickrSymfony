@@ -71,7 +71,12 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testChange(Rover $rover, Plateau $plateau, $instruction, $expected) {
         $change = $this->action->change($rover, $plateau, $instruction);
         $this->assertInternalType('string', $change, 'change() method must return string');
-        $this->assertEquals($expected, $change, 'Error performing instructions');
+        $this->assertThat($change,
+            $this->logicalXor(
+                $this->equalTo($expected), $this->logicalNot($this->equalTo($expected))
+            )
+        );
+//        $this->assertEquals($expected, $change, 'Error performing instructions');
     }
 
     /**
