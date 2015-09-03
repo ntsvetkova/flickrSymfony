@@ -23,8 +23,16 @@ class DefaultController extends Controller
      */
     private $photo;
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function indexAction(Request $request) {
         return $this->render('menu.html.twig', array());
+    }
+
+    public function menuAction() {
+        return $this->render('load.html.twig', array());
     }
 
     /**

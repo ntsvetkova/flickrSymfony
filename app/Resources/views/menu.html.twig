@@ -4,11 +4,11 @@
 
 {% block header %}{{ 'home'|trans }}{% endblock %}
 
-{% block table %}
-    <div class='cell'>
-        <a class='menu' href="{{ path('flickrPhotos') }}">{{ 'flickr.photos'|trans }}</a>
-    </div>
-    <div class='cell'>
-        <a class='menu' href="{{ path('exploringMars') }}">{{ 'mars'|trans }}</a>
-    </div>
+{% block body %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
+    <script src="{{ asset('assets/js/app/index.js') }}"></script>
 {% endblock %}
