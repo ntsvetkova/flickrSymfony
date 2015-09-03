@@ -45,11 +45,6 @@ menu:
         _controller: FrameworkBundle:Template:template
         template: load.html.twig
         _locale: en
-#menu:
-#    path: /{_locale}/menu
-#    defaults:
-#        _controller: AppBundle:Default:menu
-#        _locale: en
 menuRedirect:
     path: /menu
     defaults:

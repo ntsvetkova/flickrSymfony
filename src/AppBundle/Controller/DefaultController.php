@@ -31,10 +31,6 @@ class DefaultController extends Controller
         return $this->render('menu.html.twig', array());
     }
 
-    public function menuAction() {
-        return $this->render('load.html.twig', array());
-    }
-
     /**
      * @param Request $request
      * @return Response
