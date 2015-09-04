@@ -7,3 +7,5 @@ requirejs.config({
         app: 'app',
     }
 });
+
+//requirejs('jquery', 'underscore', function ($, _) {});
