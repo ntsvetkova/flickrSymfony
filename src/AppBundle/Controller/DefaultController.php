@@ -40,10 +40,11 @@ class DefaultController extends Controller
         $response = new JsonResponse();
         $content = json_encode(['items' => [
             ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-            ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')]
+            ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
         ]]);
         $response->setContent($content);
         return $response;
+//        return new Response();
     }
 
     /**
