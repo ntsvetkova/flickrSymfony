@@ -20,37 +20,38 @@ flickrPhotos:
         _controller: AppBundle:Default:getRecent
         _locale: en
     methods: [GET]
-photos:
-    path: /photos
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: flickrPhotos
-        permanent: true
+#photos:
+#    path: /photos
+#    defaults:
+#        _controller: FrameworkBundle:Redirect:redirect
+#        route: flickrPhotos
+#        permanent: true
 
 exploringMars:
     path: /{_locale}/mars
     defaults:
         _controller: AppBundle:Default:mars
         _locale: en
-mars:
-    path: /mars
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: exploringMars
-        permanent: true
+#mars:
+#    path: /mars
+#    defaults:
+#        _controller: FrameworkBundle:Redirect:redirect
+#        route: exploringMars
+#        permanent: true
 
 menu:
     path: /{_locale}/menu
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template: load.html.twig
+        _controller: AppBundle:Default:menu
+#        _controller: FrameworkBundle:Template:template
+#        template: load.html.twig
         _locale: en
-menuRedirect:
-    path: /menu
-    defaults:
-      _controller: FrameworkBundle:Redirect:redirect
-      route: menu
-      permanent: true
+#menuRedirect:
+#    path: /menu
+#    defaults:
+#      _controller: FrameworkBundle:Redirect:redirect
+#      route: menu
+#      permanent: true
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

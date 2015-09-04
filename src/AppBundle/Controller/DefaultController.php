@@ -9,6 +9,7 @@ use AppBundle\Models\Mars\MarsType;
 use AppBundle\Models\Mars\SetData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,6 +30,20 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request) {
         return $this->render('menu.html.twig', array());
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function menuAction(Request $request) {
+        $response = new JsonResponse();
+        $content = json_encode(['items' => [
+            ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
+            ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')]
+        ]]);
+        $response->setContent($content);
+        return $response;
     }
 
     /**
