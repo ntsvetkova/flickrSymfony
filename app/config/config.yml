@@ -85,3 +85,9 @@ swiftmailer:
 #App Configuration
 app:
     end_point: "%end_point%"
+
+#Lunetics Locale Bundle configuration
+lunetics_locale:
+    guessing_order:
+        - router
+        - browser
