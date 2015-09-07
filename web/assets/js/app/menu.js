@@ -6,9 +6,6 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
         $( document ).ready(function () {
             var locale = window.location.pathname.slice(1) != '' ? window.location.pathname.slice(1) : 'en';
             $.getJSON(locale + '/menu', function (json) {
-                var responseJson = JSON.stringify(json);
-                var responseItems = JSON.parse(responseJson);
-
                 function Link() {
                     this.type = 'link';
                 }
@@ -26,13 +23,18 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                 MenuLink.prototype = _.create(Link.prototype);
                 MenuLink.prototype.constructor = MenuLink;
                 var menuLink = new MenuLink();
-                //console.log(menuLink);
 
-                _.each(responseItems.items, function(item) {
+                var count = 0;
+                _.each(json.items, function(item) {
                     if (_.has(item, 'text') && _.has(item, 'path')) {
                         menuLink.defineLink(item.text, item.path);
                         $('<div></div>')
                             .addClass('cell')
+                            .css({
+                                'border-radius': '40px/20px',
+                                '-webkit-border-radius': '40px/20px',
+                                '-moz-border-radius': '40px/20px'
+                            })
                             .append($('<a></a>')
                                 .addClass('menu')
                                 .text(menuLink.text)
@@ -40,14 +42,41 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                                     href: menuLink.path,
                                     title: menuLink.text
                                 })
-                        )
-                            .fadeIn(1000)
+                            )
+                            .fadeIn(1000, function () {
+                                if (count % 2 == 0) {
+                                    $( this ).css({
+                                        'transform': 'translateX(10px)',
+                                        '-moz-transform': 'translateX(10px)',
+                                        '-ms-transform': 'translateX(10px)',
+                                        '-webkit-transform': 'translateX(10px)',
+                                        '-o-transform': 'translateX(10px)'
+                                    })
+                                } else {
+                                    $( this ).css({
+                                        'transform': 'translateX(-10px)',
+                                        '-moz-transform': 'translateX(-10px)',
+                                        '-ms-transform': 'translateX(-10px)',
+                                        '-webkit-transform': 'translateX(-10px)',
+                                        '-o-transform': 'translateX(-10px)'
+                                    })
+                                }
+                                $( this ).css({
+                                    '-webkit-transition': '-webkit-transform .5s',
+                                    '-moz-transition': '-moz-transform .5s',
+                                    'o-transition': '-o-transform .5s',
+                                    'transition': 'transform .5s'
+                                });
+                                count++;
+                            })
                             .appendTo("#table");
+                        $("a[title='mars']").attr('title', 'MARS');
                     }
                 });
             })
                 .fail(function() {
                     $( "#table" ).html('Error: the response is not a JSON response');
+                    console.log('Error: the response is not a JSON response');
                 });
         });
     }
