@@ -107,6 +107,12 @@ h1 {
     cursor: pointer;
 }
 
+.locale_switcher {
+    width: 15%;
+    margin: 10px auto;
+    color: #1f1f21;
+    float: right;
+}
 
 .wrapper form textarea {
     width: 100%;

@@ -23,6 +23,10 @@
             </div>
             {% block form %}{% endblock %}
             {% block result %}{% endblock %}
+            {% block switcher %}
+                <div class="locale_switcher">{{ locale_switcher() }}</div>
+                <div class="clearfix"></div>
+            {% endblock %}
         </div>
         {% endblock %}
         {% block javascripts %}{% endblock %}

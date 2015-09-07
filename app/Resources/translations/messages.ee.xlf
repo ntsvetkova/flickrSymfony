@@ -42,6 +42,10 @@
                 <source>no.input</source>
                 <target>Väärtus peab olema ülalesitatud</target>
             </trans-unit>
+            <trans-unit id="11">
+                <source>switch</source>
+                <target>ümber lülituma:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

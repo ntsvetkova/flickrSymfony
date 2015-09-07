@@ -89,5 +89,17 @@ app:
 #Lunetics Locale Bundle configuration
 lunetics_locale:
     guessing_order:
+        - query
         - router
+        - session
+        - cookie
         - browser
+    allowed_locales:
+      - en
+      - ee
+    strict_mode: false
+    strict_match: true
+    cookie:
+        set_on_change: true
+    switcher:
+        template: switcher/switcher_links.html.twig
