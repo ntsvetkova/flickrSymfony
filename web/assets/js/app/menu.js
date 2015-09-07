@@ -25,8 +25,8 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                 var menuLink = new MenuLink();
 
                 var count = 0;
-                _.each(json.items, function(item) {
-                    if (_.has(item, 'text') && _.has(item, 'path')) {
+                _.each(json.items, function(item, index, list) {
+                    if (_.isObject(item) && _.has(item, 'text') && _.has(item, 'path')) {
                         menuLink.defineLink(item.text, item.path);
                         $('<div></div>')
                             .addClass('cell')
