@@ -89,10 +89,11 @@ app:
 #Lunetics Locale Bundle configuration
 lunetics_locale:
     guessing_order:
+        - app
         - query
         - router
-        - cookie
         - session
+        - cookie
         - browser
     allowed_locales:
       - en

@@ -4,6 +4,7 @@ parameters:
 #    parameter_name: value
     request_parameters.apiKey: "3bd97586d21ffcffe1931f53c2883652"
     request_parameters.format: "json"
+    lunetics_locale.app_guesser.class: AppBundle\LocaleGuesser\AppLocaleGuesser
 
 services:
 #    service_name:
@@ -31,3 +32,9 @@ services:
     mars_type:
         class: AppBundle\Models\Mars\MarsType
         arguments: ["@translator", "%form.textarea.attributes%"]
+
+    lunetics_locale.app_guesser:
+        class: "%lunetics_locale.app_guesser.class%"
+        arguments: ["@lunetics_locale.validator.meta"]
+        tags:
+            - { name: lunetics_locale.guesser, alias: app }
