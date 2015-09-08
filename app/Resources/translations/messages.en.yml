@@ -24,3 +24,4 @@ show:
 rover:
   out: The rover is out of the plateau
 mars: mars
+switch: Switch to:

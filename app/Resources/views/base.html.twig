@@ -23,6 +23,9 @@
             </div>
             {% block form %}{% endblock %}
             {% block result %}{% endblock %}
+            {% block switcher %}
+                {{ locale_switcher() }}
+            {% endblock %}
         </div>
         {% endblock %}
         {% block javascripts %}{% endblock %}

@@ -52,6 +52,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function getRecentAction(Request $request) {
+        $request->attributes->set('_locale', $request->getSession()->get('_locale'));
         $requestInfo = $this->setRequest('getRecent', $this->photo);
         if ($requestInfo instanceof Request) {
             $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),
@@ -60,9 +61,13 @@ class DefaultController extends Controller
             $responseDecode = $this->setData($this->photo);
             $arrayPhotos = $responseDecode->decodeRecent();
             foreach ($arrayPhotos as $photo) {
-                $this->forward('AppBundle:Default:getSizes', array(
+                $response = $this->forward('AppBundle:Default:getSizes', array(
                     'photo' => $photo
                 ));
+                if ($response->getContent() == $this->get('translator')->trans('no.method')) {
+                    return $this->render('flickrPhoto/error.html.twig', array(
+                        'message' => $response->getContent()));
+                }
             }
             return $this->render('flickrPhoto/photo.html.twig', array(
                 'arrayPhotos' => $arrayPhotos,
@@ -89,8 +94,11 @@ class DefaultController extends Controller
                 $requestInfo->server->all(), $requestInfo->getContent());
             $responseDecode = $this->setData($photo);
             $this->photo = $responseDecode->decodeSizes();
+            return new Response();
         }
-        return new Response();
+        else {
+            return new Response($requestInfo);
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.locales: en|ee|en_GB|en_US|ee_EE
 
 framework:
     #esi:             ~
@@ -89,5 +90,19 @@ app:
 #Lunetics Locale Bundle configuration
 lunetics_locale:
     guessing_order:
+        - app
+        - query
         - router
+        - session
+        - cookie
         - browser
+    allowed_locales:
+      - en
+      - en_GB
+      - ee
+    strict_mode: false
+    strict_match: true
+    cookie:
+        set_on_change: true
+    switcher:
+        template: switcher/switcher_links.html.twig
