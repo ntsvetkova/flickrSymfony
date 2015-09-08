@@ -52,6 +52,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function getRecentAction(Request $request) {
+        $request->attributes->set('_locale', $request->getSession()->get('_locale'));
         $requestInfo = $this->setRequest('getRecent', $this->photo);
         if ($requestInfo instanceof Request) {
             $request->initialize($requestInfo->query->all(), $requestInfo->request->all(),

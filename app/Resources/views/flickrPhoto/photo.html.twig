@@ -19,5 +19,6 @@
     </div>
     {% endfor %}
 {% endblock %}
-{#{% block switcher %}#}
-{#{% endblock %}#}
+{% block switcher %}
+    {{ locale_switcher('flickrPhotos') }}
+{% endblock %}

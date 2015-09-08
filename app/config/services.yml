@@ -38,3 +38,7 @@ services:
         arguments: ["@lunetics_locale.validator.meta"]
         tags:
             - { name: lunetics_locale.guesser, alias: app }
+
+#    app.locale_transform:
+#        class: AppBundle\LocaleGuesser\AppLocaleTransform
+#        arguments: ["%lunetics_locale.allowed_locales%"]
