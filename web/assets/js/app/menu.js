@@ -4,8 +4,8 @@
 define("app/menu", ["jquery", "underscore"], function ($, _) {
     return function() {
         $( document ).ready(function () {
-            var locale = window.location.pathname.slice(1) != '' ? window.location.pathname.slice(1) : 'en';
-            $.getJSON(locale + '/menu', function (json) {
+            //var locale = window.location.pathname.slice(1) != '' ? window.location.pathname.slice(1) : 'en';
+            $.getJSON('/menu', function (json) {
                 function Link() {
                     this.type = 'link';
                 }
