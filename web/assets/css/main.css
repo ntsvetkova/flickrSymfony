@@ -124,6 +124,14 @@ h1 {
     margin: 20px;
 }
 
+.wrapper form #app_registration_name {
+    width: 88%;
+}
+
+.wrapper form #app_registration_email {
+    width: 88%;
+}
+
 .wrapper .result {
     width: 100%;
     height: 200px;

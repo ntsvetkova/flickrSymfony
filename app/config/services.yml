@@ -42,3 +42,7 @@ services:
 #    app.locale_transform:
 #        class: AppBundle\LocaleGuesser\AppLocaleTransform
 #        arguments: ["%lunetics_locale.allowed_locales%"]
+
+    registration_form_type:
+        class: AppBundle\Models\Registration\RegistrationFormType
+        arguments: ["@translator"]

@@ -46,6 +46,22 @@
                 <source>switch</source>
                 <target>ümber lülituma:</target>
             </trans-unit>
+            <trans-unit id="12">
+                <source>reg</source>
+                <target>registreerimine</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>name</source>
+                <target>Nimi</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>email</source>
+                <target>E-post</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>reg.action</source>
+                <target>Registreerima</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

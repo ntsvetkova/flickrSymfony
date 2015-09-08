@@ -124,6 +124,11 @@ h1 {
     margin: 20px;
 }
 
+.wrapper form #app_registration_name {
+    width: 500px;
+    margin: 0 auto;
+}
+
 .wrapper .result {
     width: 100%;
     height: 200px;

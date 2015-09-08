@@ -5,8 +5,8 @@ use AppBundle\Exceptions\AppException;
 use AppBundle\Models\FlickrPhoto\FlickrPhoto;
 use AppBundle\Models\FlickrPhoto\ResponseDecode;
 
-use AppBundle\Models\Mars\MarsType;
 use AppBundle\Models\Mars\SetData;
+use AppBundle\Models\Registration\RegistrationData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,7 +29,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function indexAction(Request $request) {
-        return $this->render('menu.html.twig', array());
+        return $this->render('menu.html.twig');
     }
 
     /**
@@ -41,6 +41,7 @@ class DefaultController extends Controller
         $content = json_encode(['items' => [
             ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
             ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
+            ['text' => $this->get('translator')->trans('reg'), 'path' => $this->generateUrl('registration')]
         ]]);
         $response->setContent($content);
         return $response;
@@ -118,6 +119,20 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'results' => $results
         ));
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function registrationAction(Request $request) {
+        $registrationData = new RegistrationData();
+        $form = $this->createForm($this->get('registration_form_type'), $registrationData);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+        return $this->render('registration.html.twig', ['form' => $form->createView()]);
     }
 
     /**

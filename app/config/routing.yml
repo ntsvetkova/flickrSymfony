@@ -20,7 +20,7 @@ flickrPhotos:
     path: /{_locale}/photos
     defaults:
         _controller: AppBundle:Default:getRecent
-        _locale: en
+        _locale: %locale%
     methods: [GET]
 #photos:
 #    path: /photos
@@ -33,7 +33,7 @@ exploringMars:
     path: /{_locale}/mars
     defaults:
         _controller: AppBundle:Default:mars
-        _locale: en
+        _locale: %locale%
 #mars:
 #    path: /mars
 #    defaults:
@@ -45,13 +45,19 @@ menu:
     path: /{_locale}/menu
     defaults:
         _controller: AppBundle:Default:menu
-        _locale: en
+        _locale: %locale%
 menuRedirect:
     path: /menu
     defaults:
       _controller: FrameworkBundle:Redirect:redirect
       route: menu
       permanent: true
+
+registration:
+    path: /{_locale}/registration
+    defaults:
+        _controller: AppBundle:Default:registration
+        _locale: %locale%
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

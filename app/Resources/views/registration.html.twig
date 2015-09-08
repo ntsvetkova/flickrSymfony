@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'reg.title'|trans }}{% endblock %}
+
+{% block header %}{{ 'reg.title'|trans }}{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    <input type="submit" value="{{ 'reg.action'|trans }}" />
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

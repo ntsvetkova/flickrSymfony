@@ -25,3 +25,8 @@ rover:
   out: The rover is out of the plateau
 mars: mars
 switch: Switch to:
+reg:
+  title: registration
+  action: Register
+name: Name
+email: E-mail
