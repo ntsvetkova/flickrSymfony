@@ -24,8 +24,7 @@
             {% block form %}{% endblock %}
             {% block result %}{% endblock %}
             {% block switcher %}
-                <div class="locale_switcher">{{ locale_switcher() }}</div>
-                <div class="clearfix"></div>
+                {{ locale_switcher() }}
             {% endblock %}
         </div>
         {% endblock %}
