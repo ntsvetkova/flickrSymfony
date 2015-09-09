@@ -9,32 +9,12 @@
 namespace AppBundle\Models\Registration;
 
 
-class RegistrationData
+class RegistrationData extends SignInData
 {
     /**
      * @var string
      */
-    protected $name;
-    /**
-     * @var string
-     */
     protected $email;
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @return string
@@ -51,6 +31,5 @@ class RegistrationData
     {
         $this->email = $email;
     }
-
 
 }

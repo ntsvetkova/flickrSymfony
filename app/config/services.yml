@@ -46,3 +46,7 @@ services:
     registration_form_type:
         class: AppBundle\Models\Registration\RegistrationFormType
         arguments: ["@translator"]
+
+    sign_in_form_type:
+            class: AppBundle\Models\Registration\SignInFormType
+            arguments: ["@translator"]

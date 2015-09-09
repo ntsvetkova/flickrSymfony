@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vkalachikhin
- * Date: 08.09.15
- * Time: 18:00
+ * Date: 09.09.15
+ * Time: 9:54
  */
 
 namespace AppBundle\Models\Registration;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\DataCollectorTranslator;
 
-class RegistrationFormType extends AbstractType
+class SignInFormType extends AbstractType
 {
     /**
      * @var Translator|DataCollectorTranslator
@@ -36,10 +36,7 @@ class RegistrationFormType extends AbstractType
         $builderInterface
             ->add('name', 'text', [
                 'label' => 'name',
-                'attr' => ['oninvalid' => "setCustomValidity('$emptyField')"]
-            ])
-            ->add('email', 'email', [
-                'label' => 'email',
+//                'label_attr' => ['class' => 'form_label'],
                 'attr' => ['oninvalid' => "setCustomValidity('$emptyField')"]
             ])
             ->add('password', 'password', [
@@ -55,6 +52,6 @@ class RegistrationFormType extends AbstractType
      */
     public function getName()
     {
-        return 'app_registration';
+        return 'app_sign_in';
     }
 }

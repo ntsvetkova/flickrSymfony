@@ -7,6 +7,7 @@ use AppBundle\Models\FlickrPhoto\ResponseDecode;
 
 use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
+use AppBundle\Models\Registration\SignInData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,7 +42,7 @@ class DefaultController extends Controller
         $content = json_encode(['items' => [
             ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
             ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
-            ['text' => $this->get('translator')->trans('reg'), 'path' => $this->generateUrl('registration')]
+            ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('registration')]
         ]]);
         $response->setContent($content);
         return $response;
@@ -125,14 +126,30 @@ class DefaultController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function registrationAction(Request $request) {
+    public function signAction(Request $request) {
         $registrationData = new RegistrationData();
-        $form = $this->createForm($this->get('registration_form_type'), $registrationData);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formSignUp = $this->createForm($this->get('registration_form_type'), $registrationData);
+        $signInData = new SignInData();
+        $formSignIn = $this->createForm($this->get('sign_in_form_type'), $signInData);
+        if ('POST' === $request->getMethod()) {
+            if ($request->request->has('app_registration_form'))
+            {
+                $formSignUp->handleRequest($request);
+                if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
 
+                }
+            }
+            else if ($request->request->has('app_sign_in')) {
+                $formSignIn->handleRequest($request);
+                if ($formSignIn->isSubmitted() && $formSignIn->isValid()) {
+
+                }
+            }
         }
-        return $this->render('registration.html.twig', ['form' => $form->createView()]);
+        return $this->render('registration.html.twig', [
+            'form_sign_up' => $formSignUp->createView(),
+            'form_sign_in' => $formSignIn->createView()
+        ]);
     }
 
     /**

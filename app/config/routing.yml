@@ -56,7 +56,7 @@ menuRedirect:
 registration:
     path: /{_locale}/registration
     defaults:
-        _controller: AppBundle:Default:registration
+        _controller: AppBundle:Default:sign
         _locale: %locale%
 
 _wdt:

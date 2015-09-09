@@ -118,15 +118,25 @@ h1 {
     width: 100%;
 }
 
+.wrapper form label.required {
+    width: 50px !important;
+}
+
 .wrapper form input {
     width: 200px;
     height: 30px;
     margin: 20px;
 }
 
-.wrapper form #app_registration_name {
-    width: 500px;
-    margin: 0 auto;
+.wrapper .form_left {
+    float: left;
+    width: 48%;
+    border-right: 1px dashed grey;
+}
+
+.wrapper .form_right {
+    float: right;
+    margin-left: 50px;
 }
 
 .wrapper .result {
