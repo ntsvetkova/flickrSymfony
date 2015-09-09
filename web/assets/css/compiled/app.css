@@ -118,7 +118,7 @@ h1 {
     width: 100%;
 }
 
-.wrapper form label.required {
+.wrapper form .sign_in label{
     width: 50px !important;
 }
 
@@ -136,7 +136,12 @@ h1 {
 
 .wrapper .form_right {
     float: right;
-    margin-left: 50px;
+    width: 45%;
+    margin-left: 10px;
+}
+
+.wrapper form ul li {
+    padding-left: 10px;
 }
 
 .wrapper .result {

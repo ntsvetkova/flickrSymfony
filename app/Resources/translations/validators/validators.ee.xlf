@@ -3,8 +3,20 @@
     <file source-language="en" target-language="ee" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>input.error</source>
+                <source>value.error</source>
                 <target>Sisend väärtus ei ole õige</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>value.short</source>
+                <target>Väärtuse pikkus peab olema vähemalt {{ limit }}</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>value.long</source>
+                <target>Väärtuse pikkus ei oska olla enam {{ limit }}</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>value.empty</source>
+                <target>Sisend väärtus ei oska olla tühi</target>
             </trans-unit>
         </body>
     </file>

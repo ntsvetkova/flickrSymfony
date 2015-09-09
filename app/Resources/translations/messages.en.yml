@@ -28,6 +28,8 @@ switch: Switch to:
 sign:
   up: sign up
   in: sign in
-name: Name
-email: E-mail
-password: Password
+user:
+  name: Name
+  email: E-mail
+  password: Password
+  country: Country

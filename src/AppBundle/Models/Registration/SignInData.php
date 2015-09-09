@@ -8,6 +8,8 @@
 
 namespace AppBundle\Models\Registration;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class SignInData
 {
@@ -50,5 +52,17 @@ class SignInData
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata) {
+        $metadata->addPropertyConstraint('name', new NotBlank([
+            'message' => 'value.empty'
+        ]));
+        $metadata->addPropertyConstraint('password', new NotBlank([
+            'message' => 'value.empty'
+        ]));
     }
 }

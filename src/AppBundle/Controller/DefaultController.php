@@ -7,7 +7,9 @@ use AppBundle\Models\FlickrPhoto\ResponseDecode;
 
 use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
+use AppBundle\Models\Registration\RegistrationFormType;
 use AppBundle\Models\Registration\SignInData;
+use AppBundle\Models\Registration\SignInFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -110,7 +112,7 @@ class DefaultController extends Controller
     public function marsAction(Request $request) {
         $setData = new SetData();
         $results = [];
-        $form = $this->createForm($this->get('mars_type'), $setData);
+        $form = $this->createForm($this->get('mars_type'), $setData, ['attr' => ['novalidate' => 'novalidate']]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $setData->setAll();
@@ -128,11 +130,11 @@ class DefaultController extends Controller
      */
     public function signAction(Request $request) {
         $registrationData = new RegistrationData();
-        $formSignUp = $this->createForm($this->get('registration_form_type'), $registrationData);
+        $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
         $signInData = new SignInData();
-        $formSignIn = $this->createForm($this->get('sign_in_form_type'), $signInData);
+        $formSignIn = $this->createForm(new SignInFormType(), $signInData, ['attr' => ['novalidate' => 'novalidate']]);
         if ('POST' === $request->getMethod()) {
-            if ($request->request->has('app_registration_form'))
+            if ($request->request->has('app_registration'))
             {
                 $formSignUp->handleRequest($request);
                 if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {

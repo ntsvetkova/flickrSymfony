@@ -29,9 +29,10 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
     mars_type:
         class: AppBundle\Models\Mars\MarsType
-        arguments: ["@translator", "%form.textarea.attributes%"]
+        arguments: ["%form.textarea.attributes%"]
 
     lunetics_locale.app_guesser:
         class: "%lunetics_locale.app_guesser.class%"
@@ -42,11 +43,3 @@ services:
 #    app.locale_transform:
 #        class: AppBundle\LocaleGuesser\AppLocaleTransform
 #        arguments: ["%lunetics_locale.allowed_locales%"]
-
-    registration_form_type:
-        class: AppBundle\Models\Registration\RegistrationFormType
-        arguments: ["@translator"]
-
-    sign_in_form_type:
-            class: AppBundle\Models\Registration\SignInFormType
-            arguments: ["@translator"]

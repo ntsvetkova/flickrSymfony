@@ -1,2 +1,5 @@
-input:
+value:
+  short: The value must be at least {{ limit }} characters long
+  long: The value can not be longer than {{ limit }} characters
+  empty: The input value can not be empty
   error: The input value is not correct

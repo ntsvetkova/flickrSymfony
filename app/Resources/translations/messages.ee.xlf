@@ -48,23 +48,27 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>sign.in</source>
-                <target>Astuma</target>
+                <target>astuma</target>
             </trans-unit>
             <trans-unit id="13">
-                <source>name</source>
+                <source>user.name</source>
                 <target>Nimi</target>
             </trans-unit>
             <trans-unit id="14">
-                <source>email</source>
+                <source>user.email</source>
                 <target>E-post</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>sign.up</source>
-                <target>Registreerima</target>
+                <target>registreerima</target>
             </trans-unit>
             <trans-unit id="16">
-                <source>password</source>
+                <source>user.password</source>
                 <target>Parool</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>user.country</source>
+                <target>Maa</target>
             </trans-unit>
         </body>
     </file>

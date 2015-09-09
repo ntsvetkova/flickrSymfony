@@ -17,5 +17,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class Input extends Constraint
 {
-    public $message = 'input.error';
+    public $emptyMessage = 'value.empty';
+    public $errorMessage = 'value.error';
 }

@@ -6,6 +6,17 @@
 
 {% block form %}
     <div class="form_left">
+        {{ form_start(form_sign_up) }}
+        {{ form_errors(form_sign_up) }}
+        {{ form_row(form_sign_up.name) }}
+        {{ form_row(form_sign_up.country) }}
+        {{ form_row(form_sign_up.email) }}
+        {{ form_row(form_sign_up.password) }}
+        <input type="submit" value="{{ 'sign.up'|trans|capitalize }}" />
+        {{ form_rest(form_sign_up) }}
+        {{ form_end(form_sign_up) }}
+    </div>
+    <div class="form_right">
         {{ form_start(form_sign_in) }}
         {{ form_errors(form_sign_in) }}
         {{ form_row(form_sign_in.name) }}
@@ -13,16 +24,6 @@
         <input type="submit" value="{{ 'sign.in'|trans|capitalize }}" />
         {{ form_rest(form_sign_in) }}
         {{ form_end(form_sign_in) }}
-    </div>
-    <div class="form_right">
-        {{ form_start(form_sign_up) }}
-        {{ form_errors(form_sign_up) }}
-        {{ form_row(form_sign_up.name) }}
-        {{ form_row(form_sign_up.email) }}
-        {{ form_row(form_sign_up.password) }}
-        <input type="submit" value="{{ 'sign.up'|trans|capitalize }}" />
-        {{ form_rest(form_sign_up) }}
-        {{ form_end(form_sign_up) }}
     </div>
     <div class="clearfix"></div>
 {% endblock %}

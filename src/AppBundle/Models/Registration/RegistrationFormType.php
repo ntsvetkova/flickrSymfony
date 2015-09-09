@@ -10,41 +10,26 @@ namespace AppBundle\Models\Registration;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\DataCollectorTranslator;
 
 class RegistrationFormType extends AbstractType
 {
-    /**
-     * @var Translator|DataCollectorTranslator
-     */
-    protected $translator;
-
-    /**
-     * @param DataCollectorTranslator $translator
-     */
-    public function __construct(DataCollectorTranslator $translator) {
-        $this->translator = $translator;
-    }
-
     /**
      * @param FormBuilderInterface $builderInterface
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
-        $emptyField = $this->translator->trans('no.input');
         $builderInterface
             ->add('name', 'text', [
-                'label' => 'name',
-                'attr' => ['oninvalid' => "setCustomValidity('$emptyField')"]
+                'label' => 'user.name',
+            ])
+            ->add('country', 'text', [
+                'label' => 'user.country'
             ])
             ->add('email', 'email', [
-                'label' => 'email',
-                'attr' => ['oninvalid' => "setCustomValidity('$emptyField')"]
+                'label' => 'user.email',
             ])
             ->add('password', 'password', [
-                'label' => 'password',
-                'attr' => ['oninvalid' => "setCustomValidity('$emptyField')"]
+                'label' => 'user.password',
             ]);
     }
 
