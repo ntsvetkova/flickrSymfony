@@ -33,3 +33,4 @@ user:
   email: E-mail
   password: Password
   country: Country
+  confirm: Confirm

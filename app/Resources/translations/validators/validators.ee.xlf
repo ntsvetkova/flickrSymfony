@@ -18,6 +18,18 @@
                 <source>value.empty</source>
                 <target>Sisend väärtus ei oska olla tühi</target>
             </trans-unit>
+            <trans-unit id="5">
+                <source>value.email.error</source>
+                <target>Väärtus ei ole e-posti aadress</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>value.confirm.error</source>
+                <target>Parooli väliandmestikud peavad sobima</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>value.same</source>
+                <target>Väärtus on juba kasutatud</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

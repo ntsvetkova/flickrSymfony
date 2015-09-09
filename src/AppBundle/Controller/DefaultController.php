@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Controller;
+use AppBundle\Entity\User;
 use AppBundle\Exceptions\AppException;
 use AppBundle\Models\FlickrPhoto\FlickrPhoto;
 use AppBundle\Models\FlickrPhoto\ResponseDecode;
@@ -10,6 +11,7 @@ use AppBundle\Models\Registration\RegistrationData;
 use AppBundle\Models\Registration\RegistrationFormType;
 use AppBundle\Models\Registration\SignInData;
 use AppBundle\Models\Registration\SignInFormType;
+use AppBundle\Models\Registration\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -129,6 +131,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function signAction(Request $request) {
+//        $em = $this->getDoctrine()->getManager();
         $registrationData = new RegistrationData();
         $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
         $signInData = new SignInData();
@@ -138,7 +141,10 @@ class DefaultController extends Controller
             {
                 $formSignUp->handleRequest($request);
                 if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
-
+//                    $registration = $formSignUp->getData();
+//                    $em->persist($registration->getUser());
+//                    $em->flush();
+                    return $this->redirectToRoute('admin');
                 }
             }
             else if ($request->request->has('app_sign_in')) {
@@ -152,6 +158,13 @@ class DefaultController extends Controller
             'form_sign_up' => $formSignUp->createView(),
             'form_sign_in' => $formSignIn->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin")
+     */
+    public function adminAction() {
+        return new Response('<html><body>Success</body></html>');
     }
 
     /**

@@ -14,69 +14,28 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\Length;
 
-class RegistrationData extends SignInData
+class RegistrationData
 {
     /**
-     * @var string
+     * @Assert\Type(type="AppBundle\Entity\User")
+     * @Assert\Valid()
      */
-    protected $email;
-    /**
-     * @var string
-     */
-    protected $country;
+    protected $user;
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getEmail()
+    public function getUser()
     {
-        return $this->email;
+        return $this->user;
     }
 
     /**
-     * @param string $email
+     * @param mixed $user
      */
-    public function setEmail($email)
+    public function setUser($user)
     {
-        $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param string $country
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-    }
-
-    /**
-     * @param ClassMetadata $metadata
-     */
-    public static function loadValidatorMetadata(ClassMetadata $metadata) {
-        $metadata->addPropertyConstraint('name', new Length([
-            'min' => 3,
-            'max' => 15,
-            'minMessage' => 'value.short',
-            'maxMessage' => 'value.long'
-        ]));
-        $metadata->addPropertyConstraint('country', new NotBlank([
-            'message' => 'value.empty'
-        ]));
-        $metadata->addPropertyConstraint('country', new Country([
-            'message' => 'value.error'
-        ]));
-        $metadata->addPropertyConstraint('email', new Email());
-        $metadata->addPropertyConstraint('email', new NotBlank([
-            'message' => 'value.empty'
-        ]));
+        $this->user = $user;
     }
 
 }

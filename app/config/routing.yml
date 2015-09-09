@@ -59,6 +59,11 @@ registration:
         _controller: AppBundle:Default:sign
         _locale: %locale%
 
+admin:
+    path: /admin
+    defaults:
+        _controller: AppBundle:Default:admin
+
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt

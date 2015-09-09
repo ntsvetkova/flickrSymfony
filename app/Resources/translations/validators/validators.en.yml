@@ -3,3 +3,8 @@ value:
   long: The value can not be longer than {{ limit }} characters
   empty: The input value can not be empty
   error: The input value is not correct
+  email:
+    error: The value is not a valid e-mail address
+  confirm:
+    error: The password fields must match
+  same: The value is already in use
