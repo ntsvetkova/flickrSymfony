@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'users'|trans }}{% endblock %}
+
+{% block header %}{{ 'users'|trans }}{% endblock %}
+
+{% block table %}
+        {% for user in users %}
+            <div class="cell" style="text-align: left; height: 120px">
+            <ul>
+                <li>{{ user.id }}
+                    <ul>
+                        <li>{{ 'user.name'|trans }}: {{ user.name }}</li>
+                        <li>{{ 'user.country'|trans }}: {{ user.country }}</li>
+                        <li>{{ 'user.email'|trans }}: {{ user.email }}</li>
+                        <li>{{ 'user.password'|trans }}: {{ user.password }}</li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+        {% endfor %}
+{% endblock %}

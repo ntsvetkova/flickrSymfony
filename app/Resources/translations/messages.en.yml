@@ -34,3 +34,4 @@ user:
   password: Password
   country: Country
   confirm: Confirm
+users: users

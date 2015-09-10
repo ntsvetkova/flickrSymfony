@@ -131,7 +131,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function signAction(Request $request) {
-//        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $registrationData = new RegistrationData();
         $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
         $signInData = new SignInData();
@@ -141,9 +141,9 @@ class DefaultController extends Controller
             {
                 $formSignUp->handleRequest($request);
                 if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
-//                    $registration = $formSignUp->getData();
-//                    $em->persist($registration->getUser());
-//                    $em->flush();
+                    $registration = $formSignUp->getData();
+                    $em->persist($registration->getUser());
+                    $em->flush();
                     return $this->redirectToRoute('admin');
                 }
             }
@@ -154,7 +154,7 @@ class DefaultController extends Controller
                 }
             }
         }
-        return $this->render('registration.html.twig', [
+        return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),
             'form_sign_in' => $formSignIn->createView()
         ]);
@@ -165,6 +165,16 @@ class DefaultController extends Controller
      */
     public function adminAction() {
         return new Response('<html><body>Success</body></html>');
+    }
+
+    /**
+     * @return Response
+     */
+    public function showAction() {
+        $user = $this->getDoctrine()
+            ->getRepository('AppBundle:User');
+        $users = $user->findAll();
+        return $this->render('registration/display.html.twig', ['users' => $users]);
     }
 
     /**

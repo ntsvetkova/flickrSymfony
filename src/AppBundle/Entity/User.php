@@ -162,7 +162,7 @@ class User
         ]);
         $metadata->addPropertyConstraints('password', [
             new Length([
-                'min' => 8,
+                'min' => 3,
                 'max' => 4096,
                 'minMessage' => 'value.short',
                 'maxMessage' => 'value.long'

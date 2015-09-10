@@ -64,6 +64,12 @@ admin:
     defaults:
         _controller: AppBundle:Default:admin
 
+showUsers:
+    path: /{_locale}/show
+    defaults:
+        _controller: AppBundle:Default:show
+        _locale: %locale%
+
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt
