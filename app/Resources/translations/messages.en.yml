@@ -29,9 +29,11 @@ sign:
   up: sign up
   in: sign in
 user:
-  name: Name
+  name: Username
   email: E-mail
   password: Password
   country: Country
   confirm: Confirm
+  not:
+    found: Check your username and password
 users: users

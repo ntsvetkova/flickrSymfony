@@ -14,6 +14,7 @@ use AppBundle\Models\Registration\SignInFormType;
 use AppBundle\Models\Registration\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -131,7 +132,8 @@ class DefaultController extends Controller
      * @return Response
      */
     public function signAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
         $registrationData = new RegistrationData();
         $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
         $signInData = new SignInData();
@@ -150,7 +152,18 @@ class DefaultController extends Controller
             else if ($request->request->has('app_sign_in')) {
                 $formSignIn->handleRequest($request);
                 if ($formSignIn->isSubmitted() && $formSignIn->isValid()) {
-
+                    $users = $doctrine
+                        ->getRepository('AppBundle:User')
+                        ->findOneBy([
+                            'username' => $formSignIn->getData()->getUsername(),
+                            'password' => $formSignIn->getData()->getPassword()
+                        ]);
+                    if (!$users) {
+                        $formSignIn->addError(new FormError($this->get('translator')->trans('user.not.found')));
+                    }
+                    else {
+                        return $this->redirectToRoute('showUsers');
+                    }
                 }
             }
         }
@@ -171,9 +184,9 @@ class DefaultController extends Controller
      * @return Response
      */
     public function showAction() {
-        $user = $this->getDoctrine()
-            ->getRepository('AppBundle:User');
-        $users = $user->findAll();
+        $users = $this->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->findAll();
         return $this->render('registration/display.html.twig', ['users' => $users]);
     }
 

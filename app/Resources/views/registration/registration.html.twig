@@ -1,4 +1,4 @@
-{% extends '../base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ 'sign.in'|trans }} / {{ 'sign.up'|trans }}{% endblock %}
 
@@ -7,14 +7,12 @@
 {% block form %}
     <div class="form_left">
         {{ form_start(form_sign_up) }}
-        {{ form_errors(form_sign_up) }}
         {{ form_widget(form_sign_up) }}
         <input type="submit" value="{{ 'sign.up'|trans|capitalize }}" />
         {{ form_end(form_sign_up) }}
     </div>
     <div class="form_right">
         {{ form_start(form_sign_in) }}
-        {{ form_errors(form_sign_in) }}
         {{ form_widget(form_sign_in) }}
         <input type="submit" value="{{ 'sign.in'|trans|capitalize }}" />
         {{ form_end(form_sign_in) }}

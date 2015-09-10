@@ -19,7 +19,7 @@ class SignInFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
         $builderInterface
-            ->add('name', 'text', [
+            ->add('username', 'text', [
                 'label' => 'user.name',
             ])
             ->add('password', 'password', [

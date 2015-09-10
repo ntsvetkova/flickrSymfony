@@ -16,7 +16,7 @@ class SignInData
     /**
      * @var string
      */
-    protected $name;
+    protected $username;
     /**
      * @var string
      */
@@ -25,17 +25,17 @@ class SignInData
     /**
      * @return string
      */
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
-     * @param string $name
+     * @param string $username
      */
-    public function setName($name)
+    public function setUsername($username)
     {
-        $this->name = $name;
+        $this->username = $username;
     }
 
     /**
@@ -58,7 +58,7 @@ class SignInData
      * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata) {
-        $metadata->addPropertyConstraint('name', new NotBlank([
+        $metadata->addPropertyConstraint('username', new NotBlank([
             'message' => 'value.empty'
         ]));
         $metadata->addPropertyConstraint('password', new NotBlank([

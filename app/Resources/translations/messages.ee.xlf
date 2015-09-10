@@ -78,6 +78,10 @@
                 <source>users</source>
                 <target>kasutajad</target>
             </trans-unit>
+            <trans-unit id="20">
+                <source>user.not.found</source>
+                <target>Kontrollige nimi ja parool</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
