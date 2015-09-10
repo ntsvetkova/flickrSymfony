@@ -20,7 +20,7 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
         $builderInterface
-            ->add('username', 'text', [
+            ->add('_username', 'text', [
                 'label' => 'user.name',
             ])
             ->add('country', 'text', [
@@ -29,7 +29,7 @@ class UserType extends AbstractType
             ->add('email', 'email', [
                 'label' => 'user.email',
             ])
-            ->add('password', 'repeated', [
+            ->add('_password', 'repeated', [
                 'type' => 'password',
                 'invalid_message' => 'value.confirm.error',
                 'first_options'  => ['label' => 'user.password'],

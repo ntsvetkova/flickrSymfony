@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\Length;
  * @package AppBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="users")
- * @UniqueEntity(fields="username", message="value.same")
+ * @UniqueEntity(fields="_username", message="value.same")
  */
 class User implements UserInterface, \Serializable
 {
@@ -37,7 +37,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $username;
+    protected $_username;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -49,7 +49,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $password;
+    protected $_password;
 
     /**
      * @return mixed
@@ -72,7 +72,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->_username;
     }
 
     /**
@@ -80,7 +80,7 @@ class User implements UserInterface, \Serializable
      */
     public function setUsername($username)
     {
-        $this->username = $username;
+        $this->_username = $username;
     }
 
     /**
@@ -120,7 +120,7 @@ class User implements UserInterface, \Serializable
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->_password;
     }
 
     /**
@@ -128,14 +128,14 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->_password = $password;
     }
 
     /**
      * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata) {
-        $metadata->addPropertyConstraints('username', [
+        $metadata->addPropertyConstraints('_username', [
             new Length([
                 'min' => 3,
                 'max' => 15,
@@ -162,7 +162,7 @@ class User implements UserInterface, \Serializable
                 'message' => 'value.empty'
             ])
         ]);
-        $metadata->addPropertyConstraints('password', [
+        $metadata->addPropertyConstraints('_password', [
             new Length([
                 'min' => 3,
                 'max' => 4096,

@@ -118,7 +118,7 @@ h1 {
     width: 100%;
 }
 
-.wrapper form .sign_in label{
+.wrapper form div label{
     width: 50px !important;
 }
 

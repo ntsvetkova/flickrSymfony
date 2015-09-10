@@ -56,7 +56,7 @@ menuRedirect:
 registration:
     path: /{_locale}/registration
     defaults:
-        _controller: AppBundle:Default:sign
+        _controller: AppBundle:Security:login
         _locale: %locale%
 
 admin:
@@ -69,6 +69,23 @@ showUsers:
     defaults:
         _controller: AppBundle:Default:show
         _locale: %locale%
+
+#login_route:
+#    path: /login
+#    defaults:
+#        _controller: AppBundle:Security:login
+#        _locale: %locale%
+#login:
+#    path: /login
+#    defaults:
+#          _controller: FrameworkBundle:Redirect:redirect
+#          route: loginMain
+#          permanent: true
+
+login_check:
+  path: /login_check
+  defaults:
+      _controller: AppBundle:Security:loginCheck
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

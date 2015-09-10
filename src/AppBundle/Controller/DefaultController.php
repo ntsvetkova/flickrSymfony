@@ -133,6 +133,9 @@ class DefaultController extends Controller
      */
     public function signAction(Request $request) {
         $doctrine = $this->getDoctrine();
+        $authenticationUtils = $this->get('security.authentication_utils');
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         $em = $doctrine->getManager();
         $registrationData = new RegistrationData();
         $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
@@ -149,26 +152,29 @@ class DefaultController extends Controller
                     return $this->redirectToRoute('admin');
                 }
             }
-            else if ($request->request->has('app_sign_in')) {
-                $formSignIn->handleRequest($request);
-                if ($formSignIn->isSubmitted() && $formSignIn->isValid()) {
-                    $users = $doctrine
-                        ->getRepository('AppBundle:User')
-                        ->findOneBy([
-                            'username' => $formSignIn->getData()->getUsername(),
-                            'password' => $formSignIn->getData()->getPassword()
-                        ]);
-                    if (!$users) {
-                        $formSignIn->addError(new FormError($this->get('translator')->trans('user.not.found')));
-                    }
-                    else {
-                        return $this->redirectToRoute('showUsers');
+            else {
+                if ($request->request->has('app_sign_in')) {
+                    $formSignIn->handleRequest($request);
+                    if ($formSignIn->isSubmitted() && $formSignIn->isValid()) {
+                        $users = $doctrine
+                            ->getRepository('AppBundle:User')
+                            ->findOneBy([
+                                '_username' => $formSignIn->getData()->getUsername(),
+                                '_password' => $formSignIn->getData()->getPassword()
+                            ]);
+                        if (!$users) {
+                            $formSignIn->addError(new FormError($this->get('translator')->trans('user.not.found')));
+                        } else {
+                            return $this->redirectToRoute('showUsers');
+                        }
                     }
                 }
             }
         }
         return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),
+            'last_username' => $lastUsername,
+            'error'         => $error,
             'form_sign_in' => $formSignIn->createView()
         ]);
     }
@@ -179,6 +185,10 @@ class DefaultController extends Controller
     public function adminAction() {
         return new Response('<html><body>Success</body></html>');
     }
+
+//    public function loginCheckAction() {
+//
+//    }
 
     /**
      * @return Response
