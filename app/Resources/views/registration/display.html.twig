@@ -6,7 +6,13 @@
 
 {% block table %}
         {% for user in users %}
-            <div class="cell" style="text-align: left; height: 120px">
+            <div class="cell" style="text-align: left; height: 120px;
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if (user.id == app.user.id) %}
+                    background-color: white; border: 1px dashed grey;
+                {% endif %}
+            {% endif %}
+            ">
             <ul>
                 <li>{{ user.id }}
                     <ul>

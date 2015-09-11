@@ -48,4 +48,3 @@ security:
        - { path: ^/admin, roles: ROLE_USER }
        - { path: ^/.*show$, roles: ROLE_USER }
        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#       - { path: ^/, roles: ROLE_USER }
