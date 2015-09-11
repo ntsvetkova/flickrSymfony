@@ -67,7 +67,12 @@ admin:
 showUsers:
     path: /{_locale}/show
     defaults:
-        _controller: AppBundle:Default:show
+        _controller: AppBundle:Default:showUsers
+        _locale: %locale%
+removeUser:
+    path: /{_locale}/remove/{id}
+    defaults:
+        _controller: AppBundle:Default:removeUser
         _locale: %locale%
 
 login_route:

@@ -44,10 +44,17 @@ class DefaultController extends Controller
      */
     public function menuAction(Request $request) {
         $response = new JsonResponse();
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $content = json_encode(['items' => [
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
+                ['text' => $this->get('translator')->trans('users'), 'path' => $this->generateUrl('showUsers')],
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout')]
+            ]]);
+        }
+        else if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            $content = json_encode(['items' => [
+                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout')],
             ]]);
         }
@@ -55,7 +62,7 @@ class DefaultController extends Controller
             $content = json_encode(['items' => [
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
-                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('showUsers')],
+                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route')],
                 ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration')]
             ]]);
         }
@@ -151,7 +158,7 @@ class DefaultController extends Controller
             $registration = $formSignUp->getData();
             $em->persist($registration->getUser());
             $em->flush();
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('showUsers');
         }
         return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),
@@ -159,20 +166,25 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin")
-     */
-    public function adminAction() {
-        return new Response('<html><body>Success</body></html>');
-    }
-
-    /**
      * @return Response
      */
-    public function showAction() {
+    public function showUsersAction() {
         $users = $this->getDoctrine()
             ->getRepository('AppBundle:User')
             ->findAll();
         return $this->render('registration/display.html.twig', ['users' => $users]);
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeUserAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->find($id);
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('showUsers');
     }
 
     /**

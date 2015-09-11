@@ -50,6 +50,10 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255)
      */
     protected $_password;
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    protected $roles = array();
 
     /**
      * @return mixed
@@ -180,7 +184,18 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN', 'ROLE_USER'];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    /**
+     * @param $roles
+     * @return $this
+     */
+    public function setRoles($roles) {
+        $this->roles = $roles;
+        return $this;
     }
 
     /**

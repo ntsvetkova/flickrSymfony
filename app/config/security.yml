@@ -7,12 +7,19 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        chain_provider:
+            chain:
+                providers: [our_db_provider, in_memory]
         our_db_provider:
             entity:
                class: AppBundle:User
                property: _username
         in_memory:
-            memory: ~
+            memory:
+               users:
+                  Admin:
+                      password: admin
+                      roles: ROLE_ADMIN
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -40,11 +47,13 @@ security:
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
     access_control:
        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
        - { path: ^/.*registration$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
        - { path: ^/.*photos, roles: ROLE_USER }
-       - { path: ^/.*mars, roles: ROLE_USER }
-       - { path: ^/admin, roles: ROLE_USER }
-       - { path: ^/.*show$, roles: ROLE_USER }
+       - { path: ^/.*mars, roles: ROLE_ADMIN }
+       - { path: ^/.*show$, roles: ROLE_ADMIN }
        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
