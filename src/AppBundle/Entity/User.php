@@ -215,10 +215,10 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
-            $this->username,
+            $this->_username,
             $this->country,
             $this->email,
-            $this->password
+            $this->_password
         ]);
     }
 
@@ -235,10 +235,10 @@ class User implements UserInterface, \Serializable
     {
         list(
             $this->id,
-            $this->username,
+            $this->_username,
             $this->country,
             $this->email,
-            $this->password
+            $this->_password
         ) = unserialize($serialized);
     }
 }

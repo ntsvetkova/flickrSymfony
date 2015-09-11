@@ -28,6 +28,7 @@ switch: Switch to:
 sign:
   up: sign up
   in: sign in
+  out: sign out
 user:
   name: Username
   email: E-mail

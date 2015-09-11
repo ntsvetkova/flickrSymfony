@@ -44,14 +44,23 @@ class DefaultController extends Controller
      */
     public function menuAction(Request $request) {
         $response = new JsonResponse();
-        $content = json_encode(['items' => [
-            ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-            ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
-            ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('registration')]
-        ]]);
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            $content = json_encode(['items' => [
+                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
+                ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout')],
+            ]]);
+        }
+        else {
+            $content = json_encode(['items' => [
+                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
+                ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
+                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('showUsers')],
+                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration')]
+            ]]);
+        }
         $response->setContent($content);
         return $response;
-//        return new Response();
     }
 
     /**
@@ -131,51 +140,21 @@ class DefaultController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function signAction(Request $request) {
-        $doctrine = $this->getDoctrine();
-        $authenticationUtils = $this->get('security.authentication_utils');
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-        $em = $doctrine->getManager();
+    public function registerAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
         $registrationData = new RegistrationData();
-        $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, ['attr' => ['novalidate' => 'novalidate']]);
-        $signInData = new SignInData();
-        $formSignIn = $this->createForm(new SignInFormType(), $signInData, ['attr' => ['novalidate' => 'novalidate']]);
-        if ('POST' === $request->getMethod()) {
-            if ($request->request->has('app_registration'))
-            {
-                $formSignUp->handleRequest($request);
-                if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
-                    $registration = $formSignUp->getData();
-                    $em->persist($registration->getUser());
-                    $em->flush();
-                    return $this->redirectToRoute('admin');
-                }
-            }
-            else {
-                if ($request->request->has('app_sign_in')) {
-                    $formSignIn->handleRequest($request);
-                    if ($formSignIn->isSubmitted() && $formSignIn->isValid()) {
-                        $users = $doctrine
-                            ->getRepository('AppBundle:User')
-                            ->findOneBy([
-                                '_username' => $formSignIn->getData()->getUsername(),
-                                '_password' => $formSignIn->getData()->getPassword()
-                            ]);
-                        if (!$users) {
-                            $formSignIn->addError(new FormError($this->get('translator')->trans('user.not.found')));
-                        } else {
-                            return $this->redirectToRoute('showUsers');
-                        }
-                    }
-                }
-            }
+        $formSignUp = $this->createForm(new RegistrationFormType(), $registrationData, [
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+        $formSignUp->handleRequest($request);
+        if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
+            $registration = $formSignUp->getData();
+            $em->persist($registration->getUser());
+            $em->flush();
+            return $this->redirectToRoute('admin');
         }
         return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),
-            'last_username' => $lastUsername,
-            'error'         => $error,
-            'form_sign_in' => $formSignIn->createView()
         ]);
     }
 
@@ -185,10 +164,6 @@ class DefaultController extends Controller
     public function adminAction() {
         return new Response('<html><body>Success</body></html>');
     }
-
-//    public function loginCheckAction() {
-//
-//    }
 
     /**
      * @return Response

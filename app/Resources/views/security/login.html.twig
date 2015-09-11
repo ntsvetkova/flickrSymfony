@@ -1,26 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'sign.in'|trans }} / {{ 'sign.up'|trans }}{% endblock %}
+{% block title %}{{ 'sign.in'|trans }}{% endblock %}
 
-{% block header %}{{ 'sign.in'|trans }} / {{ 'sign.up'|trans }}{% endblock %}
+{% block header %}{{ 'sign.in'|trans }}{% endblock %}
 
 {% block form %}
-    <div class="form_left">
-        {{ form_start(form_sign_up) }}
-        {{ form_widget(form_sign_up) }}
-        <input type="submit" value="{{ 'sign.up'|trans|capitalize }}" />
-        {{ form_end(form_sign_up) }}
-    </div>
     <div class="form_right">
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         <form action="{{ path('login_check') }}" method="post">
-            <label for="username">Username:</label>
+            <label for="username">{{ 'user.name'|trans }}</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-            <label for="password">Password:</label>
+            <br>
+            <label for="password">{{ 'user.password'|trans }}:</label>
             <input type="password" id="password" name="_password" />
             <input type="submit" value="{{ 'sign.in'|trans|capitalize }}" />
         </form>

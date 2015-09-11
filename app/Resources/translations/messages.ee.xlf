@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>sign.in</source>
-                <target>astuma</target>
+                <target>sisse logima</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>user.name</source>
@@ -81,6 +81,10 @@
             <trans-unit id="20">
                 <source>user.not.found</source>
                 <target>Kontrollige nimi ja parool</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>sign.out</source>
+                <target>välja logima</target>
             </trans-unit>
         </body>
     </file>

@@ -28,6 +28,15 @@
             {% endblock %}
         </div>
         {% endblock %}
+        {% block logout %}
+            {% if (app.request.attributes.get('_route') != 'homepage') %}
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ logout_path('default') }}">{{ 'sign.out'|trans }} » </a>
+                {% endif %}
+                <br>
+                <a href="{{ path('homepage') }}">{{ 'home'|trans }} » </a>
+            {% endif %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
