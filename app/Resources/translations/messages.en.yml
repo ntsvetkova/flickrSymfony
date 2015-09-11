@@ -37,4 +37,5 @@ user:
   confirm: Confirm
   not:
     found: Check your username and password
+  remove: Remove user
 users: users

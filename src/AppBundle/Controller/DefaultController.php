@@ -56,8 +56,8 @@ class DefaultController extends Controller
         }
         else {
             $content = json_encode(['items' => [
-                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-                ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
+//                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
+//                ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
                 ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route')],
                 ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration')]
             ]]);

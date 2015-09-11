@@ -86,6 +86,10 @@
                 <source>sign.out</source>
                 <target>välja logima</target>
             </trans-unit>
+            <trans-unit id="22">
+                <source>user.remove</source>
+                <target>Kasutaja eemaldama</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

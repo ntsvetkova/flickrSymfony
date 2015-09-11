@@ -16,6 +16,11 @@ a:hover {
     color: #1f1f21;
 }
 
+a:visited {
+    text-decoration: none;
+    color: #1f1f21;
+}
+
 h1 {
     font-size: 48px;
     margin-top: 10px;

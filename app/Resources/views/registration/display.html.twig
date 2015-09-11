@@ -25,7 +25,7 @@
                         </li>
                     </ul>
                 </div>
-                <a id='arrow' href="{{ path('removeUser', {'id': user.id}) }}"> × </a>
+                <a id='arrow' title="{{ 'user.remove'|trans }}" href="{{ path('removeUser', {'id': user.id}) }}"> × </a>
             </div>
         {% endfor %}
 {% endblock %}
