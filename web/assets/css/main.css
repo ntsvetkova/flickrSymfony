@@ -11,6 +11,11 @@ a {
     color: #1f1f21;
 }
 
+a:hover {
+    text-decoration: none;
+    color: #1f1f21;
+}
+
 h1 {
     font-size: 48px;
     margin-top: 10px;
@@ -119,7 +124,7 @@ h1 {
 }
 
 .wrapper form div label{
-    width: 50px !important;
+    width: 50px;
 }
 
 .wrapper form input {
@@ -134,10 +139,35 @@ h1 {
     border-right: 1px dashed grey;
 }
 
-.wrapper .form_right {
-    float: right;
-    width: 45%;
-    margin-left: 10px;
+.wrapper .form_signin {
+    width: 500px;
+    margin: 50px auto;
+}
+
+.wrapper .form-group {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.wrapper .form-control {
+    width: 300px;
+    margin: 10px auto;
+}
+
+.wrapper .control-label {
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.wrapper .input-sm {
+   width: 250px;
+}
+
+.wrapper .btn {
+    width: 300px;
+    margin: 10px auto;
 }
 
 .wrapper form ul li {

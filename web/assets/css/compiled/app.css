@@ -138,6 +138,8 @@ h1 {
     float: right;
     width: 45%;
     margin-left: 10px;
+    padding-left: 20px;
+    border-left: 1px dashed grey;
 }
 
 .wrapper form ul li {

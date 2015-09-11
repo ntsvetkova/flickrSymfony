@@ -9,15 +9,11 @@ use AppBundle\Models\FlickrPhoto\ResponseDecode;
 use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
 use AppBundle\Models\Registration\RegistrationFormType;
-use AppBundle\Models\Registration\SignInData;
-use AppBundle\Models\Registration\SignInFormType;
-use AppBundle\Models\Registration\UserType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class DefaultController
@@ -177,7 +173,7 @@ class DefaultController extends Controller
 
     /**
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function removeUserAction($id) {
         $em = $this->getDoctrine()->getManager();
