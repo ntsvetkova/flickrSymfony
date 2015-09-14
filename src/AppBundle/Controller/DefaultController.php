@@ -156,7 +156,7 @@ class DefaultController extends Controller
             $encoder = $this->container->get('security.password_encoder');
             $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encodedPassword);
-//            $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER']);
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute('login_route');
