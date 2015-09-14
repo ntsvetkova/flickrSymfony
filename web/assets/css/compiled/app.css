@@ -2,7 +2,6 @@ body {
     margin: 0 auto;
     width: 60%;
     background-color: white;
-    font-family: Arial;
     color: #1f1f21;
 }
 
@@ -20,6 +19,14 @@ h1 {
 .wrapper {
     width: 100%;
     text-align: center;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    border-top: 1px dashed #1f1f21;
+    padding: 25px 0;
+    margin-top: 100px;
 }
 
 .wrapper #table {
@@ -47,8 +54,7 @@ h1 {
 .wrapper .cell .img {
     width: 100px;
     height: 100px;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background: center center no-repeat;
     margin-left: 10px;
     margin-right: 10px;
     float: left;
@@ -108,13 +114,6 @@ h1 {
     cursor: pointer;
 }
 
-.locale_switcher {
-    width: 15%;
-    margin: 10px auto;
-    color: #1f1f21;
-    float: right;
-}
-
 .wrapper form textarea .form-control {
     width: 100%;
 }
@@ -150,12 +149,6 @@ h1 {
    width: 250px;
 }
 
-.wrapper .btn {
-    width: 100%;
-    height: 40px;
-    border: none;
-}
-
 .wrapper form ul li {
     padding-left: 10px;
 }
@@ -169,6 +162,22 @@ h1 {
 
 .wrapper .alert {
     padding: 10px;
+}
+
+.wrapper .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.footer .btn {
+    width: 100%;
+    height: 40px;
+    border: none;
+}
+
+.footer ul {
+    padding-bottom: 25px;
+    border-bottom: 1px dashed #1f1f21;
 }
 
 .clearfix {

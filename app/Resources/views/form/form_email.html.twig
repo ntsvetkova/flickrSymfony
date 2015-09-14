@@ -1,0 +1,7 @@
+{% block email_widget %}
+    {% set type = type|default('email') %}
+    <div class="input-group" style="margin: 10px auto">
+        <span class="input-group-addon" style="padding: 0 12px; height: 100%; margin: 10px">@</span>
+        <input type="{{ type }}" style="margin: 0" {{ block('widget_attributes') }}/>
+    </div>
+{% endblock email_widget %}

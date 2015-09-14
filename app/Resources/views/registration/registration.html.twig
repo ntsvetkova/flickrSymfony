@@ -5,7 +5,7 @@
 {% block header %}{{ 'sign.up'|trans }}{% endblock %}
 
 {% block form %}
-    {% form_theme form_sign_up 'form/form_errors.html.twig' %}
+    {% form_theme form_sign_up with ['form/form_errors.html.twig', 'form/form_email.html.twig'] %}
     <div class="form_signin">
         <div class="form-group">
             {{ form_start(form_sign_up) }}
@@ -14,5 +14,4 @@
             {{ form_end(form_sign_up) }}
         </div>
     </div>
-    <div class="clearfix"></div>
 {% endblock %}
