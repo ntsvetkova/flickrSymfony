@@ -6,14 +6,20 @@
 
 {% block table %}
         {% for user in users %}
-            <div class="cell" style="text-align: left; height: 120px;
+            <div class="cell" style="text-align: left; height: 140px;
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% if (user.id == app.user.id) %}
                     background-color: white; border: 1px dashed grey;
                 {% endif %}
             {% endif %}
             ">
-                <div class="large" style="cursor: auto">
+                <div class="large" style="cursor: auto;
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if (user.id == app.user.id) %}
+                            width: 100%
+                    {% endif %}
+                {% endif %}
+                ">
                     <ul>
                         <li>{{ user.id }}
                             <ul>
@@ -25,7 +31,11 @@
                         </li>
                     </ul>
                 </div>
-                <a id='arrow' title="{{ 'user.remove'|trans }}" href="{{ path('removeUser', {'id': user.id}) }}"> × </a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if (user.id != app.user.id) %}
+                    <a id='arrow' title="{{ 'user.remove'|trans }}" href="{{ path('removeUser', {'id': user.id}) }}"> × </a>
+                {% endif %}
+            {% endif %}
             </div>
         {% endfor %}
 {% endblock %}
