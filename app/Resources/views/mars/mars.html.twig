@@ -5,12 +5,16 @@
 {% block header %}{{ 'explore.mars'|trans }}{% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.enterData) }}
-        <input type="submit" value="{{ 'show.final'|trans }}" />
-        {{ form_rest(form) }}
-    {{ form_end(form) }}
+    {% form_theme form 'form/form_errors.html.twig' %}
+    <div class="form_signin">
+        <div class="form-group">
+        {{ form_start(form) }}
+            {{ form_row(form.enterData) }}
+            <button class="btn btn-primary" type="submit">{{ 'show.final'|trans }}</button>
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block result %}

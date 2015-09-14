@@ -27,17 +27,17 @@
             {% block switcher %}
                 {{ locale_switcher() }}
             {% endblock %}
-        </div>
-        {% endblock %}
-        {% block logout %}
-            {% if (app.request.attributes.get('_route') != 'homepage') %}
-                {% if is_granted('ROLE_USER') %}
-                    <a href="{{ logout_path('default') }}">{{ 'sign.out'|trans }} » </a>
+            {% endblock %}
+            {% block logout %}
+                {% if (app.request.attributes.get('_route') != 'homepage') %}
+                    {% if is_granted('ROLE_USER') %}
+                        <button class="btn btn-default" type="button" onclick="window.location.href='{{ logout_path('default') }}'">{{ 'sign.out'|trans }}</button>
+                    {% endif %}
+                    <br>
+                    <button class="btn btn-default" type="button" onclick="window.location.href='{{ path('homepage') }}'">{{ 'home'|trans }}</button>
                 {% endif %}
-                <br>
-                <a href="{{ path('homepage') }}">{{ 'home'|trans }} » </a>
-            {% endif %}
-        {% endblock %}
+            {% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

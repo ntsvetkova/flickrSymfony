@@ -34,7 +34,7 @@ user:
   email: E-mail
   password: Password
   country: Country
-  confirm: Confirm
+  confirm: Confirm password
   not:
     found: Check your username and password
   remove: Remove user

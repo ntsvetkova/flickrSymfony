@@ -5,11 +5,14 @@
 {% block header %}{{ 'sign.up'|trans }}{% endblock %}
 
 {% block form %}
-    <div class="form_left">
-        {{ form_start(form_sign_up) }}
-        {{ form_widget(form_sign_up) }}
-        <input type="submit" value="{{ 'sign.up'|trans|capitalize }}" />
-        {{ form_end(form_sign_up) }}
+    {% form_theme form_sign_up 'form/form_errors.html.twig' %}
+    <div class="form_signin">
+        <div class="form-group">
+            {{ form_start(form_sign_up) }}
+            {{ form_widget(form_sign_up) }}
+            <button class="btn btn-primary" type="submit">{{ 'sign.up'|trans|capitalize }}</button>
+            {{ form_end(form_sign_up) }}
+        </div>
     </div>
     <div class="clearfix"></div>
 {% endblock %}

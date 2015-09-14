@@ -37,7 +37,10 @@ class MarsType extends AbstractType
         $builderInterface
             ->add('enterData', 'textarea', array(
                 'label' => 'enter.data',
-                'attr' => array('rows' => $this->attributes['rows'])
+                'attr' => [
+                    'rows' => $this->attributes['rows'],
+                    'class' => 'form-control'
+                ]
             ));
     }
 

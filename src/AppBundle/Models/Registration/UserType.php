@@ -22,18 +22,37 @@ class UserType extends AbstractType
         $builderInterface
             ->add('_username', 'text', [
                 'label' => 'user.name',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('country', 'text', [
-                'label' => 'user.country'
+                'label' => 'user.country',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('email', 'email', [
                 'label' => 'user.email',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('_password', 'repeated', [
                 'type' => 'password',
                 'invalid_message' => 'value.confirm.error',
-                'first_options'  => ['label' => 'user.password'],
-                'second_options' => ['label' => 'user.confirm']
+                'first_options'  => [
+                    'label' => 'user.password',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'user.confirm',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ]
             ]);
     }
 

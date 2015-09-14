@@ -6,7 +6,7 @@ body {
     color: #1f1f21;
 }
 
-a {
+a, a:hover, a:visited, a:focus {
     text-decoration: none;
     color: #1f1f21;
 }
@@ -19,6 +19,7 @@ h1 {
 
 .wrapper {
     width: 100%;
+    text-align: center;
 }
 
 .wrapper #table {
@@ -30,7 +31,7 @@ h1 {
     width: 100%;
     border: 4px solid #ffffff;
     background-color: #d8d8ca;
-    height: 100px;
+    height: 108px;
     color: #1f1f21;
 }
 
@@ -81,7 +82,7 @@ h1 {
 }
 
 .wrapper .cell .menu {
-    height: 70px;
+    height: 100%;
     display: block;
     text-align: center;
     font-size: 28px;
@@ -114,18 +115,8 @@ h1 {
     float: right;
 }
 
-.wrapper form textarea {
+.wrapper form textarea .form-control {
     width: 100%;
-}
-
-.wrapper form div label{
-    width: 50px !important;
-}
-
-.wrapper form input {
-    width: 200px;
-    height: 30px;
-    margin: 20px;
 }
 
 .wrapper .form_left {
@@ -134,12 +125,35 @@ h1 {
     border-right: 1px dashed grey;
 }
 
-.wrapper .form_right {
-    float: right;
-    width: 45%;
-    margin-left: 10px;
-    padding-left: 20px;
-    border-left: 1px dashed grey;
+.wrapper .form_signin {
+    width: 500px;
+    margin: 30px auto;
+}
+
+.wrapper .form-group {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.wrapper .form-control {
+    margin: 10px auto;
+}
+
+.wrapper .control-label {
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.wrapper .input-sm {
+   width: 250px;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 40px;
+    border: none;
 }
 
 .wrapper form ul li {
@@ -147,10 +161,14 @@ h1 {
 }
 
 .wrapper .result {
-    width: 100%;
+    width: 500px;
     height: 200px;
-    margin: 0;
+    margin: 10px auto;
     border: 1px darkgrey solid;
+}
+
+.wrapper .alert {
+    padding: 10px;
 }
 
 .clearfix {

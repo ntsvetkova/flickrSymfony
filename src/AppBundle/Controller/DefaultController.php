@@ -152,9 +152,14 @@ class DefaultController extends Controller
         $formSignUp->handleRequest($request);
         if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
             $registration = $formSignUp->getData();
-            $em->persist($registration->getUser());
+            $user = $registration->getUser();
+            $encoder = $this->container->get('security.password_encoder');
+            $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encodedPassword);
+//            $user->setRoles(['ROLE_ADMIN']);
+            $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('showUsers');
+            return $this->redirectToRoute('login_route');
         }
         return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),

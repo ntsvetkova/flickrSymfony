@@ -72,7 +72,7 @@
             </trans-unit>
             <trans-unit id="18">
                 <source>user.confirm</source>
-                <target>Kinnitama</target>
+                <target>Kinnitama parooli</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>users</source>
