@@ -21,6 +21,7 @@
                     <label class="control-label" for="password">{{ 'user.password'|trans }}</label>
                     <input class="form-control" type="password" id="password" name="_password" />
                 </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="form-group">
                     {% if error %}
                         <label class="control-label input-sm">{{ error.messageKey|trans(error.messageData, 'security') }}</label>

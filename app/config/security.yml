@@ -28,6 +28,7 @@ security:
             form_login:
                 login_path: login_route
                 check_path: login_check
+                csrf_provider: security.csrf.token_manager
             logout:
               path: /logout
               target: /
