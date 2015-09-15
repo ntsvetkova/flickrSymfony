@@ -194,19 +194,24 @@ class DefaultController extends Controller
      */
     public function validateAction(Request $request) {
         $response = new JsonResponse();
+        $content = '';
+        $properties = ['_username', 'country', 'email', '_password'];
         $user = new User();
         $name = $request->request->get('name');
         $value = $request->request->get('value');
         $validator = $this->get('validator');
-        if (strpos($name, '_username') >= 0) {
-            $errors = $validator->validatePropertyValue($user, '_username', $value);
-        }
-        if ($errors->has(0)) {
-            $content = json_encode($errors->get(0)->getMessage());
-        }
-        else {
-            $content = json_encode('Success');
-        }
+        foreach ($properties as $property) {
+            if (strpos($name, $property) !== false) {
+                $errors = $validator->validatePropertyValue($user, $property, $value);
+                if ($errors->has(0)) {
+                    $content = json_encode($errors->get(0)->getMessage());
+                }
+                else {
+                    $content = json_encode('Success');
+                }
+                break;
+            }
+        };
         $response->setContent($content);
         return $response;
     }

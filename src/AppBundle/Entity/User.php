@@ -168,9 +168,9 @@ class User implements UserInterface, \Serializable
         ]);
         $metadata->addPropertyConstraints('_password', [
             new Length([
-                'min' => 3,
+//                'min' => 3,
                 'max' => 4096,
-                'minMessage' => 'value.short',
+//                'minMessage' => 'value.short',
                 'maxMessage' => 'value.long'
             ]),
             new NotBlank([
