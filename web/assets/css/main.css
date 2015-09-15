@@ -125,7 +125,7 @@ h1 {
 }
 
 .wrapper .form_signin {
-    width: 500px;
+    width: 60%;
     margin: 30px auto;
 }
 
@@ -154,7 +154,7 @@ h1 {
 }
 
 .wrapper .result {
-    width: 500px;
+    width: 60%;
     height: 200px;
     margin: 10px auto;
     border: 1px darkgrey solid;
@@ -185,7 +185,41 @@ h1 {
 }
 
 @media screen and (max-width: 800px) {
+
+    .wrapper .form_signin {
+        width: 100%;
+    }
+
+    .wrapper .result {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    body {
+        width: 80%;
+    }
+
+    .wrapper .form_signin {
+        width: 70%;
+    }
+
+    .wrapper .result {
+        width: 70%;
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+
+    .wrapper .cell .img {
+        margin: 10px auto;
+        float: none;
+    }
+
     .wrapper .cell {
-        height: 200px;
+        height: 100%;
+        padding-bottom: 30px;
     }
 }
