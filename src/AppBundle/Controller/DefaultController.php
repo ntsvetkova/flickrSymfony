@@ -189,6 +189,30 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function validateAction(Request $request) {
+        $response = new JsonResponse();
+        $user = new User();
+        $name = $request->request->get('name');
+        $value = $request->request->get('value');
+        $validator = $this->get('validator');
+        if (strpos($name, '_username') >= 0) {
+            $errors = $validator->validatePropertyValue($user, '_username', $value);
+        }
+        if ($errors->has(0)) {
+            $content = json_encode($errors->get(0)->getMessage());
+        }
+        else {
+            $content = json_encode('Success');
+        }
+        $response->setContent($content);
+        return $response;
+    }
+
+
+    /**
      * @param FlickrPhoto|null $photo
      * @return mixed
      */

@@ -23,7 +23,7 @@ class UserType extends AbstractType
             ->add('_username', 'text', [
                 'label' => 'user.name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])
             ->add('country', 'text', [

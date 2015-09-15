@@ -15,3 +15,8 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
+    <script src="{{ asset('assets/js/app/validator.js') }}"></script>
+{% endblock %}

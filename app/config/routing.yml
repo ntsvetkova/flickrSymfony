@@ -83,15 +83,20 @@ login_route:
 login:
     path: /login
     defaults:
-          _controller: FrameworkBundle:Redirect:redirect
-          route: login_route
-          permanent: true
+        _controller: FrameworkBundle:Redirect:redirect
+        route: login_route
+        permanent: true
 login_check:
-  path: /login_check
-  defaults:
-      _controller: AppBundle:Security:loginCheck
+    path: /login_check
+    defaults:
+        _controller: AppBundle:Security:loginCheck
 logout:
   path: /logout
+
+validation:
+  path: /validation
+  defaults:
+        _controller: AppBundle:Default:validate
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
