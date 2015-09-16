@@ -8,3 +8,6 @@ value:
   confirm:
     error: The password fields must match
   same: The value is already in use
+age:
+  young: Sorry, you are too young
+  old: Sorry, you are too old

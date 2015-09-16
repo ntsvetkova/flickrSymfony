@@ -30,6 +30,14 @@
                 <source>value.same</source>
                 <target>Väärtus on juba kasutatud</target>
             </trans-unit>
+            <trans-unit id="8">
+                <source>age.young</source>
+                <target>Vabanda, sa oled liiga noor</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>age.old</source>
+                <target>Vabandage, te olete liiga vana</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

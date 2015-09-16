@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * Class User
@@ -51,9 +54,25 @@ class User implements UserInterface, \Serializable
      */
     protected $_password;
     /**
+     * @ORM\Column(type="integer", length=20)
+     */
+    protected $age;
+    /**
      * @ORM\Column(type="json_array")
      */
     protected $roles = array();
+    /**
+    * @ORM\OneToMany(targetEntity="Phone", mappedBy="user", cascade={"persist"})
+    * @Assert\Valid()
+    */
+    protected $phones;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->phones = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -136,6 +155,44 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param mixed $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhones() {
+        return $this->phones;
+    }
+
+    /**
+     * @param Phone $phone
+     */
+    public function addPhone(Phone $phone) {
+        $phone->setUser($this);
+        $this->phones->add($phone);
+    }
+
+    /**
+     * @param Phone $phone
+     */
+    public function removePhone(Phone $phone) {
+
+    }
+
+    /**
      * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata) {
@@ -166,11 +223,23 @@ class User implements UserInterface, \Serializable
                 'message' => 'value.empty'
             ])
         ]);
+        $metadata->addPropertyConstraints('age', [
+            new NotBlank([
+                'message' => 'value.empty'
+            ]),
+            new Range([
+                'min' => 14,
+                'max' => 80,
+                'minMessage' => 'age.young',
+                'maxMessage' => 'age.old',
+                'invalidMessage' => 'value.error'
+            ])
+        ]);
         $metadata->addPropertyConstraints('_password', [
             new Length([
-//                'min' => 3,
+                'min' => 3,
                 'max' => 4096,
-//                'minMessage' => 'value.short',
+                'minMessage' => 'value.short',
                 'maxMessage' => 'value.long'
             ]),
             new NotBlank([

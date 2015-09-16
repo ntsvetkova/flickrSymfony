@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Controller;
+use AppBundle\Entity\Phone;
 use AppBundle\Entity\User;
 use AppBundle\Exceptions\AppException;
 use AppBundle\Models\FlickrPhoto\FlickrPhoto;
@@ -195,14 +196,19 @@ class DefaultController extends Controller
     public function validateAction(Request $request) {
         $response = new JsonResponse();
         $content = '';
-        $properties = ['_username', 'country', 'email', '_password'];
+        $properties = ['_username', 'country', 'email', 'age', '_password', 'phones'];
         $user = new User();
         $name = $request->request->get('name');
         $value = $request->request->get('value');
         $validator = $this->get('validator');
         foreach ($properties as $property) {
             if (strpos($name, $property) !== false) {
-                $errors = $validator->validatePropertyValue($user, $property, $value);
+                if (strpos($name, 'phones') !== false) {
+                    $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
+                }
+                else {
+                    $errors = $validator->validatePropertyValue($user, $property, $value);
+                }
                 if ($errors->has(0)) {
                     $content = json_encode(['code' => 1, 'message' => $errors->get(0)->getMessage()]);
                 }

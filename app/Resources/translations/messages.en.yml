@@ -34,6 +34,8 @@ user:
   email: E-mail
   password: Password
   country: Country
+  age: Age
+  phone: Phone number
   confirm: Confirm password
   not:
     found: Check your username and password

@@ -38,6 +38,18 @@ class UserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('age', 'number', [
+                'label' => 'user.age',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('phones', 'collection', [
+                'label' => false,
+                'type' => new PhoneType(),
+                'allow_add' => true,
+                'by_reference' => false
+            ])
             ->add('_password', 'repeated', [
                 'type' => 'password',
                 'invalid_message' => 'value.confirm.error',
@@ -62,7 +74,8 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\User'
+            'data_class' => 'AppBundle\Entity\User',
+            'cascade_validation' => true
         ]);
     }
 

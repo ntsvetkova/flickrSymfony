@@ -98,6 +98,14 @@
                 <source>password.strong</source>
                 <target>Tugev parool</target>
             </trans-unit>
+            <trans-unit id="25">
+                <source>user.age</source>
+                <target>Vanus</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>user.phone</source>
+                <target>Telefoninumber</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
