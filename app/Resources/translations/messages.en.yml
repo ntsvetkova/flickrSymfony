@@ -39,3 +39,6 @@ user:
     found: Check your username and password
   remove: Remove user
 users: users
+password:
+  weak: Weak password
+  strong: Strong password

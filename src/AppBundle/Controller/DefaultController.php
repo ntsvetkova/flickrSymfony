@@ -204,10 +204,17 @@ class DefaultController extends Controller
             if (strpos($name, $property) !== false) {
                 $errors = $validator->validatePropertyValue($user, $property, $value);
                 if ($errors->has(0)) {
-                    $content = json_encode($errors->get(0)->getMessage());
+                    $content = json_encode(['code' => 1, 'message' => $errors->get(0)->getMessage()]);
+                }
+                else if (strpos($name, 'password') !== false) {
+                    if (strlen($value) <= 4) {
+                        $content = json_encode(['code' => 2, 'message' => $this->get('translator')->trans('password.weak')]);
+                    } else {
+                        $content = json_encode(['code' => 0, 'message' => $this->get('translator')->trans('password.strong')]);
+                    }
                 }
                 else {
-                    $content = json_encode('Success');
+                    $content = json_encode(['code' => 0]);
                 }
                 break;
             }

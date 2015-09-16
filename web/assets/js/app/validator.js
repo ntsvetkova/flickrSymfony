@@ -4,7 +4,7 @@ require (["jquery", "underscore"], function ($, _) {
         var timer = null;
         $("input.form-control").keydown(function() {
             clearTimeout(timer);
-            timer = _.delay(validate, 2000, this);
+            timer = _.delay(validate, 1500, this);
         });
 
         function validate(input)
@@ -12,73 +12,61 @@ require (["jquery", "underscore"], function ($, _) {
             $.post('/validation', {name: input.name, value: input.value})
                 .success(function (json) {
 
-                    if (json == 'Success') {
-
+                    function create(classAdd, classRemove, classGlyphicon) {
+                        var label = $('<label></label>')
+                            .addClass("control-label input-sm")
+                            .text(json.message)
+                            .css({
+                                'width': '100%',
+                                'margin-bottom': '10px'
+                            });
                         var span = $('<span></span>')
-                            .addClass("glyphicon glyphicon-ok form-control-feedback")
+                            .addClass("glyphicon form-control-feedback " + classGlyphicon)
                             .attr('aria-hidden', 'true')
                             .css('top', '35px');
 
                         if (!$(input).parent().hasClass("input-group")) {
                             $(input).parent()
-                                .removeClass("has-error")
-                                .addClass("has-success has-feedback")
+                                .removeClass(classRemove)
+                                .addClass("has-feedback " + classAdd)
                                 .children("label.control-label.input-sm").remove();
                             $(input).parent()
                                 .find("span.glyphicon").remove();
+                            if (classAdd != "has-success") {
+                                label.insertAfter($(input));
+                            }
                             span.insertAfter($(input));
                         }
                         else {
                             $(input).parent()
-                                .removeClass("has-error")
-                                .addClass("has-success");
+                                .removeClass(classRemove)
+                                .addClass(addClass);
                             $(input).parent().parent()
-                                .removeClass("has-error")
-                                .addClass("has-success has-feedback")
+                                .removeClass(classRemove)
+                                .addClass("has-feedback " + classAdd)
                                 .children("label.control-label.input-sm").remove();
                             $(input).parent().parent()
                                 .find("span.glyphicon").remove();
+                            if (classAdd == "has-error") {
+                                label.css('color', '#a94442')
+                            }
+                            if (classAdd != "has-success") {
+                                label.insertAfter($(input).parent());
+                            }
                             span.insertAfter($(input).parent());
-
                         }
+                    }
 
-                        //todo weak/strong password
-
+                    if (json.code == 0) {
+                        create("has-success", "has-error has-warning", "glyphicon-ok");
+                    }
+                    else if (json.code == 1) {
+                        create("has-error", "has-success has-warning", "glyphicon-remove");
                     }
                     else {
-
-                        var label = $('<label></label>')
-                            .addClass("control-label input-sm")
-                            .text(json)
-                            .css({
-                                'width': '100%',
-                                'margin-bottom': '10px'
-                            });
-
-                        if (!$(input).parent().hasClass("input-group")) {
-                            $(input).parent()
-                                .removeClass("has-success")
-                                .addClass("has-error has-feedback")
-                                .children("label.control-label.input-sm").remove();
-                            $(input).parent()
-                                .find("span.glyphicon").remove();
-                            label.insertAfter($(input));
-                        }
-                        else {
-                            $(input).parent()
-                                .removeClass("has-success")
-                                .addClass("has-error");
-                            $(input).parent().parent()
-                                .removeClass("has-success")
-                                .addClass("has-error has-feedback")
-                                .children("label.control-label.input-sm").remove();
-                            $(input).parent().parent()
-                                .find("span.glyphicon").remove();
-                            label
-                                .css('color', '#a94442')
-                                .insertAfter($(input).parent());
-                        }
+                        create("has-warning", "has-error has-success", "glyphicon-warning-sign");
                     }
+
                 })
                 .fail(function () {
                     console.log('Error: the response is not a JSON response');

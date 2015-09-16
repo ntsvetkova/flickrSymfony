@@ -90,6 +90,14 @@
                 <source>user.remove</source>
                 <target>Kasutaja eemaldama</target>
             </trans-unit>
+            <trans-unit id="23">
+                <source>password.weak</source>
+                <target>Nõrk parool</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>password.strong</source>
+                <target>Tugev parool</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
