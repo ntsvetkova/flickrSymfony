@@ -12,8 +12,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class PhoneType
+ * @package AppBundle\Models\Registration
+ */
 class PhoneType extends AbstractType {
 
+    /**
+     * @param FormBuilderInterface $builderInterface
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builderInterface, array $options)
     {
         $builderInterface
@@ -25,6 +33,9 @@ class PhoneType extends AbstractType {
             ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

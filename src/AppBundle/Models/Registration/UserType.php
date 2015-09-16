@@ -12,6 +12,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class UserType
+ * @package AppBundle\Models\Registration
+ */
 class UserType extends AbstractType
 {
     /**
