@@ -10,6 +10,7 @@ use AppBundle\Models\FlickrPhoto\ResponseDecode;
 use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
 use AppBundle\Models\Registration\RegistrationFormType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -174,7 +175,10 @@ class DefaultController extends Controller
         $users = $this->getDoctrine()
             ->getRepository('AppBundle:User')
             ->findAll();
-        return $this->render('registration/display.html.twig', ['users' => $users]);
+        $phones = $this->getDoctrine()
+            ->getRepository('AppBundle:Phone')
+            ->findBy(['user' => $users]);
+        return $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones]);
     }
 
     /**
@@ -205,6 +209,16 @@ class DefaultController extends Controller
             if (strpos($name, $property) !== false) {
                 if (strpos($name, 'phones') !== false) {
                     $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
+                }
+                else if (strpos($name, '_username') !== false) {
+                    $user->setUsername($value);
+                    $unique = new UniqueEntity('_username');
+                    $unique->message = 'value.same';
+                    $errorsUnique = $validator->validate($user, $unique);
+                    $errors = $validator->validatePropertyValue($user, $property, $value);
+                    if ($errorsUnique->has(0)) {
+                        $errors->add($errorsUnique->get(0));
+                    }
                 }
                 else {
                     $errors = $validator->validatePropertyValue($user, $property, $value);

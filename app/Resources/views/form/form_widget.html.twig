@@ -1,0 +1,12 @@
+{% extends 'form_div_layout.html.twig' %}
+{% use 'form/form_errors.html.twig' %}
+
+{% block form_widget_simple %}
+    <div class="has-feedback">
+        {{ parent() }}
+        <span class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
+        <span class="glyphicon glyphicon-remove form-control-feedback" style="display: none"></span>
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback" style="display: none"></span>
+        <label class="control-label input-sm" style="width: 100%; display: none"></label>
+    </div>
+{% endblock %}

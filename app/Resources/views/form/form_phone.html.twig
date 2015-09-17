@@ -1,8 +1,0 @@
-{% block integer_widget %}
-    {% set type = type|default('number') %}
-    <div class="phones" data-prototype="{{ form_widget(form.phones.vars.prototype)|e }}">
-        {% for phone in form.phones %}
-            <input type="{{ type }}" {{ block('widget_attributes') }}/>
-        {% endfor %}
-    </div>
-{% endblock integer_widget %}

@@ -5,13 +5,10 @@
  * Date: 09.09.15
  * Time: 17:54
  */
-
 namespace AppBundle\Models\Registration;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 /**
  * Class UserType
  * @package AppBundle\Models\Registration
@@ -21,6 +18,7 @@ class UserType extends AbstractType
     /**
      * @param FormBuilderInterface $builderInterface
      * @param array $options
+     * TODO password validation
      */
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
         $builderInterface
@@ -71,7 +69,6 @@ class UserType extends AbstractType
                 ]
             ]);
     }
-
     /**
      * @param OptionsResolver $resolver
      */
@@ -82,7 +79,6 @@ class UserType extends AbstractType
             'cascade_validation' => true
         ]);
     }
-
     /**
      * Returns the name of this type.
      *

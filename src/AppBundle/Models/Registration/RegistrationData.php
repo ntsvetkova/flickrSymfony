@@ -19,27 +19,6 @@ class RegistrationData
     protected $user;
 
     /**
-     * @Assert\Valid()
-     */
-    protected $phones;
-
-    /**
-     * @return mixed
-     */
-    public function getPhones()
-    {
-        return $this->phones;
-    }
-
-    /**
-     * @param mixed $phones
-     */
-    public function setPhones($phones)
-    {
-        $this->phones = $phones;
-    }
-
-    /**
      * @return mixed
      */
     public function getUser()

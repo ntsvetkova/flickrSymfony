@@ -38,7 +38,7 @@ class User implements UserInterface, \Serializable
      */
     protected $id;
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     protected $_username;
     /**
@@ -325,4 +325,5 @@ class User implements UserInterface, \Serializable
             $this->_password
         ) = unserialize($serialized);
     }
+
 }

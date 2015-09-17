@@ -6,7 +6,7 @@
 
 {% block table %}
         {% for user in users %}
-            <div class="cell" style="text-align: left; height: 140px;
+            <div class="cell" style="text-align: left; height: 170px;
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% if (user.id == app.user.id) %}
                     background-color: white; border: 1px dashed grey;
@@ -27,6 +27,11 @@
                                 <li>{{ 'user.country'|trans }}: {{ user.country }}</li>
                                 <li>{{ 'user.email'|trans }}: {{ user.email }}</li>
                                 <li>{{ 'user.password'|trans }}: {{ user.password }}</li>
+                                {% for phone in phones %}
+                                    {% if (user.id == phone.user.id) %}
+                                        <li>{{ 'user.phone'|trans }}: {{ phone.number }}</li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </li>
                     </ul>
