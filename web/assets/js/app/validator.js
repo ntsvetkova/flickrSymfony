@@ -8,23 +8,23 @@ require (["jquery", "underscore"], function ($, _) {
             }
         });
 
-        var timer = null;
+        var throttled = _.throttle(validate, 1000, {leading: false});
         $("input.form-control").bind('keydown mouseup', (function () {
-            //_.compose(clearTimeout, _.delay(validate, 1000, this));
-            clearTimeout(timer);
-            timer = _.delay(validate, 1000, this);
+            throttled(this);
         }));
 
         function validate(input)
         {
-            $.post('/validation', {name: input.name, value: input.value})
+            var data = {name: input.name, value: input.value};
+            console.log(data);
+            $.post('/validation', data)
                 .success(function (json) {
 
                     function create(classAdd, classRemove, classGlyphicon) {
                         if (!$(input).parent().hasClass("input-group")) {
                             $(input).parent()
                                 .removeClass(classRemove)
-                                .addClass(classAdd)
+                                .addClass(classAdd);
                             if (classAdd == "has-error") {
                                 $(input).parent().find("label.control-label.input-sm").text(json.message);
                                 $(input).parent().find("label.control-label.input-sm").show();
@@ -85,8 +85,7 @@ require (["jquery", "underscore"], function ($, _) {
                             var newFormDiv = collectionHolder.append(newForm);
                             var newInput = newFormDiv.find('input.form-control');
                             newInput.bind('keydown mouseup', function() {
-                                clearTimeout(timer);
-                                timer = _.delay(validate, 1000, this);
+                                throttled(this);
                             });
                             newFormDiv.children('div').children('label.required').remove();
                         }
@@ -101,7 +100,7 @@ require (["jquery", "underscore"], function ($, _) {
                     else if (json.code == 1) {
                         create("has-error", "has-success has-warning", "glyphicon-remove");
                         if (input.name.indexOf('age') > 0) {
-                            $(input).parent().next('div').hide();
+                            $(input).parent().parent().next('div').hide();
                         }
                     }
                     else {

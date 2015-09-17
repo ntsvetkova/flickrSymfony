@@ -58,13 +58,13 @@ class UserType extends AbstractType
                 'first_options'  => [
                     'label' => 'user.password',
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control repeated'
                     ]
                 ],
                 'second_options' => [
                     'label' => 'user.confirm',
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control repeated'
                     ]
                 ]
             ]);
@@ -75,8 +75,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\User',
-            'cascade_validation' => true
+            'data_class' => 'AppBundle\Entity\User'
         ]);
     }
     /**
