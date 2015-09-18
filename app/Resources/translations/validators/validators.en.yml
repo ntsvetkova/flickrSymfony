@@ -11,3 +11,5 @@ value:
 age:
   young: Sorry, you are too young
   old: Sorry, you are too old
+recaptcha:
+  check: Check reCAPTCHA

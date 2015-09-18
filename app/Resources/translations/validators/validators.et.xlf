@@ -38,6 +38,10 @@
                 <source>age.old</source>
                 <target>Vabandage, te olete liiga vana</target>
             </trans-unit>
+            <trans-unit id="10">
+                <source>recaptcha.check</source>
+                <target>Kontrollige reCAPTCHA</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

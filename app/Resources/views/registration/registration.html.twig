@@ -10,6 +10,7 @@
         <div class="form-group">
             {{ form_start(form_sign_up) }}
             {{ form_widget(form_sign_up) }}
+            <div class="g-recaptcha" data-sitekey="6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh"></div>
             <button class="btn btn-primary" type="submit">{{ 'sign.up'|trans|capitalize }}</button>
             {{ form_end(form_sign_up) }}
         </div>
@@ -19,4 +20,8 @@
 {% block javascripts %}
     <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
     <script src="{{ asset('assets/js/app/validator.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?&render=onload&hl={{ app.request.locale }}"
+            async defer>
+    </script>
+
 {% endblock %}

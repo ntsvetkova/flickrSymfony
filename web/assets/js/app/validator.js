@@ -1,6 +1,8 @@
 require (["jquery", "underscore"], function ($, _) {
     $( document ).ready(function () {
 
+        $("div.g-recaptcha").children().children().css('margin', '10px auto 0');
+
         $("label.required").each(function(index) {
             var attr = $(this).attr("for");
             if (typeof attr === typeof undefined || attr === false) {
@@ -18,7 +20,7 @@ require (["jquery", "underscore"], function ($, _) {
             var data = {name: input.name, value: input.value};
             if (input.name.indexOf('[second]') > 0) {
                 var id = input.id.slice(0,-6) + 'first';
-                data = {name: input.name, value: input.value, first_value: $("input#"+id+"")[0].value};
+                data = {name: input.name, value: input.value, first_value: $("input#"+id)[0].value};
             }
             $.post('/validation', data)
                 .success(function (json) {
@@ -98,6 +100,9 @@ require (["jquery", "underscore"], function ($, _) {
                         create("has-success", "has-error has-warning", "glyphicon-ok");
                         if (input.name.indexOf('age') > 0 && input.value >= 18) {
                            createForm();
+                        }
+                        else if (input.name.indexOf('age') > 0 && input.value < 18) {
+                            $(input).parent().parent().next('div').remove();
                         }
                     }
                     else if (json.code == 1) {

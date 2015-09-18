@@ -10,8 +10,10 @@ use AppBundle\Models\FlickrPhoto\ResponseDecode;
 use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
 use AppBundle\Models\Registration\RegistrationFormType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,8 +62,6 @@ class DefaultController extends Controller
         }
         else {
             $content = json_encode(['items' => [
-//                ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-//                ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
                 ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route')],
                 ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration')]
             ]]);
@@ -154,16 +154,23 @@ class DefaultController extends Controller
             'attr' => ['novalidate' => 'novalidate'],
         ]);
         $formSignUp->handleRequest($request);
+        $recaptchaResponse = $request->request->get('g-recaptcha-response');
         if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
-            $registration = $formSignUp->getData();
-            $user = $registration->getUser();
-            $encoder = $this->container->get('security.password_encoder');
-            $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($encodedPassword);
-            $user->setRoles(['ROLE_USER']);
-            $em->persist($user);
-            $em->flush();
-            return $this->redirectToRoute('login_route');
+            $verifyResponse = $this->verifyRecaptcha($recaptchaResponse);
+            if ($verifyResponse === true) {
+                $registration = $formSignUp->getData();
+                $user = $registration->getUser();
+                $encoder = $this->container->get('security.password_encoder');
+                $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($encodedPassword);
+                $user->setRoles(['ROLE_USER']);
+                $em->persist($user);
+                $em->flush();
+                return $this->redirectToRoute('login_route');
+            }
+            else {
+                $formSignUp->addError(new FormError($this->get('translator')->trans('recaptcha.check', [], 'validators')));
+            }
         }
         return $this->render('registration/registration.html.twig', [
             'form_sign_up' => $formSignUp->createView(),
@@ -190,6 +197,16 @@ class DefaultController extends Controller
     public function removeUserAction($id) {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->find($id);
+        $phones = new ArrayCollection();
+        foreach ($user->getPhones() as $phone) {
+            $phones->add($phone);
+        }
+        foreach ($phones as $phone) {
+            if (false !== $user->getPhones()->contains($phone)) {
+                $phone->setUser(null);
+                $em->remove($phone);
+            }
+        }
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute('showUsers');
@@ -287,6 +304,21 @@ class DefaultController extends Controller
         return $content;
     }
 
+    /**
+     * @param $recaptchaResponse
+     * @return boolean
+     */
+    public function verifyRecaptcha($recaptchaResponse) {
+        $secret = '6LdiDQ0TAAAAANqeVhdQsYL99nF3TKrcsqGItRTm';
+        $verifyRequest = Request::create('https://www.google.com/recaptcha/api/siteverify', 'GET', ['secret' => $secret, 'response' => $recaptchaResponse]);
+        $sendRequest = $this->get('curl');
+        $data = $sendRequest->curlVerifyExec($verifyRequest);
+        $responseDecode = ResponseDecode::getInstance();
+        $responseDecode->setResponse($data);
+        $response = $responseDecode->decodeRecaptcha();
+        return $response;
+    }
+
 
     /**
      * @param FlickrPhoto|null $photo
@@ -294,7 +326,7 @@ class DefaultController extends Controller
      */
     public function setData(FlickrPhoto $photo = null) {
         $sendRequest = $this->get('curl');
-        $data = $sendRequest->curlExec();
+        $data = substr($sendRequest->curlExec(), 14, -1);
         $responseDecode = ResponseDecode::getInstance();
         $responseDecode->setPhoto($photo);
         $responseDecode->setResponse($data);
