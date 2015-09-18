@@ -58,13 +58,13 @@ class UserType extends AbstractType
                 'first_options'  => [
                     'label' => 'user.password',
                     'attr' => [
-                        'class' => 'form-control repeated'
+                        'class' => 'form-control'
                     ]
                 ],
                 'second_options' => [
                     'label' => 'user.confirm',
                     'attr' => [
-                        'class' => 'form-control repeated'
+                        'class' => 'form-control'
                     ]
                 ]
             ]);

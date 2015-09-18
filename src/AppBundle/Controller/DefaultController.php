@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator;
 
 /**
  * Class DefaultController
@@ -200,6 +202,7 @@ class DefaultController extends Controller
     public function validateAction(Request $request) {
         $response = new JsonResponse();
         $content = '';
+        $errors = new ConstraintViolationList();
         $properties = ['_username', 'country', 'email', 'age', '_password', 'phones'];
         $user = new User();
         $name = $request->request->get('name');
@@ -211,36 +214,77 @@ class DefaultController extends Controller
                     $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
                 }
                 else if (strpos($name, '_username') !== false) {
-                    $user->setUsername($value);
-                    $unique = new UniqueEntity('_username');
-                    $unique->message = 'value.same';
-                    $errorsUnique = $validator->validate($user, $unique);
-                    $errors = $validator->validatePropertyValue($user, $property, $value);
-                    if ($errorsUnique->has(0)) {
-                        $errors->add($errorsUnique->get(0));
-                    }
+                    $errors = $this->isUsernameValid($user, $value, $validator);
                 }
                 else {
                     $errors = $validator->validatePropertyValue($user, $property, $value);
                 }
+
                 if ($errors->has(0)) {
                     $content = json_encode(['code' => 1, 'message' => $errors->get(0)->getMessage()]);
                 }
-                else if (strpos($name, 'password') !== false) {
-                    if (strlen($value) <= 4) {
-                        $content = json_encode(['code' => 2, 'message' => $this->get('translator')->trans('password.weak')]);
-                    } else {
-                        $content = json_encode(['code' => 0, 'message' => $this->get('translator')->trans('password.strong')]);
-                    }
+                else if (strpos($name, 'password') !== false && strpos($name, 'first') !== false) {
+                    $content = $this->isPasswordStrong($value);
+                }
+                else if ((strpos($name, 'password') !== false && strpos($name, 'second') !== false)) {
+                    $content = $this->doPasswordsMatch($request, $value);
                 }
                 else {
                     $content = json_encode(['code' => 0]);
                 }
+
                 break;
             }
         };
         $response->setContent($content);
         return $response;
+    }
+
+    /**
+     * @param User $user
+     * @param $value
+     * @param Validator\RecursiveValidator $validator
+     * @return \Symfony\Component\Validator\ConstraintViolationListInterface
+     */
+    public function isUsernameValid(User $user, $value, Validator\RecursiveValidator $validator) {
+        $user->setUsername($value);
+        $unique = new UniqueEntity('_username');
+        $unique->message = 'value.same';
+        $errorsUnique = $validator->validate($user, $unique);
+        $errors = $validator->validatePropertyValue($user, '_username', $value);
+        if ($errorsUnique->has(0)) {
+            $errors->add($errorsUnique->get(0));
+        }
+        return $errors;
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function isPasswordStrong($value) {
+        if (strlen($value) <= 4) {
+            $content = json_encode(['code' => 2, 'message' => $this->get('translator')->trans('password.weak')]);
+        } else {
+            $content = json_encode(['code' => 0, 'message' => $this->get('translator')->trans('password.strong')]);
+        }
+        return $content;
+    }
+
+    /**
+     * @param Request $request
+     * @param $value
+     * @return string
+     */
+    public function doPasswordsMatch(Request $request, $value) {
+        $firstValue = $request->request->get('first_value');
+        if ($firstValue != $value) {
+            $content = json_encode(['code' => 1, 'message' => $this->get('translator')->trans('value.confirm.error', [], 'validators')]);
+        }
+        else {
+            $content = json_encode(['code' => 0]);
+        }
+        return $content;
     }
 
 

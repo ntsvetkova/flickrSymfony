@@ -16,7 +16,10 @@ require (["jquery", "underscore"], function ($, _) {
         function validate(input)
         {
             var data = {name: input.name, value: input.value};
-            console.log(data);
+            if (input.name.indexOf('[second]') > 0) {
+                var id = input.id.slice(0,-6) + 'first';
+                data = {name: input.name, value: input.value, first_value: $("input#"+id+"")[0].value};
+            }
             $.post('/validation', data)
                 .success(function (json) {
 
