@@ -189,7 +189,7 @@ class User implements UserInterface, \Serializable
      * @param Phone $phone
      */
     public function removePhone(Phone $phone) {
-
+        $this->phones->removeElement($phone);
     }
 
     /**

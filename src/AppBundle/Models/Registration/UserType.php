@@ -50,7 +50,8 @@ class UserType extends AbstractType
                 'label' => false,
                 'type' => new PhoneType(),
                 'allow_add' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'allow_delete' => true
             ])
             ->add('_password', 'repeated', [
                 'type' => 'password',
