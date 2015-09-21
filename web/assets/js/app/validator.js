@@ -1,6 +1,8 @@
-require (["jquery", "underscore"], function ($, _) {
+require (["jquery", "underscore", "app/recaptcha"], function ($, _, grecaptcha) {
+//require (["jquery", "underscore"], function ($, _) {
     $( document ).ready(function () {
-
+        console.log(grecaptcha());
+        console.log(grecaptcha.render('test'));
         $("div.g-recaptcha").children().children().css('margin', '10px auto 0');
 
         $("label.required").each(function(index) {
@@ -14,30 +16,6 @@ require (["jquery", "underscore"], function ($, _) {
         $("input.form-control").bind('keydown mouseup', (function () {
             throttled(this);
         }));
-        //var recaptcha = _.throttle(validateRecaptcha, 500, {leading: false});
-        //$("div.g-recaptcha").bind('mouseout', (function () {
-        //    recaptcha();
-        //}));
-        //
-        //function validateRecaptcha() {
-        //    var data = {name: 'g-recaptcha-response', value: $("#g-recaptcha-response")[0].value};
-        //    $.post('/validation', data)
-        //        .success(function (json) {
-        //            if (json.code == 0) {
-        //                $("label.recaptcha-error").hide();
-        //            }
-        //            else {
-        //                $("label.recaptcha-error")
-        //                    .text(json.message)
-        //                    .css('color', '#a94442')
-        //                    .show();
-        //                //grecaptcha.reset();
-        //            }
-        //        })
-        //        .fail(function () {
-        //            console.log('Error: the response is not a JSON response');
-        //        });
-        //}
 
         function validate(input)
         {

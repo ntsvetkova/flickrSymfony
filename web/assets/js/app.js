@@ -5,10 +5,13 @@ requirejs.config({
     baseUrl: 'assets/js',
     paths: {
         app: 'app',
-        recaptcha: 'https://www.google.com/recaptcha/api'
+        jquery: 'jquery',
+        recaptcha: 'https://www.google.com/recaptcha'
     },
     waitSeconds: 45,
     shim: {
-        recaptcha: { exports: 'grecaptcha' }
+        recaptcha: {
+            exports: 'grecaptcha'
+        }
     }
 });
