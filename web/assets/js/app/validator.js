@@ -10,10 +10,34 @@ require (["jquery", "underscore"], function ($, _) {
             }
         });
 
-        var throttled = _.throttle(validate, 1000, {leading: false});
+        var throttled = _.throttle(validate, 500, {leading: false});
         $("input.form-control").bind('keydown mouseup', (function () {
             throttled(this);
         }));
+        //var recaptcha = _.throttle(validateRecaptcha, 500, {leading: false});
+        //$("div.g-recaptcha").bind('mouseout', (function () {
+        //    recaptcha();
+        //}));
+        //
+        //function validateRecaptcha() {
+        //    var data = {name: 'g-recaptcha-response', value: $("#g-recaptcha-response")[0].value};
+        //    $.post('/validation', data)
+        //        .success(function (json) {
+        //            if (json.code == 0) {
+        //                $("label.recaptcha-error").hide();
+        //            }
+        //            else {
+        //                $("label.recaptcha-error")
+        //                    .text(json.message)
+        //                    .css('color', '#a94442')
+        //                    .show();
+        //                //grecaptcha.reset();
+        //            }
+        //        })
+        //        .fail(function () {
+        //            console.log('Error: the response is not a JSON response');
+        //        });
+        //}
 
         function validate(input)
         {

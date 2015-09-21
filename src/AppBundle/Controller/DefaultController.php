@@ -11,6 +11,7 @@ use AppBundle\Models\Mars\SetData;
 use AppBundle\Models\Registration\RegistrationData;
 use AppBundle\Models\Registration\RegistrationFormType;
 use Doctrine\Common\Collections\ArrayCollection;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -133,9 +134,17 @@ class DefaultController extends Controller
         $results = [];
         $form = $this->createForm($this->get('mars_type'), $setData, ['attr' => ['novalidate' => 'novalidate']]);
         $form->handleRequest($request);
+        $recaptchaResponse = $request->request->get('g-recaptcha-response');
+        $recaptcha = new ReCaptcha($this->container->getParameter('recaptcha_secret'));
         if ($form->isSubmitted() && $form->isValid()) {
-            $setData->setAll();
-            $results = $setData->execute();
+            $verifyResponse = $recaptcha->verify($recaptchaResponse);
+            if ($verifyResponse->isSuccess()) {
+                $setData->setAll();
+                $results = $setData->execute();
+            }
+            else {
+                $form->addError(new FormError($this->get('translator')->trans('recaptcha.check', [], 'validators')));
+            }
         }
         return $this->render('mars/mars.html.twig', array(
             'form' => $form->createView(),
@@ -155,9 +164,10 @@ class DefaultController extends Controller
         ]);
         $formSignUp->handleRequest($request);
         $recaptchaResponse = $request->request->get('g-recaptcha-response');
+        $recaptcha = new ReCaptcha($this->container->getParameter('recaptcha_secret'));
         if ($formSignUp->isSubmitted() && $formSignUp->isValid()) {
-            $verifyResponse = $this->verifyRecaptcha($recaptchaResponse);
-            if ($verifyResponse === true) {
+            $verifyResponse = $recaptcha->verify($recaptchaResponse);
+            if ($verifyResponse->isSuccess()) {
                 $registration = $formSignUp->getData();
                 $user = $registration->getUser();
                 $encoder = $this->container->get('security.password_encoder');
@@ -224,35 +234,41 @@ class DefaultController extends Controller
         $user = new User();
         $name = $request->request->get('name');
         $value = $request->request->get('value');
-        $validator = $this->get('validator');
-        foreach ($properties as $property) {
-            if (strpos($name, $property) !== false) {
-                if (strpos($name, 'phones') !== false) {
-                    $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
-                }
-                else if (strpos($name, '_username') !== false) {
-                    $errors = $this->isUsernameValid($user, $value, $validator);
-                }
-                else {
-                    $errors = $validator->validatePropertyValue($user, $property, $value);
-                }
-
-                if ($errors->has(0)) {
-                    $content = json_encode(['code' => 1, 'message' => $errors->get(0)->getMessage()]);
-                }
-                else if (strpos($name, 'password') !== false && strpos($name, 'first') !== false) {
-                    $content = $this->isPasswordStrong($value);
-                }
-                else if ((strpos($name, 'password') !== false && strpos($name, 'second') !== false)) {
-                    $content = $this->doPasswordsMatch($request, $value);
-                }
-                else {
-                    $content = json_encode(['code' => 0]);
-                }
-
-                break;
+        if ($name == 'g-recaptcha-response') {
+            $verifyRecaptcha = $this->verifyRecaptcha($value);
+            if ($verifyRecaptcha === true) {
+                $content = json_encode(['code' => 0]);
             }
-        };
+            else {
+                $content = json_encode(['code' => 1, 'message' => $this->get('translator')->trans('recaptcha.check', [], 'validators')]);
+            }
+        }
+        else {
+            $validator = $this->get('validator');
+            foreach ($properties as $property) {
+                if (strpos($name, $property) !== false) {
+                    if (strpos($name, 'phones') !== false) {
+                        $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
+                    } else if (strpos($name, '_username') !== false) {
+                        $errors = $this->isUsernameValid($user, $value, $validator);
+                    } else {
+                        $errors = $validator->validatePropertyValue($user, $property, $value);
+                    }
+
+                    if ($errors->has(0)) {
+                        $content = json_encode(['code' => 1, 'message' => $errors->get(0)->getMessage()]);
+                    } else if (strpos($name, 'password') !== false && strpos($name, 'first') !== false) {
+                        $content = $this->isPasswordStrong($value);
+                    } else if ((strpos($name, 'password') !== false && strpos($name, 'second') !== false)) {
+                        $content = $this->doPasswordsMatch($request, $value);
+                    } else {
+                        $content = json_encode(['code' => 0]);
+                    }
+
+                    break;
+                }
+            };
+        }
         $response->setContent($content);
         return $response;
     }
@@ -303,22 +319,6 @@ class DefaultController extends Controller
         }
         return $content;
     }
-
-    /**
-     * @param $recaptchaResponse
-     * @return boolean
-     */
-    public function verifyRecaptcha($recaptchaResponse) {
-        $secret = '6LdiDQ0TAAAAANqeVhdQsYL99nF3TKrcsqGItRTm';
-        $verifyRequest = Request::create('https://www.google.com/recaptcha/api/siteverify', 'GET', ['secret' => $secret, 'response' => $recaptchaResponse]);
-        $sendRequest = $this->get('curl');
-        $data = $sendRequest->curlVerifyExec($verifyRequest);
-        $responseDecode = ResponseDecode::getInstance();
-        $responseDecode->setResponse($data);
-        $response = $responseDecode->decodeRecaptcha();
-        return $response;
-    }
-
 
     /**
      * @param FlickrPhoto|null $photo

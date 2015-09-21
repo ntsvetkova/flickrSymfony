@@ -41,23 +41,13 @@ class CurlExec
     }
 
     /**
-     * @return string
-     */
-    public function curlExec() {
-        $request = $this->requestStack->getCurrentRequest();
-        $options = [
-            CURLOPT_URL => 'https://' . $request->getHttpHost() . $request->getRequestUri(),
-            CURLOPT_RETURNTRANSFER => 1
-        ];
-        curl_setopt_array($this->handle, $options);
-        return curl_exec($this->handle);
-    }
-
-    /**
-     * @param Request $request
+     * @param null $request
      * @return mixed
      */
-    public function curlVerifyExec(Request $request) {
+    public function curlExec($request = null) {
+        if (is_null($request)) {
+            $request = $this->requestStack->getCurrentRequest();
+        }
         $options = [
             CURLOPT_URL => 'https://' . $request->getHttpHost() . $request->getRequestUri(),
             CURLOPT_RETURNTRANSFER => 1

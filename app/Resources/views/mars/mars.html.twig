@@ -9,7 +9,8 @@
     <div class="form_signin">
         <div class="form-group">
         {{ form_start(form) }}
-            {{ form_row(form.enterData) }}
+            {{ form_widget(form) }}
+            <div class="g-recaptcha" data-sitekey="6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh"></div>
             <button class="btn btn-primary" type="submit">{{ 'show.final'|trans }}</button>
             {{ form_rest(form) }}
         {{ form_end(form) }}
@@ -23,4 +24,10 @@
             {{ result|trans }} <br>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?&render=onload&hl={{ app.request.locale }}"
+            async defer>
+    </script>
 {% endblock %}

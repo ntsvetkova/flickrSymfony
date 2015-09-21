@@ -39,6 +39,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
       version:  "%app.version%"
+      recaptcha_public: "%recaptcha_public%"
 
 # Assetic Configuration
 assetic:
@@ -86,6 +87,8 @@ swiftmailer:
 #App Configuration
 app:
     end_point: "%end_point%"
+    recaptcha_public: "%recaptcha_public%"
+    recaptcha_secret: "%recaptcha_secret%"
 
 #Lunetics Locale Bundle configuration
 lunetics_locale:

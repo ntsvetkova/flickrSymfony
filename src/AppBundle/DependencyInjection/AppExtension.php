@@ -33,5 +33,7 @@ class AppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('end_point', $config['end_point']);
+        $container->setParameter('recaptcha_public', $config['recaptcha_public']);
+        $container->setParameter('recaptcha_secret', $config['recaptcha_secret']);
     }
 }

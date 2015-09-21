@@ -33,6 +33,12 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('end_point')
                     ->defaultValue('https://api.flickr.com/services/rest')
                 ->end()
+                ->scalarNode('recaptcha_public')
+                    ->defaultValue('6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh')
+                ->end()
+                ->scalarNode('recaptcha_secret')
+                    ->defaultValue('6LdiDQ0TAAAAANqeVhdQsYL99nF3TKrcsqGItRTm')
+                ->end()
             ->end()
         ;
 

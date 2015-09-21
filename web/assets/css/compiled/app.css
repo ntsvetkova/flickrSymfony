@@ -158,6 +158,7 @@ h1 {
     height: 200px;
     margin: 10px auto;
     border: 1px darkgrey solid;
+    text-align: left;
 }
 
 .wrapper .alert {

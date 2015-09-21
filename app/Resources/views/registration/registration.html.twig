@@ -10,7 +10,10 @@
         <div class="form-group">
             {{ form_start(form_sign_up) }}
             {{ form_widget(form_sign_up) }}
-            <div class="g-recaptcha" data-sitekey="6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh"></div>
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}"></div>
+                <label class="control-label input-sm recaptcha-error" style="width: 100%; display: none"></label>
+            </div>
             <button class="btn btn-primary" type="submit">{{ 'sign.up'|trans|capitalize }}</button>
             {{ form_end(form_sign_up) }}
         </div>
@@ -23,5 +26,4 @@
     <script src="https://www.google.com/recaptcha/api.js?&render=onload&hl={{ app.request.locale }}"
             async defer>
     </script>
-
 {% endblock %}
