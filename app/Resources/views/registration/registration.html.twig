@@ -11,8 +11,8 @@
             {{ form_start(form_sign_up) }}
             {{ form_widget(form_sign_up) }}
             <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}"></div>
-                <label class="control-label input-sm recaptcha-error" style="width: 100%; display: none"></label>
+                <div id="test"></div>
+                {#<div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}" data-expired-callback="dataExpiredCallback"></div>#}
             </div>
             <button class="btn btn-primary" type="submit">{{ 'sign.up'|trans|capitalize }}</button>
             {{ form_end(form_sign_up) }}
@@ -23,7 +23,12 @@
 {% block javascripts %}
     <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
     <script src="{{ asset('assets/js/app/validator.js') }}"></script>
-    <script src="https://www.google.com/recaptcha/api.js?&render=onload&hl={{ app.request.locale }}"
-            async defer>
-    </script>
+    {#<script type="text/javascript">#}
+        {#var dataExpiredCallback = function() {#}
+            {#grecaptcha.reset();#}
+        {#};#}
+    {#</script>#}
+    {#<script src="https://www.google.com/recaptcha/api.js?&hl={{ app.request.locale }}"#}
+            {#async defer>#}
+    {#</script>#}
 {% endblock %}

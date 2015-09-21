@@ -9,7 +9,6 @@
                 <link href="{{ asset_url }}" rel="stylesheet" />
             {% endstylesheets %}
         {% endblock %}
-        {% block javascripts %}{% endblock %}
         {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
     </head>
     <body>
@@ -42,6 +41,7 @@
                     <button class="btn btn-default" type="button" onclick="window.location.href='{{ path('homepage') }}'">{{ 'home'|trans }}</button>
                 {% endif %}
             {% endblock %}
+            {% block javascripts %}{% endblock %}
         </div>
     </body>
 </html>
