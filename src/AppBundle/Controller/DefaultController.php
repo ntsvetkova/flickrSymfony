@@ -235,8 +235,9 @@ class DefaultController extends Controller
         $name = $request->request->get('name');
         $value = $request->request->get('value');
         if ($name == 'g-recaptcha-response') {
-            $verifyRecaptcha = $this->verifyRecaptcha($value);
-            if ($verifyRecaptcha === true) {
+            $recaptcha = new ReCaptcha($this->container->getParameter('recaptcha_secret'));
+            $verifyRecaptcha = $recaptcha->verify($value);
+            if ($verifyRecaptcha->isSuccess()) {
                 $content = json_encode(['code' => 0]);
             }
             else {
