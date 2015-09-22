@@ -20,6 +20,10 @@
             </div>
         <div class='wrapper'>
             <div class="container-fluid">
+                {#{% block feedback %}#}
+                    {#<div class="feedback"></div>#}
+                    {#&#123;&#35;{% include 'feedback.html.twig' %}&#35;&#125;#}
+                {#{% endblock %}#}
                 <div id='table'>
                     {% block table %}{% endblock %}
                 </div>
@@ -40,8 +44,12 @@
                     <br>
                     <button class="btn btn-default" type="button" onclick="window.location.href='{{ path('homepage') }}'">{{ 'home'|trans }}</button>
                 {% endif %}
+                <button id="feedback" class="btn btn-default" type="button">{{ 'feedback'|trans }}</button>
             {% endblock %}
-            {% block javascripts %}{% endblock %}
         </div>
     </body>
+    {% block javascripts %}
+        <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
+        <script src="{{ asset('assets/js/app/feedback.js') }}"></script>
+    {% endblock %}
 </html>

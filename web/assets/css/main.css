@@ -181,6 +181,17 @@ h1 {
     border-bottom: 1px dashed #1f1f21;
 }
 
+.feedback {
+    width: 70%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    top: 50px;
+    margin: 0 auto;
+    border: 1px dashed #1f1f21;
+    background-color: white;
+}
+
 .clearfix {
     clear: both;
 }

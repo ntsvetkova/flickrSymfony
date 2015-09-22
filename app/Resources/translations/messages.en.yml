@@ -44,3 +44,6 @@ users: users
 password:
   weak: Weak password
   strong: Strong password
+message: Message
+feedback: feedback
+submit: submit

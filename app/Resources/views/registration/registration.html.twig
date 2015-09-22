@@ -21,9 +21,10 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
     {#<script src="{{ asset('assets/js/app/recaptcha.js') }}"></script>#}
-    <script src="{{ asset('assets/js/app/validator.js') }}"></script>
+    <script src="{{ asset('assets/js/app/registration.js') }}"></script>
     <script type="text/javascript">
         var dataExpiredCallback = function() {
             grecaptcha.reset();

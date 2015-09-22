@@ -98,6 +98,12 @@ validation:
   defaults:
         _controller: AppBundle:Default:validate
 
+feedback:
+    path: /{_locale}/feedback
+    defaults:
+        _controller: AppBundle:Default:feedback
+        _locale: %locale%
+
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt

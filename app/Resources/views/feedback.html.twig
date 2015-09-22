@@ -1,0 +1,35 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block header %}{{ 'feedback'|trans }}{% endblock %}
+
+{% block feedback %}
+    {% block form %}
+        {% form_theme form with ['form/form_widget.html.twig', 'form/form_email.html.twig'] %}
+        {#, 'form/form_textarea.html.twig'] %}#}
+        <div class="form_signin">
+            <div class="form-group">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}" data-expired-callback="dataExpiredCallback"></div>
+                </div>
+                <button class="btn btn-primary" type="submit">{{ 'submit'|trans|capitalize }}</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    <script data-main="{{ asset('assets/js/app.js') }}" src="{{ asset('assets/js/require.js') }}"></script>
+    <script src="{{ asset('assets/js/app/feedback.js') }}"></script>
+    {#<script src="{{ asset('assets/js/app/validator.js') }}"></script>#}
+    <script type="text/javascript">
+        var dataExpiredCallback = function() {
+            grecaptcha.reset();
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?&hl={{ app.request.locale }}"
+            async defer>
+    </script>
+{% endblock %}
