@@ -230,7 +230,10 @@ class DefaultController extends Controller
         $response = new JsonResponse();
         $content = '';
         $errors = new ConstraintViolationList();
-        $properties = ['_username', 'country', 'email', 'age', '_password', 'phones'];
+        $em = $this->getDoctrine()->getManager();
+        $propertiesUser = $em->getClassMetadata('AppBundle:User')->getFieldNames();
+        $propertiesPhone = $em->getClassMetadata('AppBundle:Phone')->getFieldNames();
+        $properties = array_unique(array_merge($propertiesUser, $propertiesPhone));
         $user = new User();
         $name = $request->request->get('name');
         $value = $request->request->get('value');
@@ -248,7 +251,7 @@ class DefaultController extends Controller
             $validator = $this->get('validator');
             foreach ($properties as $property) {
                 if (strpos($name, $property) !== false) {
-                    if (strpos($name, 'phones') !== false) {
+                    if (strpos($name, 'number') !== false) {
                         $errors = $validator->validatePropertyValue(new Phone(), 'number', $value);
                     } else if (strpos($name, '_username') !== false) {
                         $errors = $this->isUsernameValid($user, $value, $validator);

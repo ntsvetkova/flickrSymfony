@@ -1,8 +1,6 @@
-require (["jquery", "underscore", "app/recaptcha"], function ($, _, grecaptcha) {
-//require (["jquery", "underscore"], function ($, _) {
+//require (["jquery", "underscore", "async", "app/recaptcha"], function ($, _, async, grecaptcha) {
+require (["jquery", "underscore"], function ($, _) {
     $( document ).ready(function () {
-        console.log(grecaptcha());
-        console.log(grecaptcha.render('test'));
         $("div.g-recaptcha").children().children().css('margin', '10px auto 0');
 
         $("label.required").each(function(index) {
@@ -104,13 +102,13 @@ require (["jquery", "underscore", "app/recaptcha"], function ($, _, grecaptcha) 
                            createForm();
                         }
                         else if (input.name.indexOf('age') > 0 && input.value < 18) {
-                            $(input).parent().parent().next('div').remove();
+                            $("div#app_registration_user_phones_0").remove();
                         }
                     }
                     else if (json.code == 1) {
                         create("has-error", "has-success has-warning", "glyphicon-remove");
                         if (input.name.indexOf('age') > 0) {
-                            $(input).parent().parent().next('div').hide();
+                            $("div#app_registration_user_phones_0").remove();
                         }
                     }
                     else {
