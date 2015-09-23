@@ -47,3 +47,6 @@ password:
 message: Message
 feedback: feedback
 submit: submit
+sent: Your message was successfully submitted!
+try:
+  later: Please, try later

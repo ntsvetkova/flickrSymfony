@@ -4,7 +4,10 @@ define ("app/validator", ["jquery", "underscore"], function ($, _) {
         $(document).ready(function () {
             var throttled = _.throttle(validate, 500, {leading: false});
             $("input.form-control").bind('keydown mouseup', (function () {
-                throttled(this);
+                var readonly = $(this).attr('readonly');
+                if (typeof readonly === typeof undefined || readonly === false) {
+                    throttled(this);
+                }
             }));
             $("textarea.form-control").bind('keydown mouseup', (function () {
                 throttled(this);

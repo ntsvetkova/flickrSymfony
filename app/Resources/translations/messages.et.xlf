@@ -118,6 +118,14 @@
                 <source>submit</source>
                 <target>ära saatma</target>
             </trans-unit>
+            <trans-unit id="30">
+                <source>sent</source>
+                <target>Teie sõnum oli edukalt saadetud!</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>try.later</source>
+                <target>Palun, proovige hiljem</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -263,26 +263,39 @@ class DefaultController extends Controller
      * @return Response
      */
     public function feedbackAction(Request $request) {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $name = $this->getUser()->getUsername();
+            $readonly = true;
+        }
+        else {
+            $name = '';
+            $readonly = false;
+        }
         $em = $this->getDoctrine()->getManager();
         $feedback = new Feedback();
         $form = $this->createForm(new FeedbackType(), $feedback, ['attr' => ['novalidate' => 'novalidate']]);
-        $form->handleRequest($request);
-        $recaptchaResponse = $request->request->get('g-recaptcha-response');
-        if ($form->isSubmitted() && $form->isValid()) {
-            $verifyResponse = $this->verifyRecaptcha($recaptchaResponse);
-            if ($verifyResponse) {
-                $feedback = $form->getData();
-                $em->persist($feedback);
-                $em->flush();
-                return $this->redirectToRoute('homepage');
-            }
-            else {
-                $form->addError(new FormError($this->get('translator')->trans('recaptcha.check', [], 'validators')));
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            $recaptchaResponse = $request->request->get('g-recaptcha-response');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $verifyResponse = $this->verifyRecaptcha($recaptchaResponse);
+                if ($verifyResponse) {
+                    $feedback = $form->getData();
+                    $em->persist($feedback);
+                    $em->flush();
+                    $response = new JsonResponse();
+                    $response->setContent(json_encode(['code' => 0, 'message' => $this->get('translator')->trans('sent')]));
+                    return $response;
+                } else {
+                    $form->addError(new FormError($this->get('translator')->trans('recaptcha.check', [], 'validators')));
+                }
             }
         }
         return $this->render('feedback.html.twig', array(
-            'form' => $form->createView()
-//            ['message' => $feedback->getMessage()]
+                'form' => $form->createView(),
+                'value' => $feedback->getMessage(),
+                'name' => $name,
+                'readonly' => $readonly
         ));
     }
 

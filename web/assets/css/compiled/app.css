@@ -181,6 +181,11 @@ h1 {
     border-bottom: 1px dashed #1f1f21;
 }
 
+.modal-error {
+    padding-bottom: 30px;
+    display: none;
+}
+
 .clearfix {
     clear: both;
 }
