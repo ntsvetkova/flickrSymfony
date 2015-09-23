@@ -42,7 +42,7 @@ require (["jquery", "underscore", "app/validator", "bootstrap"], function ($, _,
                 fail: function() {
                     modal.find("div.modal-error").show();
                 }
-                });
             });
+        });
     });
 });
