@@ -104,6 +104,11 @@ feedback:
         _controller: AppBundle:Default:feedback
         _locale: %locale%
 
+getPage:
+    path: /page
+    defaults:
+        _controller: AppBundle:Default:getPage
+
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt

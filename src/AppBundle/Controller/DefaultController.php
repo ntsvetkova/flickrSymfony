@@ -91,20 +91,31 @@ class DefaultController extends Controller
                     'photo' => $photo
                 ));
                 if ($response->getContent() == $this->get('translator')->trans('no.method')) {
-                    return $this->render('flickrPhoto/error.html.twig', array(
-                        'message' => $response->getContent()));
+                    $html = $this->render('flickrPhoto/error.html.twig', array(
+                        'message' => $response->getContent()))->getContent();
+//                    return $this->render('flickrPhoto/error.html.twig', array(
+//                        'message' => $response->getContent()));
                 }
             }
-            return $this->render('flickrPhoto/photo.html.twig', array(
+            $html = $this->render('flickrPhoto/photo.html.twig', array(
                 'arrayPhotos' => $arrayPhotos,
                 'count' => count($arrayPhotos)
-            ));
+            ))->getContent();
+//            return $this->render('flickrPhoto/photo.html.twig', array(
+//                'arrayPhotos' => $arrayPhotos,
+//                'count' => count($arrayPhotos)
+//            ));
         }
         else {
-            return $this->render('flickrPhoto/error.html.twig', array(
+            $html = $this->render('flickrPhoto/error.html.twig', array(
                 'message' => $requestInfo
-            ));
+            ))->getContent();
+//            return $this->render('flickrPhoto/error.html.twig', array(
+//                'message' => $requestInfo
+//            ));
         }
+        $response = $this->createJsonResponse($html);
+        return $response;
     }
 
     /**
@@ -147,10 +158,40 @@ class DefaultController extends Controller
                 $form->addError(new FormError($this->get('translator')->trans('recaptcha.check', [], 'validators')));
             }
         }
-        return $this->render('mars/mars.html.twig', array(
+        $html = $this->render('mars/mars.html.twig', array(
             'form' => $form->createView(),
             'results' => $results
-        ));
+        ))->getContent();
+        $response = $this->createJsonResponse($html);
+        return $response;
+//        return $this->render('mars/mars.html.twig', array(
+//            'form' => $form->createView(),
+//            'results' => $results
+//        ));
+    }
+
+    /**
+     * @param $html
+     * @return JsonResponse
+     */
+    public function createJsonResponse($html) {
+        $response = new JsonResponse();
+        $content = json_encode(['html' => $html, 'data' => 'data']);
+        $response->setContent($content);
+        return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getPageAction(Request $request) {
+        $response = new JsonResponse();
+        $controller = str_replace('/', '', $request->request->get('link'));
+        $html = $this->forward('AppBundle:Default:' . $controller)->getContent();
+        $content = json_encode(['html' => $html, 'data' => 'data']);
+        $response->setContent($content);
+        return $response;
     }
 
     /**

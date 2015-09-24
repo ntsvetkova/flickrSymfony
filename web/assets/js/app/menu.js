@@ -1,16 +1,14 @@
-/**
- * Created by vkalachikhin on 03.09.15.
- */
 define("app/menu", ["jquery", "underscore"], function ($, _) {
-    return function() {
-        $( document ).ready(function () {
-            //var locale = window.location.pathname.slice(1) != '' ? window.location.pathname.slice(1) : 'en';
-            $.getJSON('/menu', function (json) {
+    var Menu = {
+        isCreated: false,
+        create: function () {
+            $(document).ready(function () {
+
                 function Link() {
                     this.type = 'link';
                 }
 
-                Link.prototype.defineLink = function(text, path) {
+                Link.prototype.defineLink = function (text, path) {
                     this.text = text;
                     this.path = path;
                 };
@@ -22,62 +20,76 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
 
                 MenuLink.prototype = _.create(Link.prototype);
                 MenuLink.prototype.constructor = MenuLink;
-                var menuLink = new MenuLink();
 
-                var count = 0;
-                _.each(json.items, function(item, index, list) {
-                    if (_.isObject(item) && _.has(item, 'text') && _.has(item, 'path')) {
-                        menuLink.defineLink(item.text, item.path);
-                        $('<div></div>')
-                            .addClass('cell')
-                            .css({
-                                'border-radius': '40px/20px',
-                                '-webkit-border-radius': '40px/20px',
-                                '-moz-border-radius': '40px/20px'
-                            })
-                            .append($('<a></a>')
-                                .addClass('menu')
-                                .text(menuLink.text)
-                                .attr({
-                                    href: menuLink.path,
-                                    title: menuLink.text
+                $.getJSON('/menu', function (json) {
+                    var count = 0;
+                    _.each(json.items, function (item, index, list) {
+                        if (_.isObject(item) && _.has(item, 'text') && _.has(item, 'path')) {
+                            var menuLink = new MenuLink();
+                            menuLink.defineLink(item.text, item.path);
+                            $('<div></div>')
+                                .addClass('cell')
+                                .css({
+                                    'border-radius': '40px/20px',
+                                    '-webkit-border-radius': '40px/20px',
+                                    '-moz-border-radius': '40px/20px'
                                 })
-                            )
-                            .fadeIn(1000, function () {
-                                if (count % 2 == 0) {
-                                    $( this ).css({
-                                        'transform': 'translateX(10px)',
-                                        '-moz-transform': 'translateX(10px)',
-                                        '-ms-transform': 'translateX(10px)',
-                                        '-webkit-transform': 'translateX(10px)',
-                                        '-o-transform': 'translateX(10px)'
+                                .append($('<a></a>')
+                                    .addClass('menu')
+                                    .text(menuLink.text)
+                                    .attr({
+                                        href: menuLink.path,
+                                        title: menuLink.text
                                     })
-                                } else {
-                                    $( this ).css({
-                                        'transform': 'translateX(-10px)',
-                                        '-moz-transform': 'translateX(-10px)',
-                                        '-ms-transform': 'translateX(-10px)',
-                                        '-webkit-transform': 'translateX(-10px)',
-                                        '-o-transform': 'translateX(-10px)'
-                                    })
-                                }
-                                $( this ).css({
-                                    '-webkit-transition': '-webkit-transform .5s',
-                                    '-moz-transition': '-moz-transform .5s',
-                                    'o-transition': '-o-transform .5s',
-                                    'transition': 'transform .5s'
-                                });
-                                count++;
-                            })
-                            .appendTo("#table");
-                        $("a[title='mars']").attr('title', 'MARS');
-                    }
-                });
-            })
-                .fail(function() {
-                    $( "#table" ).html('Error: the response is not a JSON response');
-                    console.log('Error: the response is not a JSON response');
-                });
-        });
-    }
+                                )
+                                .fadeIn(1000, function () {
+                                    if (count % 2 == 0) {
+                                        $(this).css({
+                                            'transform': 'translateX(10px)',
+                                            '-moz-transform': 'translateX(10px)',
+                                            '-ms-transform': 'translateX(10px)',
+                                            '-webkit-transform': 'translateX(10px)',
+                                            '-o-transform': 'translateX(10px)'
+                                        })
+                                    } else {
+                                        $(this).css({
+                                            'transform': 'translateX(-10px)',
+                                            '-moz-transform': 'translateX(-10px)',
+                                            '-ms-transform': 'translateX(-10px)',
+                                            '-webkit-transform': 'translateX(-10px)',
+                                            '-o-transform': 'translateX(-10px)'
+                                        })
+                                    }
+                                    $(this).css({
+                                        '-webkit-transition': '-webkit-transform .5s',
+                                        '-moz-transition': '-moz-transform .5s',
+                                        'o-transition': '-o-transform .5s',
+                                        'transition': 'transform .5s'
+                                    });
+                                    count++;
+                                })
+                                .appendTo("#menu-table");
+                            $("a[title='mars']").attr('title', 'MARS');
+                        }
+                    });
+                })
+                    .fail(function () {
+                        $("#menu-table").html('Error: the response is not a JSON response');
+                        console.log('Error: the response is not a JSON response');
+                    });
+            });
+            this.isCreated = true;
+        }
+        //},
+        //itemClick: function() {
+        //    if (this.isCreated) {
+        //        $("div.container-menu").on('click', 'a.menu', function (e) {
+        //            e.preventDefault();
+        //            return this.href;
+        //        });
+        //    }
+        //    return '#';
+        //}
+    };
+    return Menu;
 });

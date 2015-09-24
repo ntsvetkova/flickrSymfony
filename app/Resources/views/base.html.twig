@@ -22,11 +22,16 @@
                 {% block feedback %}
                     {% include 'feedback_main.html.twig' %}
                 {% endblock %}
-                <div id='table'>
-                    {% block table %}{% endblock %}
+                <div class="container-menu">
+                    <div class="app-table" id="menu-table"></div>
                 </div>
-                {% block form %}{% endblock %}
-                {% block result %}{% endblock %}
+                <div class="content">
+                    <div class="app-table">
+                        {% block table %}{% endblock %}
+                    </div>
+                    {% block form %}{% endblock %}
+                    {% block result %}{% endblock %}
+                </div>
             </div>
         </div>
         <div class="footer">

@@ -1,7 +1,7 @@
 /**
  * Created by vkalachikhin on 03.09.15.
  */
-require(['app/menu', 'jquery'], function(menu, $) {
+require(['jquery', 'app/menu', 'app/manager'], function($, Menu, Manager) {
     $( "div[class='header']" ).css('color','black');
     $( "div.header" )
         .on("mouseenter", function() {
@@ -10,5 +10,6 @@ require(['app/menu', 'jquery'], function(menu, $) {
         .on("mouseleave", function() {
             $( this ).css('color', 'black')
         });
-    menu();
+    Manager.createMenu();
+
 });

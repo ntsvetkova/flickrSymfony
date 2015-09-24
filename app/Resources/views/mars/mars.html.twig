@@ -1,14 +1,15 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block title %}{{ 'explore.mars'|trans }}{% endblock %}
+{#{% block title %}{{ 'explore.mars'|trans }}{% endblock %}#}
 
-{% block header %}{{ 'explore.mars'|trans }}{% endblock %}
+{#{% block header %}{{ 'explore.mars'|trans }}{% endblock %}#}
 
 {% block form %}
     {% form_theme form 'form/form_errors.html.twig' %}
     <div class="form_signin">
         <div class="form-group">
         {{ form_start(form) }}
+        {#{'action': path('marsNew')}) }}#}
             {{ form_widget(form) }}
             <div class="g-recaptcha" data-sitekey="6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh"></div>
             <button class="btn btn-primary" type="submit">{{ 'show.final'|trans }}</button>
