@@ -93,4 +93,11 @@ class ResponseDecode
         return $this->photo;
     }
 
+    /**
+     * @return mixed
+     */
+    public function decodeRecaptcha() {
+        return $this->response->success;
+    }
+
 }

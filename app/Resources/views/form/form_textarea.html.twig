@@ -1,0 +1,11 @@
+{% block textarea_widget %}
+    <div class="textarea_widget has-feedback">
+        <div class="has-feedback">
+            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+            <span class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
+            <span class="glyphicon glyphicon-remove form-control-feedback" style="display: none"></span>
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback" style="display: none"></span>
+            <label class="control-label input-sm" style="width: 100%; display: none"></label>
+        </div>
+    </div>
+{% endblock %}

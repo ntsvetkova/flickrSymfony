@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="ee" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>value.error</source>
+                <target>Sisend väärtus ei ole õige</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>value.short</source>
+                <target>Väärtuse pikkus peab olema vähemalt {{ limit }}</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>value.long</source>
+                <target>Väärtuse pikkus ei oska olla enam {{ limit }}</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>value.empty</source>
+                <target>Sisend väärtus ei oska olla tühi</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>value.email.error</source>
+                <target>Väärtus ei ole e-posti aadress</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>value.confirm.error</source>
+                <target>Parooli väliandmestikud peavad sobima</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>value.same</source>
+                <target>Väärtus on juba kasutatud</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>age.young</source>
+                <target>Vabanda, sa oled liiga noor</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>age.old</source>
+                <target>Vabandage, te olete liiga vana</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>recaptcha.check</source>
+                <target>Kontrollige reCAPTCHA</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

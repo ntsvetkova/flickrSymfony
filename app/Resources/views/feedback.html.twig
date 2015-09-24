@@ -1,0 +1,23 @@
+{% form_theme form with ['form/form_widget.html.twig', 'form/form_email.html.twig', 'form/form_textarea.html.twig'] %}
+<div class="form_signin">
+    <form class="form-group" action="{{ path('feedback') }}">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.username, {'attr': {'value': name, 'readonly': readonly}}) }}
+        {{ form_rest(form) }}
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}" data-expired-callback="dataExpiredCallback"></div>
+        </div>
+        {{ form_end(form) }}
+        <button class="btn btn-primary" type="submit">{{ 'submit'|trans|capitalize }}</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var dataExpiredCallback = function() {
+        grecaptcha.reset();
+    };
+</script>
+<script src="https://www.google.com/recaptcha/api.js?&hl={{ app.request.locale }}"
+    async defer>
+</script>

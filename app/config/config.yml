@@ -7,7 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    app.locales: en|ee|en_GB|en_US|ee_EE
+    app.locales: en|en_GB|en_US|ee_EE|et
 
 framework:
     #esi:             ~
@@ -39,6 +39,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
       version:  "%app.version%"
+      recaptcha_public: "%recaptcha_public%"
 
 # Assetic Configuration
 assetic:
@@ -86,6 +87,8 @@ swiftmailer:
 #App Configuration
 app:
     end_point: "%end_point%"
+    recaptcha_public: "%recaptcha_public%"
+    recaptcha_secret: "%recaptcha_secret%"
 
 #Lunetics Locale Bundle configuration
 lunetics_locale:
@@ -99,7 +102,7 @@ lunetics_locale:
     allowed_locales:
       - en
       - en_GB
-      - ee
+      - et
     strict_mode: false
     strict_match: true
     cookie:

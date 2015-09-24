@@ -10,8 +10,6 @@ namespace AppBundle\Models\Mars;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\DataCollectorTranslator;
 
 /**
  * Class MarsType
@@ -20,19 +18,14 @@ use Symfony\Component\Translation\DataCollectorTranslator;
 class MarsType extends AbstractType
 {
     /**
-     * @var Translator|DataCollectorTranslator
-     */
-    protected $translator;
-    /**
      * @var array
      */
     protected $attributes;
 
     /**
-     * @param DataCollectorTranslator $translator
+     * @param $attributes
      */
-    public function __construct(DataCollectorTranslator $translator, $attributes) {
-        $this->translator = $translator;
+    public function __construct($attributes) {
         $this->attributes = $attributes;
     }
 
@@ -41,12 +34,13 @@ class MarsType extends AbstractType
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builderInterface, array $options) {
-        $emptyField = $this->translator->trans('no.input');
         $builderInterface
             ->add('enterData', 'textarea', array(
                 'label' => 'enter.data',
-                'attr' => array('rows' => $this->attributes['rows'],
-                    'oninvalid' => "setCustomValidity('$emptyField')")
+                'attr' => [
+                    'rows' => $this->attributes['rows'],
+                    'class' => 'form-control'
+                ]
             ));
     }
 

@@ -29,9 +29,10 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
     mars_type:
         class: AppBundle\Models\Mars\MarsType
-        arguments: ["@translator", "%form.textarea.attributes%"]
+        arguments: ["%form.textarea.attributes%"]
 
     lunetics_locale.app_guesser:
         class: "%lunetics_locale.app_guesser.class%"

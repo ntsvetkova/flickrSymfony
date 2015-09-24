@@ -23,3 +23,5 @@ parameters:
     end_point: https://api.flickr.com/services/rest
     form.textarea.attributes:
         rows: 1
+    recaptcha_public: 6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh
+    recaptcha_secret: 6LdiDQ0TAAAAANqeVhdQsYL99nF3TKrcsqGItRTm

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="ee" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>flickr.photos</source>
+                <target>flickr pildid</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>no.method</source>
+                <target>See rakendus ei oska töötada see API meetodiga</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>{0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos</source>
+                <target>{0}Siin ei ole pilti|{1}Siin on üks pilt|]1,Inf[Siin on %count% pilti</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>home</source>
+                <target>kodulehekülg</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>explore.mars</source>
+                <target>marssi uurimine</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>enter.data</source>
+                <target>Sisestage andmed</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>show.final</source>
+                <target>Näitama lõpuasendit</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>rover.out</source>
+                <target>Marssiaurik on platoo väljas</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>mars</source>
+                <target>marss</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>no.input</source>
+                <target>Väärtus peab olema ülalesitatud</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>switch</source>
+                <target>ümber lülituma:</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>sign.in</source>
+                <target>sisse logima</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>user.name</source>
+                <target>Nimi</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>user.email</source>
+                <target>E-post</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>sign.up</source>
+                <target>registreerima</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>user.password</source>
+                <target>Parool</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>user.country</source>
+                <target>Maa</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>user.confirm</source>
+                <target>Kinnitama parooli</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>users</source>
+                <target>kasutajad</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>user.not.found</source>
+                <target>Kontrollige nimi ja parool</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>sign.out</source>
+                <target>välja logima</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>user.remove</source>
+                <target>Kasutaja eemaldama</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>password.weak</source>
+                <target>Nõrk parool</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>password.strong</source>
+                <target>Tugev parool</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>user.age</source>
+                <target>Vanus</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>user.phone</source>
+                <target>Telefoninumber</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>message</source>
+                <target>Sõnum</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>feedback</source>
+                <target>tagasiside</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>submit</source>
+                <target>ära saatma</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>sent</source>
+                <target>Teie sõnum oli edukalt saadetud!</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>try.later</source>
+                <target>Palun, proovige hiljem</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

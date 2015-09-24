@@ -1,0 +1,13 @@
+{% block email_widget %}
+    <div class="email_widget has-feedback">
+        {% set type = type|default('email') %}
+        <div class="input-group has-feedback" style="margin: 10px auto">
+            <span class="input-group-addon" style="padding: 0 12px; height: 100%; margin: 10px">@</span>
+            <input type="{{ type }}" style="margin: 0" {{ block('widget_attributes') }}/>
+        </div>
+        <span class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
+        <span class="glyphicon glyphicon-remove form-control-feedback" style="display: none"></span>
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback" style="display: none"></span>
+        <label class="control-label input-sm" style="width: 100%; color: #a94442; display: none"></label>
+    </div>
+{% endblock email_widget %}

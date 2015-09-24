@@ -1,11 +1,9 @@
-<div class="locale_switcher">
-    {{ 'switch'|trans }}
-    <ul class="locale_chooser">
-        {% for locale in locales %}
-            <li{% if current_locale == locale.locale %} class="locale_current"{% endif %}>
-                <a href="{{ locale.link }}" title="{{ locale.locale_current_language }}">{{ locale.locale_target_language }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="clearfix"></div>
+{{ 'switch'|trans }}
+<ul class="locale_chooser list-inline">
+    {% for locale in locales %}
+        <li{% if current_locale == locale.locale %} class="locale_current"{% endif %}>
+            <button class="btn btn-default btn-xs" type="button" onclick="window.location.href='{{ locale.link }}'">{{ locale.locale_target_language }}</button>
+            {#<a href="{{ locale.link }}" title="{{ locale.locale_current_language }}">{{ locale.locale_target_language }}</a>#}
+        </li>
+    {% endfor %}
+ </ul>

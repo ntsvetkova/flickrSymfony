@@ -25,3 +25,28 @@ rover:
   out: The rover is out of the plateau
 mars: mars
 switch: Switch to:
+sign:
+  up: sign up
+  in: sign in
+  out: sign out
+user:
+  name: Username
+  email: E-mail
+  password: Password
+  country: Country
+  age: Age
+  phone: Phone number
+  confirm: Confirm password
+  not:
+    found: Check your username and password
+  remove: Remove user
+users: users
+password:
+  weak: Weak password
+  strong: Strong password
+message: Message
+feedback: feedback
+submit: submit
+sent: Your message was successfully submitted!
+try:
+  later: Please, try later

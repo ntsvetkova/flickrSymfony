@@ -20,7 +20,7 @@ flickrPhotos:
     path: /{_locale}/photos
     defaults:
         _controller: AppBundle:Default:getRecent
-        _locale: en
+        _locale: %locale%
     methods: [GET]
 #photos:
 #    path: /photos
@@ -33,7 +33,7 @@ exploringMars:
     path: /{_locale}/mars
     defaults:
         _controller: AppBundle:Default:mars
-        _locale: en
+        _locale: %locale%
 #mars:
 #    path: /mars
 #    defaults:
@@ -45,13 +45,64 @@ menu:
     path: /{_locale}/menu
     defaults:
         _controller: AppBundle:Default:menu
-        _locale: en
+        _locale: %locale%
 menuRedirect:
     path: /menu
     defaults:
       _controller: FrameworkBundle:Redirect:redirect
       route: menu
       permanent: true
+
+registration:
+    path: /{_locale}/registration
+    defaults:
+        _controller: AppBundle:Default:register
+        _locale: %locale%
+
+admin:
+    path: /admin
+    defaults:
+        _controller: AppBundle:Default:admin
+
+showUsers:
+    path: /{_locale}/show
+    defaults:
+        _controller: AppBundle:Default:showUsers
+        _locale: %locale%
+removeUser:
+    path: /{_locale}/remove/{id}
+    defaults:
+        _controller: AppBundle:Default:removeUser
+        _locale: %locale%
+
+login_route:
+    path: /{_locale}/login
+    defaults:
+        _controller: AppBundle:Security:login
+        _locale: %locale%
+login:
+    path: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: login_route
+        permanent: true
+login_check:
+    path: /login_check
+    defaults:
+        _controller: AppBundle:Security:loginCheck
+logout:
+  path: /logout
+
+validation:
+  path: /validation
+  defaults:
+        _controller: AppBundle:Default:validate
+
+feedback:
+    path: /{_locale}/feedback
+    defaults:
+        _controller: AppBundle:Default:feedback
+        _locale: %locale%
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
