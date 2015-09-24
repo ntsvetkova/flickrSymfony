@@ -292,10 +292,10 @@ class DefaultController extends Controller
             }
         }
         return $this->render('feedback.html.twig', array(
-                'form' => $form->createView(),
-                'value' => $feedback->getMessage(),
-                'name' => $name,
-                'readonly' => $readonly
+            'form' => $form->createView(),
+            'value' => $feedback->getMessage(),
+            'name' => $name,
+            'readonly' => $readonly
         ));
     }
 
