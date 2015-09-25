@@ -54,19 +54,19 @@ class DefaultController extends Controller
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
                 ['text' => $this->get('translator')->trans('users'), 'path' => $this->generateUrl('showUsers')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'page']
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'this']
             ]]);
         }
         else if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $content = json_encode(['items' => [
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'page'],
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'this'],
             ]]);
         }
         else {
             $content = json_encode(['items' => [
-                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route'), 'target' => 'page'],
-                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration'), 'target' => 'page']
+                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route'), 'target' => 'this'],
+                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration'), 'target' => 'this']
             ]]);
         }
         $response->setContent($content);
@@ -114,7 +114,7 @@ class DefaultController extends Controller
 //                'message' => $requestInfo
 //            ));
         }
-        $response = $this->createJsonResponse($html, $this->get('translator')->trans('flickr.photos'));
+        $response = $this->createJsonResponse($html, ['headerText' => $this->get('translator')->trans('flickr.photos')]);
         return $response;
     }
 
@@ -162,7 +162,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'results' => $results
         ))->getContent();
-        $response = $this->createJsonResponse($html, $this->get('translator')->trans('mars'));
+        $response = $this->createJsonResponse($html, ['headerText' => $this->get('translator')->trans('mars')]);
         return $response;
 //        return $this->render('mars/mars.html.twig', array(
 //            'form' => $form->createView(),
@@ -226,7 +226,7 @@ class DefaultController extends Controller
             ->getRepository('AppBundle:Phone')
             ->findBy(['user' => $users]);
         $html = $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones])->getContent();
-        $response = $this->createJsonResponse($html, $this->get('translator')->trans('users'));
+        $response = $this->createJsonResponse($html, ['headerText' => $this->get('translator')->trans('users')]);
         return $response;
 //        return $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones]);
     }
