@@ -22,7 +22,7 @@ define("app/content", ["jquery", "underscore", "app/manager"], function ($, _, M
                     }
                     else {
                         target.html(response);
-                        target.fadein(1000);
+                        target.fadeIn(1000);
                     }
                     that.isLoaded = true;
                 },

@@ -99,7 +99,7 @@ h1 {
 
 .wrapper .content {
     margin: 20px auto;
-    display: none;
+    /*display: none;*/
 }
 
 .wrapper form textarea .form-control {
