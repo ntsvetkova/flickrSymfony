@@ -81,12 +81,13 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                     .fail(function () {
                         $("#menu-table").html('Error: the response is not a JSON response');
                         console.log('Error: the response is not a JSON response');
+                        Menu.isCreated = false;
                     });
             });
             this.isCreated = true;
         }
-        //},
-        //itemClick: function() {
+        //itemClick: function(event) {
+        //    var selected = event.target;
         //    if (this.isCreated) {
         //        $("div.container-menu").on('click', 'a.menu', function (e) {
         //            e.preventDefault();

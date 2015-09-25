@@ -72,8 +72,9 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
             if (Menu.isCreated) {
                 this.extend(menuContainer, new Subject());
                 menuContainer.addObserver(contentContainer);
+                menuContainer.addObserver(headerContainer);
                 menuContainer.on('click', 'a.menu', function (e) {
-                    if (this.target != 'page') {
+                    if (this.target != 'this') {
                         e.preventDefault();
                         menuContainer.notify(this.pathname);
                     }
@@ -82,24 +83,19 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
                     }
                 });
                 this.loadContent();
+                this.changeHeader();
             }
         },
         loadContent: function () {
             this.extend(contentContainer, new Observer());
             contentContainer.update = function(link) {
                 Content.render(contentContainer, link);
-                if (Content.isLoaded) {
-                    Manager.extend(contentContainer, new Subject());
-                    contentContainer.addObserver(headerContainer);
-                    Manager.changeHeader();
-                    contentContainer.notify(Content.data);
-                }
             };
         },
         changeHeader: function() {
             this.extend(headerContainer, new Observer());
-            headerContainer.update = function(title) {
-                Header.render(headerContainer, title);
+            headerContainer.update = function(link) {
+                Header.render(headerContainer, link);
             };
         }
 
