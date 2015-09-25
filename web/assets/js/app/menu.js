@@ -6,7 +6,6 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
 
                 function Link() {
                     this.type = 'link';
-                    this.target = '_self';
                 }
 
                 Link.prototype.defineLink = function (text, path) {

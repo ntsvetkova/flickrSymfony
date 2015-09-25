@@ -62,15 +62,10 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
     }
 
     var Manager = {
-        extend: function(obj, extension) {
-            for ( var key in extension ){
-                obj[key] = extension[key];
-            }
-        },
         createMenu: function() {
             Menu.create();
             if (Menu.isCreated) {
-                this.extend(menuContainer, new Subject());
+                _.extend(menuContainer, new Subject());
                 menuContainer.addObserver(contentContainer);
                 menuContainer.addObserver(headerContainer);
                 menuContainer.on('click', 'a.menu', function (e) {
@@ -87,13 +82,13 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
             }
         },
         loadContent: function () {
-            this.extend(contentContainer, new Observer());
+            _.extend(contentContainer, new Observer());
             contentContainer.update = function(link) {
                 Content.render(contentContainer, link);
             };
         },
         changeHeader: function() {
-            this.extend(headerContainer, new Observer());
+            _.extend(headerContainer, new Observer());
             headerContainer.update = function(link) {
                 Header.render(headerContainer, link);
             };
