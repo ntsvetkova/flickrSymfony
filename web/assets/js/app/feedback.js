@@ -19,7 +19,6 @@ require (["jquery", "underscore", "app/validator", "bootstrap"], function ($, _,
 
                     var submit = modal.find("button[type='submit']");
                     submit.on('click', function() {
-                        console.log('click');
                         var data = {};
                         modal.find('input, textarea').each(function() {
                             data[$(this).attr('name')] = $(this).val();
