@@ -99,23 +99,7 @@ h1 {
 
 .wrapper .content {
     margin: 20px auto;
-}
-
-#photo_large {
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: #1f1f21;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
     display: none;
-}
-
-#photo_large:hover {
-    cursor: pointer;
 }
 
 .wrapper form textarea .form-control {
