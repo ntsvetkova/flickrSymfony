@@ -73,8 +73,13 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
                 this.extend(menuContainer, new Subject());
                 menuContainer.addObserver(contentContainer);
                 menuContainer.on('click', 'a.menu', function (e) {
-                    e.preventDefault();
-                    menuContainer.notify(this.pathname);
+                    if (this.target != 'page') {
+                        e.preventDefault();
+                        menuContainer.notify(this.pathname);
+                    }
+                    else {
+                        this.target = '_self';
+                    }
                 });
                 this.loadContent();
             }
