@@ -54,19 +54,19 @@ class DefaultController extends Controller
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
                 ['text' => $this->get('translator')->trans('users'), 'path' => $this->generateUrl('showUsers')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout')]
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'page']
             ]]);
         }
         else if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $content = json_encode(['items' => [
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout')],
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'page'],
             ]]);
         }
         else {
             $content = json_encode(['items' => [
-                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route')],
-                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration')]
+                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route'), 'target' => 'page'],
+                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration'), 'target' => 'page']
             ]]);
         }
         $response->setContent($content);
@@ -114,7 +114,7 @@ class DefaultController extends Controller
 //                'message' => $requestInfo
 //            ));
         }
-        $response = $this->createJsonResponse($html);
+        $response = $this->createJsonResponse($html, $this->get('translator')->trans('flickr.photos'));
         return $response;
     }
 
@@ -162,7 +162,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'results' => $results
         ))->getContent();
-        $response = $this->createJsonResponse($html);
+        $response = $this->createJsonResponse($html, $this->get('translator')->trans('mars'));
         return $response;
 //        return $this->render('mars/mars.html.twig', array(
 //            'form' => $form->createView(),
@@ -174,22 +174,9 @@ class DefaultController extends Controller
      * @param $html
      * @return JsonResponse
      */
-    public function createJsonResponse($html) {
+    public function createJsonResponse($html, $data) {
         $response = new JsonResponse();
-        $content = json_encode(['html' => $html, 'data' => 'data']);
-        $response->setContent($content);
-        return $response;
-    }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getPageAction(Request $request) {
-        $response = new JsonResponse();
-        $controller = str_replace('/', '', $request->request->get('link'));
-        $html = $this->forward('AppBundle:Default:' . $controller)->getContent();
-        $content = json_encode(['html' => $html, 'data' => 'data']);
+        $content = json_encode(['html' => $html, 'data' => $data]);
         $response->setContent($content);
         return $response;
     }
@@ -238,14 +225,18 @@ class DefaultController extends Controller
         $phones = $this->getDoctrine()
             ->getRepository('AppBundle:Phone')
             ->findBy(['user' => $users]);
-        return $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones]);
+        $html = $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones])->getContent();
+        $response = $this->createJsonResponse($html, $this->get('translator')->trans('users'));
+        return $response;
+//        return $this->render('registration/display.html.twig', ['users' => $users, 'phones' => $phones]);
     }
 
     /**
+     * @param Request $request
      * @param $id
      * @return RedirectResponse
      */
-    public function removeUserAction($id) {
+    public function removeUserAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->find($id);
         $phones = new ArrayCollection();
@@ -260,7 +251,7 @@ class DefaultController extends Controller
         }
         $em->remove($user);
         $em->flush();
-        return $this->redirectToRoute('showUsers');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**

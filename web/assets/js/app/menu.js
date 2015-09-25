@@ -6,6 +6,7 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
 
                 function Link() {
                     this.type = 'link';
+                    this.target = '_self';
                 }
 
                 Link.prototype.defineLink = function (text, path) {
@@ -27,6 +28,9 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                         if (_.isObject(item) && _.has(item, 'text') && _.has(item, 'path')) {
                             var menuLink = new MenuLink();
                             menuLink.defineLink(item.text, item.path);
+                            if (_.has(item, 'target')) {
+                                menuLink.target = item.target;
+                            }
                             $('<div></div>')
                                 .addClass('cell')
                                 .css({
@@ -39,7 +43,8 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                                     .text(menuLink.text)
                                     .attr({
                                         href: menuLink.path,
-                                        title: menuLink.text
+                                        title: menuLink.text,
+                                        target: menuLink.target
                                     })
                                 )
                                 .fadeIn(1000, function () {
