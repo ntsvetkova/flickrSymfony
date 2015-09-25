@@ -7,15 +7,16 @@
 {% block form %}
     {% form_theme form 'form/form_errors.html.twig' %}
     <div class="form_signin">
-        <div class="form-group">
-        {{ form_start(form) }}
-        {#{'action': path('marsNew')}) }}#}
+        <form class="form-group" action="{{ path('exploringMars') }}">
+            {{ form_start(form) }}
             {{ form_widget(form) }}
-            <div class="g-recaptcha" data-sitekey="6LdiDQ0TAAAAAIdApd1TC3ri_H73Y2sgNoF4QFfh"></div>
-            <button class="btn btn-primary" type="submit">{{ 'show.final'|trans }}</button>
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="{{ recaptcha_public }}" data-expired-callback="dataExpiredCallback"></div>
+            </div>
             {{ form_rest(form) }}
-        {{ form_end(form) }}
-        </div>
+            {{ form_end(form) }}
+            <button class="btn btn-primary" type="submit">{{ 'show.final'|trans }}</button>
+        </form>
     </div>
 {% endblock %}
 
@@ -27,6 +28,11 @@
     </div>
 {% endblock %}
 
+<script type="text/javascript">
+    var dataExpiredCallback = function() {
+        grecaptcha.reset();
+    };
+</script>
 {% block javascripts %}
     <script src="https://www.google.com/recaptcha/api.js?&render=onload&hl={{ app.request.locale }}"
             async defer>
