@@ -8,9 +8,16 @@
     {% transchoice count %}
         {0}There are no photos|{1}There is one photo|]1,Inf[There are %count% photos
     {% endtranschoice %}
+    <div class="modal fade" id="photo_large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
     {% for photo in show(reverse(arrayPhotos), 5) %}
     <div class='cell'>
-        <a class='large' href={{ photo.srclarge }}>
+        <a class='large' href={{ photo.srclarge }} data-toggle="modal" data-target="#photo_large">
             <div class='img' style='background-image:url({{ photo.srcthumbnail }})'></div>
             <div class='title'>{{ short(photo.title|default('No title'))|counter(loop.index) }}</div>
         </a>
