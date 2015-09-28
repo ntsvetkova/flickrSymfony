@@ -12,10 +12,13 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
 
     function loadImage (a) {
         var modal = $("#photo_large");
-        $(modal.find("div.modal-body")).empty();
+        $(modal.find("img.loading")).show();
+        $(modal.find(".large_photo")).remove();
         var img = $("<img />").attr('src', a.href)
+            .addClass('large_photo')
             .css('width', '100%')
             .on('load', function () {
+                $(modal.find("img.loading")).hide();
                 $(modal.find("div.modal-body")).append(img);
             });
     };
@@ -23,6 +26,7 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
     var Content = {
         render: function (target, link) {
             target.hide();
+            $("img.loading").show();
             $.getJSON(link, successHandler)
                 .fail(function () {
                     target.html('');
@@ -33,6 +37,7 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
                         Publish.publish("changeHeader", response.data.headerText);
                     }
                     target.html(response.html);
+                    $("img.loading").hide();
                     target.fadeIn(1000);
                     var submit = target.find("button[type='submit']");
                     submit.on('click', function () {

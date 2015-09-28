@@ -1,6 +1,6 @@
-define("app/test-manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/content', 'app/publish'], function ($, _, Menu, Header, Content, Publish)  {
-    var menuContainer = $("div.container-menu");
-    var contentContainer = $("div.content");
+define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/content', 'app/publish'], function ($, _, Menu, Header, Content, Publish)  {
+    var menuContainer = $("div#menu-table");
+    var contentContainer = $("div#content-table");
     var headerContainer = $("div.header h1");
 
     var Manager = {

@@ -26,7 +26,8 @@
                     <div class="app-table" id="menu-table"></div>
                 </div>
                 <div class="content">
-                    <div class="app-table">
+                    <img class="loading" src="{{ asset('assets/images/loading.gif') }}"/>
+                    <div class="app-table" id="content-table">
                         {% block table %}
                             <div class="modal-error">{{ 'try.later'|trans }}</div>
                         {% endblock %}

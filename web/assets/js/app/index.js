@@ -1,4 +1,4 @@
-require(['jquery', 'app/test-manager'], function($, Manager) {
+require(['jquery', 'app/manager'], function($, Manager) {
     $( "div[class='header']" ).css('color','black');
     $( "div.header" )
         .on("mouseenter", function() {
