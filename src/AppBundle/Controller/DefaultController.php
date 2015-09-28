@@ -54,19 +54,19 @@ class DefaultController extends Controller
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
                 ['text' => $this->get('translator')->trans('mars'), 'path' => $this->generateUrl('exploringMars')],
                 ['text' => $this->get('translator')->trans('users'), 'path' => $this->generateUrl('showUsers')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'this']
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => '_self']
             ]]);
         }
         else if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $content = json_encode(['items' => [
                 ['text' => $this->get('translator')->trans('flickr.photos'), 'path' => $this->generateUrl('flickrPhotos')],
-                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => 'this'],
+                ['text' => $this->get('translator')->trans('sign.out'), 'path' => $this->generateUrl('logout'), 'target' => '_self'],
             ]]);
         }
         else {
             $content = json_encode(['items' => [
-                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route'), 'target' => 'this'],
-                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration'), 'target' => 'this']
+                ['text' => $this->get('translator')->trans('sign.in'), 'path' => $this->generateUrl('login_route'), 'target' => '_self'],
+                ['text' => $this->get('translator')->trans('sign.up'), 'path' => $this->generateUrl('registration'), 'target' => '_self']
             ]]);
         }
         $response->setContent($content);

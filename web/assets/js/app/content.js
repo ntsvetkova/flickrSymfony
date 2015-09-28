@@ -27,7 +27,7 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
         render: function (target, link) {
             target.hide();
             $("img.loading").show();
-            $.getJSON(link, successHandler)
+            var xhr = $.getJSON(link, successHandler)
                 .fail(function () {
                     target.html('');
                 });

@@ -8,12 +8,9 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
             Menu.create();
             if (Menu.isCreated) {
                 menuContainer.on('click', 'a.menu', function (e) {
-                    if (this.target != 'this') {
+                    if (this.target !== '_self') {
                         e.preventDefault();
                         Publish.publish("changeContent", this.pathname);
-                    }
-                    else {
-                        this.target = '_self';
                     }
                 });
             }
