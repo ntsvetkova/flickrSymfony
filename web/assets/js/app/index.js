@@ -1,7 +1,4 @@
-/**
- * Created by vkalachikhin on 03.09.15.
- */
-require(['jquery', 'app/manager'], function($, Manager) {
+require(['jquery', 'app/test-manager'], function($, Manager) {
     $( "div[class='header']" ).css('color','black');
     $( "div.header" )
         .on("mouseenter", function() {

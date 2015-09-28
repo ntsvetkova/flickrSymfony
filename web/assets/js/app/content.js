@@ -1,22 +1,45 @@
-define("app/content", ["jquery", "underscore"], function ($, _) {
+define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, Publish) {
+    function submitData(target, link, functionName) {
+        var data = {};
+        target.find('input, textarea').each(function () {
+            data[$(this).attr('name')] = $(this).val();
+        });
+        $.post(link, data)
+            .success(function (response) {
+                functionName(response);
+            });
+    };
+
+    function loadImage (a) {
+        var modal = $("#photo_large");
+        $(modal.find("div.modal-body")).empty();
+        var img = $("<img />").attr('src', a.href)
+            .css('width', '100%')
+            .on('load', function () {
+                $(modal.find("div.modal-body")).append(img);
+            });
+    };
+
     var Content = {
-        render: function(target, link) {
-            var that = this;
+        render: function (target, link) {
             target.hide();
             $.getJSON(link, successHandler)
-                .fail(function() {
+                .fail(function () {
                     target.html('');
                 });
             function successHandler(response) {
                 if (_.isObject(response) && _.has(response, 'html') && _.has(response, 'data')) {
+                    if (_.isObject(response.data) && _.has(response.data, 'headerText')) {
+                        Publish.publish("changeHeader", response.data.headerText);
+                    }
                     target.html(response.html);
                     target.fadeIn(1000);
                     var submit = target.find("button[type='submit']");
-                    submit.on('click', function() {
-                        that.submit(target, link, successHandler);
+                    submit.on('click', function () {
+                        submitData(target, link, successHandler);
                     });
-                    $("a.large").bind('click', function() {
-                        that.loadImage(this);
+                    $("a.large").bind('click', function () {
+                        loadImage(this);
                     });
                 }
                 else {
@@ -24,25 +47,6 @@ define("app/content", ["jquery", "underscore"], function ($, _) {
                     target.fadeIn(1000);
                 }
             };
-        },
-        submit: function(target, link, functionName) {
-            var data = {};
-            target.find('input, textarea').each(function () {
-                data[$(this).attr('name')] = $(this).val();
-            });
-            $.post(link, data)
-                .success(function (response) {
-                    functionName(response);
-                });
-        },
-        loadImage: function(a) {
-            var modal = $("#photo_large");
-            $(modal.find("div.modal-body")).empty();
-            var img = $("<img />").attr('src', a.href)
-                .css('width', '100%')
-                .on('load', function() {
-                    $(modal.find("div.modal-body")).append(img);
-                });
         }
     };
     return Content;

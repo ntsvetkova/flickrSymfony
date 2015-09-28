@@ -3,6 +3,7 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
         isCreated: false,
         create: function () {
             $(document).ready(function () {
+                $("div.modal-error").hide();
 
                 function Link() {
                     this.type = 'link';
@@ -29,7 +30,7 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                             menuLink.defineLink(item.text, item.path);
                             if (_.has(item, 'target')) {
                                 menuLink.target = item.target;
-                            }
+                            };
                             $('<div></div>')
                                 .addClass('cell')
                                 .css({
@@ -73,28 +74,17 @@ define("app/menu", ["jquery", "underscore"], function ($, _) {
                                     count++;
                                 })
                                 .appendTo("#menu-table");
-                            $("a[title='mars']").attr('title', 'MARS');
                         }
                     });
                 })
                     .fail(function () {
-                        $("#menu-table").html('Error: the response is not a JSON response');
+                        $("div.modal-error").show();
                         console.log('Error: the response is not a JSON response');
                         Menu.isCreated = false;
                     });
             });
             this.isCreated = true;
         }
-        //itemClick: function(event) {
-        //    var selected = event.target;
-        //    if (this.isCreated) {
-        //        $("div.container-menu").on('click', 'a.menu', function (e) {
-        //            e.preventDefault();
-        //            return this.href;
-        //        });
-        //    }
-        //    return '#';
-        //}
     };
     return Menu;
 });
