@@ -1,42 +1,15 @@
 define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, Publish) {
-    function submitData(target, link, functionName) {
-        var data = {};
-        target.find('input, textarea').each(function () {
-            data[$(this).attr('name')] = $(this).val();
-        });
-        $.post(link, data)
-            .success(function (response) {
-                functionName(response);
-            });
-    };
 
-    function loadImage (a) {
-        var modal = $("#photo_large");
-        $(modal.find("img.loading")).show();
-        $(modal.find(".large_photo")).remove();
-        var img = $("<img />").attr('src', a.href)
-            .addClass('large_photo')
-            .css('width', '100%')
-            .on('load', function () {
-                $(modal.find("img.loading")).hide();
-                $(modal.find("div.modal-body")).append(img);
-            });
-    };
+    var ContentProto = function() {};
 
-    var xhr;
-    function checkActiveRequest(xhr) {
-        if (xhr && xhr.readyState !== 4) {
-            xhr.abort();
-            console.log(xhr.statusText);
-        }
-    }
-
-    var Content = {
-        render: function (target, link) {
+    var Content = function() {
+        this.xhr = null;
+        this.render = function(target, link) {
+            var that = this;
             target.hide();
             $("img.loading").show();
-            checkActiveRequest(xhr);
-            xhr = $.getJSON(link, successHandler)
+            this.checkActiveRequest(this.xhr);
+            this.xhr = $.getJSON(link, successHandler)
                 .fail(function () {
                     target.html('');
                 });
@@ -50,10 +23,10 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
                     target.fadeIn(1000);
                     var submit = target.find("button[type='submit']");
                     submit.on('click', function () {
-                        submitData(target, link, successHandler);
+                        that.submitData(target, link, successHandler);
                     });
                     $("a.large").bind('click', function () {
-                        loadImage(this);
+                        that.loadImage(this);
                     });
                 }
                 else {
@@ -63,5 +36,39 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
             };
         }
     };
-    return Content;
+
+    Content.prototype = new ContentProto();
+
+    Content.prototype.submitData = function(target, link, functionName) {
+        var data = {};
+        target.find('input, textarea').each(function () {
+            data[$(this).attr('name')] = $(this).val();
+        });
+        $.post(link, data)
+            .success(function (response) {
+                functionName(response);
+            });
+    };
+
+    Content.prototype.loadImage = function(a){
+        var modal = $("#photo_large");
+        $(modal.find("img.loading")).show();
+        $(modal.find(".large_photo")).remove();
+        var img = $("<img />").attr('src', a.href)
+            .addClass('large_photo')
+            .css('width', '100%')
+            .on('load', function () {
+                $(modal.find("img.loading")).hide();
+                $(modal.find("div.modal-body")).append(img);
+            });
+    };
+
+    Content.prototype.checkActiveRequest = function(xhr) {
+        if (xhr && xhr.readyState !== 4) {
+            xhr.abort();
+            console.log(xhr.statusText);
+        }
+    };
+
+    return new Content();
 });
