@@ -2,6 +2,7 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
     var menuContainer = $("div#menu-table");
     var contentContainer = $("div#content-table");
     var headerContainer = $("div.header h1");
+    var content = new Content;
 
     var Manager = {
         createMenu: function () {
@@ -18,7 +19,7 @@ define("app/manager", ["jquery", "underscore", 'app/menu', 'app/header', 'app/co
     };
 
     Publish.subscribe("changeContent", function(topic, link) {
-        Content.render(contentContainer, link);
+        content.render(contentContainer, link);
     });
     Publish.subscribe("changeHeader", function (topic, header) {
         Header.render(headerContainer, header);

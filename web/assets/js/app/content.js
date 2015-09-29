@@ -34,7 +34,7 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
                     target.fadeIn(1000);
                 }
             };
-        }
+        };
     };
 
     Content.prototype = new ContentProto();
@@ -70,5 +70,5 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
         }
     };
 
-    return new Content();
+    return Content;
 });
