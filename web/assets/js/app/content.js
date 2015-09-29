@@ -23,11 +23,20 @@ define("app/content", ["jquery", "underscore", "app/publish"], function ($, _, P
             });
     };
 
+    var xhr;
+    function checkActiveRequest(xhr) {
+        if (xhr && xhr.readyState !== 4) {
+            xhr.abort();
+            console.log(xhr.statusText);
+        }
+    }
+
     var Content = {
         render: function (target, link) {
             target.hide();
             $("img.loading").show();
-            var xhr = $.getJSON(link, successHandler)
+            checkActiveRequest(xhr);
+            xhr = $.getJSON(link, successHandler)
                 .fail(function () {
                     target.html('');
                 });
